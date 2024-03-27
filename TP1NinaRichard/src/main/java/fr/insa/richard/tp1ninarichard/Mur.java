@@ -10,17 +10,14 @@ import static java.lang.Math.sqrt;
  *
  * @author nrichard01
  */
-public class Mur {
-    // herite de l'etage une fois la classe cree
+public class Mur extends Etage {
     // devrait on y associer in revetement
     
     private int id;
     private Coin coin1;
     private Coin coin2;
-    
-    // je ne sais pas
     private boolean interior;
-    private double hauteur = 2; //mettre une reference a l'etage
+
     
     public int getId() {
         return id;
@@ -55,17 +52,6 @@ public class Mur {
     }
 
 
-    public double getHauteur() {
-        return hauteur;
-    }
-
-    public void setHauteur(double hauteur) {
-        this.hauteur = hauteur;
-    }
-
-    
-    
-
     public Mur(int id, Coin coin1, Coin coin2) {
         this.id = id;
         this.coin1 = coin1;
@@ -85,13 +71,13 @@ public class Mur {
     }
 
    public  double Surface(){
-       double surface = Longueur() * hauteur;
+       double surface = Longueur() * super.getHauteursousplafont();
        return surface;
    }
 
     @Override
     public String toString() {
-        return "Mur{" + "id=" + id + ", coin1=" + coin1 + ", coin2=" + coin2 + ", interior=" + interior + ", hauteur=" + hauteur + '}';
+        return "Mur{" + "id=" + id + ", coin1=" + coin1 + ", coin2=" + coin2 + ", interior=" + interior + '}';
     }
     
 
