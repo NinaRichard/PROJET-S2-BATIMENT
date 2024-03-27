@@ -8,7 +8,7 @@ package fr.insa.richard.tp1ninarichard;
  *
  * @author inspi
  */ 
-//wow
+//wow !
 public abstract class Ouverture {
     private int id;
     
