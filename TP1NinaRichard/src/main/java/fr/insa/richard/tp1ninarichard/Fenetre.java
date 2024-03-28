@@ -10,14 +10,38 @@ package fr.insa.richard.tp1ninarichard;
  */
 public class Fenetre extends Ouverture{
     private int id; 
-    private double longeur= 1.20; 
-    private double largeur= 1.20; 
-    
+    private double cote= 1.20;     
+
+    public Fenetre(int id) {
+        this.id = id;
+    }
   
-public double surface(){
-    
-} 
-   
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getCote() {
+        return cote;
+    }
+
+    public void setCote(double cote) {
+        this.cote = cote;
+    }
+
+    @Override
+    public String toString() {
+        return "Fenetre{" + "id=" + id + ", cote=" + cote + '}';
+    }
+
+
+    public double Surface(){
+       return Surface(this.cote, this.cote);
+    }
+}
 
    
     
