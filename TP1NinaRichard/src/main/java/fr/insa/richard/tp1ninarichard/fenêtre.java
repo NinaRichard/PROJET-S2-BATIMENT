@@ -10,6 +10,5 @@ package fr.insa.richard.tp1ninarichard;
  */
 public class fenêtre {
     
-    
    
 }
