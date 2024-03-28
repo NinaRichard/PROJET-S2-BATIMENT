@@ -10,7 +10,7 @@ import static java.lang.Math.sqrt;
  *
  * @author nrichard01
  */
-public class Mur extends Etage {
+public class Mur {
     // devrait on y associer in revetement
     
     private int id;
@@ -70,8 +70,8 @@ public class Mur extends Etage {
         return longueur;
     }
 
-   public  double Surface(){
-       double surface = Longueur() * super.getHauteursousplafont();
+   public  double Surface(double hauteur){
+       double surface = Longueur() * hauteur;
        return surface;
    }
 
