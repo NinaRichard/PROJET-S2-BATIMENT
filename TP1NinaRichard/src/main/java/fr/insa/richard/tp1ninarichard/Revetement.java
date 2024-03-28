@@ -17,6 +17,7 @@ import java.util.List;
 public class Revetement {
     private int id;
     private String type;
+    private double prixaum2; //a faire
     private List<Piece> utiliser = new ArrayList();
 
     public Revetement(int id) {
