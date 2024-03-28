@@ -17,15 +17,51 @@ public class Piece {
     private Mur mur2;
     private Mur mur3;
     private Mur mur4;
+    private Sol sol;
+    private String usage;
+    private Plafond plafond;
 
 
-    public Piece(Mur mur1, Mur mur2, Mur mur3, Mur mur4) {
+    public Piece(int id, Mur mur1, Mur mur2, Mur mur3, Mur mur4,Sol sol, Plafond plafond) {
+        this.id = id;
         this.mur1 = mur1;
         this.mur2 = mur2;
         this.mur3 = mur3;
         this.mur4 = mur4;
+        sol.setPiece(this); 
+        plafond.setPiece(this);
     }
 
+    public Piece(int id, Mur mur1, Mur mur2, Mur mur3, Mur mur4,Sol sol, Plafond plafond, String usage) {
+        this.id = id;
+        this.mur1 = mur1;
+        this.mur2 = mur2;
+        this.mur3 = mur3;
+        this.mur4 = mur4;
+        this.usage = usage;
+        sol.setPiece(this); 
+        plafond.setPiece(this);
+    }
+
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public void setUsage(String usage) {
+        this.usage = usage;
+    }
+    
+    
+    
     public Mur getMur1() {
         return mur1;
     }
@@ -58,6 +94,23 @@ public class Piece {
         this.mur4 = mur4;
     }
 
+    public Sol getSol() {
+        return sol;
+    }
+
+    public void setSol(Sol sol) {
+        this.sol = sol;
+    }
+
+    public Plafond getPlafond() {
+        return plafond;
+    }
+
+    public void setPlafond(Plafond plafond) {
+        this.plafond = plafond;
+    }
+
+    
   
     public double Surface(){
         double surface= sqrt( mur1.Longueur()*mur2.Longueur()*mur3.Longueur()*mur4.Longueur());

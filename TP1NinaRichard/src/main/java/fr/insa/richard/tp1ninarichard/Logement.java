@@ -14,6 +14,7 @@ import java.util.List;
 public class Logement {
     private int id;
     private List<Piece> appartement= new ArrayList();
+    private int nbrpiece;
 
     public Logement(int id) {
         this.id = id;
@@ -37,6 +38,7 @@ public class Logement {
     
     public void ajouterPiece( Piece nouvellePiece){
         appartement.add(nouvellePiece);
+        this.nbrpiece ++;
     }
     
     
