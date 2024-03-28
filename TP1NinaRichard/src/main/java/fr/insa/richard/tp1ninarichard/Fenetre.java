@@ -14,7 +14,9 @@ public class Fenetre extends Ouverture{
     private double largeur= 1.20; 
     
   
-public abstract double surface(); 
+public double surface(){
+    
+} 
    
 
    
