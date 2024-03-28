@@ -13,12 +13,12 @@ import java.util.List;
  */
 public class Etage {
     private int id;
-    private double hauteursousplafont;
+    private double hauteursousplafond;
     private List<Logement> appartementEtage= new ArrayList();
 
-    public Etage(int id, double hauteursousplafont) {
+    public Etage(int id, double hauteursousplafond) {
         this.id = id;
-        this.hauteursousplafont = hauteursousplafont;
+        this.hauteursousplafond = hauteursousplafond;
     }
 
     public List<Logement> getAppartementEtage() {
@@ -38,11 +38,11 @@ public class Etage {
     }
 
     public double getHauteursousplafont() {
-        return hauteursousplafont;
+        return hauteursousplafond;
     }
 
-    public void setHauteursousplafont(double hauteursousplafont) {
-        this.hauteursousplafont = hauteursousplafont;
+    public void setHauteursousplafond(double hauteursousplafond) {
+        this.hauteursousplafond = hauteursousplafond;
     }
 
    public void ajouterAppartement( Logement nouvelAppartement){
