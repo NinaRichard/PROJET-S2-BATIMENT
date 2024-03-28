@@ -14,6 +14,7 @@ import java.util.List;
 public class Etage {
     private int id;
     private double hauteursousplafond;
+    private int nbrdappart;
     private List<Logement> appartementEtage= new ArrayList();
 
     public Etage(int id, double hauteursousplafond) {
@@ -47,6 +48,7 @@ public class Etage {
 
    public void ajouterAppartement( Logement nouvelAppartement){
         appartementEtage.add(nouvelAppartement);
+        nbrdappart ++;
     }
     
     
