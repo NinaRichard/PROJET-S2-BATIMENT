@@ -45,8 +45,8 @@ public class Porte extends Ouverture{
     public String toString() {
         return "Porte{" + "id=" + id + ", hauteur=" + hauteur + ", largeur=" + largeur + '}';
     }
-     return Surface(this.hauteur, this.largeur);
+     
     public double Surface(){
-       
+       return Surface(this.hauteur, this.largeur);
     }
 }
