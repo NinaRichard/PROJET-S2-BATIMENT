@@ -11,7 +11,10 @@ package fr.insa.richard.tp1ninarichard;
 public class TP1NinaRichard {
 
     public static void main(String[] args) {
-        Coin c1 = new Coin(1,3.15,4.5);
-        System.out.println(c1.toString());
+        //Coin c1 = new Coin(1,3.15,4.5);
+        //System.out.println(c1.toString());
+        Porte p1 = new Porte(1);
+        double s = p1.Surface();
+        System.out.println("la surface vaut "+s);
     }
 }
