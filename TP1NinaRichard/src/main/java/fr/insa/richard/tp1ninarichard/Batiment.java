@@ -38,7 +38,7 @@ public class Batiment {
         this.type = type;
     }
 
-
+    
     public List<Etage> getBatiment() {
         return batiment;
     }

@@ -17,6 +17,11 @@ public class Etage {
     private int nbrdappart;
     private List<Logement> appartementEtage= new ArrayList();
 
+    public Etage(int id) {
+        this.id = id;
+    }
+
+    
     public Etage(int id, double hauteursousplafond) {
         this.id = id;
         this.hauteursousplafond = hauteursousplafond;

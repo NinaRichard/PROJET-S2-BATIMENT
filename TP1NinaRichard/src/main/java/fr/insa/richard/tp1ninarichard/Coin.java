@@ -12,6 +12,7 @@ public class Coin {
     private int id;
     private double x;
     private double y;
+    private static int nbrCoin = 0;
 
     public Coin() {
     }
@@ -20,6 +21,7 @@ public class Coin {
         this.id = id;
         this.x = x;
         this.y = y;
+        nbrCoin ++;
     }
 
     public int getId() {
