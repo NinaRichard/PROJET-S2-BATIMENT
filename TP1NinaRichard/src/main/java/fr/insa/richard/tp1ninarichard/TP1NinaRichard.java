@@ -53,8 +53,9 @@ public class TP1NinaRichard {
                     }
                     Sol sol = new Sol(nbrPiece);
                     Plafond plafond = new Plafond(nbrPiece);
-                    Piece piece = new Piece(k,murs[0],murs[1],murs[2],murs[3], sol , plafond, typePiece); 
-                    nbrPiece ++;
+                    Piece piece = new Piece(k,murs[0],murs[1],murs[2],murs[3], sol , plafond, typePiece);
+                    //ajouter la piece à l'appart
+                    appartement.ajouterPiece(piece);
                 }   
             }
         }
