@@ -28,10 +28,10 @@ public class TP1NinaRichard {
             for (int j=1; j<=nbrAppartement ; j++){
                 Logement appartement = new Logement(j);
                 etage.ajouterAppartement(appartement);
-                System.out.println("Combien de piece comporte votre logement " + i + " ?");
+                System.out.println("Combien de piece comporte votre logement " + j + " ?");
                 int nbrPiece = Lire.i();
                 for (int k=1; k<=nbrPiece ; k++){
-                    System.out.println("Quel est l'utilité de votre piece " + i + " ?");
+                    System.out.println("Quel est l'utilité de votre piece " + k + " ?");
                     String typePiece = Lire.S();
                     Mur[] murs = new Mur[4];
                     for (int f=0; f<4; f++){
