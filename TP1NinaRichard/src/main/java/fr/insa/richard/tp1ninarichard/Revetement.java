@@ -1,5 +1,4 @@
 
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -9,6 +8,8 @@ package fr.insa.richard.tp1ninarichard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
+import java.util.*;
 
 /**
  *
@@ -16,24 +17,29 @@ import java.util.List;
  */
 public class Revetement {
     private int id;
-    private String type;
+    private int type;
+    private String revetement;
     private double prixaum2; //a faire
     private List<Piece> utiliser = new ArrayList();
-
+    boolean pourMur;
+    boolean pourSol;
+    boolean pourPlafond; 
+    double prixUnitaire;
+    
     public Revetement(int id) {
         this.id = id;
     }
 
-    public Revetement(int id, String type) {
+    public Revetement(int id, int type) {
         this.id = id;
         this.type = type;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -58,4 +64,17 @@ public class Revetement {
         utiliser.add(nouvellePiece);
     }
     
+    public void Parametres(int Type){
+        try{
+        Scanner fileScanner = new Scanner(new File("CatalogueRevetements.txt"));
+        for (int compt=0; compt<Type; compt++){
+            Scanner lineScanner=new Scanner(fileScanner.nextLine());//lit toutes les lignes jusqu'a la bonne
+            lineScanner.useDelimiter(";");
+        }
+        int compt=lineScanner.nextInt();
+        revetement=lineScanner.next();
+        pourMur=lineScanner.next();
+       }catch (FileNotFoundException e){
+           e.printStackTrace();
+       }
 }
