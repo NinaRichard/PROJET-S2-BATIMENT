@@ -22,6 +22,14 @@ public class Batiment {
         this.type = type;
     }
 
+    public Batiment(int id, String type, int nbrEtage) {
+        this.id = id;
+        this.type = type;
+        this.nbrEtage = nbrEtage;
+    }
+
+    
+    
     public int getId() {
         return id;
     }

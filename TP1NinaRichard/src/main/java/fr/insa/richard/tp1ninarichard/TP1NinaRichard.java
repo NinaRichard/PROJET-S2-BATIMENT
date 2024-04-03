@@ -3,6 +3,9 @@
  */
 
 package fr.insa.richard.tp1ninarichard;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -11,6 +14,10 @@ package fr.insa.richard.tp1ninarichard;
 public class TP1NinaRichard {
 
     public static void main(String[] args) {
+         // Définition du chemin du fichier de sortie
+        String filePath = "batiment.txt";
+        // Écriture du code LaTeX avec TikZ dans le fichier de sortie
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
         //Coin c1 = new Coin(1,3.15,4.5);
         //System.out.println(c1.toString());
         System.out.println("Bonjour, de quel type est votre batiment?");
@@ -58,6 +65,9 @@ public class TP1NinaRichard {
                     appartement.ajouterPiece(piece);
                 }   
             }
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         /*
         Porte p1 = new Porte(1);
