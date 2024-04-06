@@ -67,14 +67,19 @@ public class Revetement {
     public void Parametres(int Type){
         try{
         Scanner fileScanner = new Scanner(new File("CatalogueRevetements.txt"));
+        Scanner lineScanner=fileScanner;
         for (int compt=0; compt<Type; compt++){
-            Scanner lineScanner=new Scanner(fileScanner.nextLine());//lit toutes les lignes jusqu'a la bonne
+            lineScanner=new Scanner(fileScanner.nextLine());//lit toutes les lignes jusqu'a la bonne
             lineScanner.useDelimiter(";");
         }
         int compt=lineScanner.nextInt();
         revetement=lineScanner.next();
-        pourMur=lineScanner.next();
-       }catch (FileNotFoundException e){
+        pourMur=lineScanner.nextBoolean();
+        pourSol=lineScanner.nextBoolean();
+        pourPlafond=lineScanner.nextBoolean();
+        prixUnitaire=lineScanner.nextDouble();
+        }catch (FileNotFoundException e){
            e.printStackTrace();
-       }
+        }
+    }
 }
