@@ -63,14 +63,22 @@ public class Revetement {
     public void ajouterPiece( Piece nouvellePiece){
         utiliser.add(nouvellePiece);
     }
+
+    public double getPrixUnitaire() {//test
+        return prixUnitaire;
+    }
+    
     
     public void Parametres(int Type){
-        try{
-        Scanner fileScanner = new Scanner(new File("CatalogueRevetements.txt"));
-        Scanner lineScanner=fileScanner;
-        for (int compt=0; compt<Type; compt++){
-            lineScanner=new Scanner(fileScanner.nextLine());//lit toutes les lignes jusqu'a la bonne
-            lineScanner.useDelimiter(";");
+       try (Scanner fileScanner = new Scanner(new File("CatalogueRevetement"))){
+        //String lineScanner=fileScanner.nextLine();
+        Scanner lineScanner;
+        lineScanner=fileScanner;
+        if (Type>1){
+            for (int compt=2; compt<=Type; compt++){
+                lineScanner=new Scanner(fileScanner.nextLine());//lit toutes les lignes jusqu'a la bonne
+                lineScanner.useDelimiter(";");
+            }
         }
         int compt=lineScanner.nextInt();
         revetement=lineScanner.next();
@@ -78,8 +86,8 @@ public class Revetement {
         pourSol=lineScanner.nextBoolean();
         pourPlafond=lineScanner.nextBoolean();
         prixUnitaire=lineScanner.nextDouble();
-        }catch (FileNotFoundException e){
+       }catch (FileNotFoundException e){
            e.printStackTrace();
-        }
+       }
     }
 }
