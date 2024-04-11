@@ -18,13 +18,13 @@ import java.util.*;
 public class Revetement {
     private int id;
     private int type;
+    public int idRevetement;
     private String revetement;
-    private double prixaum2; //a faire
     private List<Piece> utiliser = new ArrayList();
-    boolean pourMur;
-    boolean pourSol;
-    boolean pourPlafond; 
-    double prixUnitaire;
+    private boolean pourMur;
+    private boolean pourSol;
+    private boolean pourPlafond; 
+    private double prixUnitaire;
     
     public Revetement(int id) {
         this.id = id;
@@ -67,27 +67,74 @@ public class Revetement {
     public double getPrixUnitaire() {//test
         return prixUnitaire;
     }
+
+    public int getIdRevetement() {
+        return idRevetement;
+    }
+
+    public void setRevetement(int idRevetement) {
+        this.idRevetement = idRevetement;
+    }
+    
     
     
     public void Parametres(int Type){
-       try (Scanner fileScanner = new Scanner(new File("CatalogueRevetement"))){
-        //String lineScanner=fileScanner.nextLine();
-        Scanner lineScanner;
-        lineScanner=fileScanner;
-        if (Type>1){
-            for (int compt=2; compt<=Type; compt++){
-                lineScanner=new Scanner(fileScanner.nextLine());//lit toutes les lignes jusqu'a la bonne
-                lineScanner.useDelimiter(";");
+        int idrevetement=0;
+        String revetements="";
+        int pourmur=0, poursol=0, pourplafond=0;
+        boolean mur=true, sol=true, plafond=true;
+        Double prixunitaire=0.0;
+        try (Scanner fileScanner = new Scanner(new File("CatalogueRevetements.txt"))){
+        String ligne=fileScanner.nextLine();
+        
+        //if (Type>1){
+            for (int compt=1; compt<=Type; compt++){
+                ligne=fileScanner.nextLine();//lit toutes les lignes jusqu'a la bonne
+                System.out.println(ligne);
             }
+        
+            
+        Scanner lineScanner=new Scanner( ligne);
+        lineScanner.useDelimiter(";");
+        
+        idrevetement=lineScanner.nextInt();
+        revetements=lineScanner.next();
+        System.out.println(revetements);
+        pourmur=lineScanner.nextInt();
+        System.out.println(pourmur);
+        poursol=lineScanner.nextInt();
+        pourplafond=lineScanner.nextInt();
+        prixunitaire=lineScanner.nextDouble();
+        
+        if (pourmur==1){
+            mur=true;
+        }else{
+            mur=false;
         }
-        int compt=lineScanner.nextInt();
-        revetement=lineScanner.next();
-        pourMur=lineScanner.nextBoolean();
-        pourSol=lineScanner.nextBoolean();
-        pourPlafond=lineScanner.nextBoolean();
-        prixUnitaire=lineScanner.nextDouble();
+        
+        if (poursol==1){
+            sol=true;
+        }else{
+            sol=false;
+        }
+        
+        if (pourplafond==1){
+            plafond=true;
+        }else{
+            plafond=false;
+        }
+        
+        System.out.println(prixunitaire);
+        
+        this.revetement=revetements;
+        this.pourMur=mur;
+        this.pourSol=sol;
+        this.pourPlafond=plafond;
+        this.prixUnitaire=prixunitaire;
        }catch (FileNotFoundException e){
            e.printStackTrace();
        }
+        //this.idRevetement=idrevetement;
+        
     }
 }
