@@ -126,6 +126,7 @@ public class Revetement {
         
         System.out.println(prixunitaire);
         
+        this.idRevetement=idrevetement;
         this.revetement=revetements;
         this.pourMur=mur;
         this.pourSol=sol;
