@@ -25,7 +25,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         
-        GridPane pane = new GridPane();
+        /*GridPane pane = new GridPane();
         pane.setAlignment(Pos.CENTER);
         pane.setHgap(5.5);
         pane.setVgap(5.5);
@@ -36,19 +36,8 @@ public class App extends Application {
                                         System.out.println("Bonjour !");
                                        });
         var nouvellefenetre = new Button("Créer mon batiment.");
-        nouvellefenetre.setOnAction((ActionEvent event) -> {
-            Parent root2;
-            try {
-                Stage stage1 = new Stage();
-                stage1.setTitle("My New Stage Title");
-                stage1.setScene(new Scene(root2, 450, 450));
-                stage1.show();
-                // Hide this current window (if this is what you want)
-                ((Node)(event.getSource())).getScene().getWindow().hide();
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-        }var plustard = new Button("Peut etre plus tard");
+    
+    var plustard = new Button("Peut etre plus tard");
         plustard.setOnAction(evt -> {label.setText("Attention, la procrastination est un vilain defaut");
                                         System.out.println("Bonjour !");
                                        });
@@ -61,7 +50,10 @@ public class App extends Application {
         root.setBottom(buttonBar);
         var scene = new Scene(root, 640, 480);
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
+        Scene sc = new Scene(new MainPane());
+        stage.setScene(sc);
+            stage.show();
     }
 
     public static void main(String[] args) {
