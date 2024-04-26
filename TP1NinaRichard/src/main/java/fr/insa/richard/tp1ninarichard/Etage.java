@@ -25,6 +25,7 @@ public class Etage {
     public Etage(int id, double hauteursousplafond) {
         this.id = id;
         this.hauteursousplafond = hauteursousplafond;
+        this.nbrdappart = 0;
     }
 
     public List<Logement> getAppartementEtage() {
@@ -41,6 +42,14 @@ public class Etage {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getNbrdappart() {
+        return nbrdappart;
+    }
+
+    public void setNbrdappart(int nbrdappart) {
+        this.nbrdappart = nbrdappart;
     }
 
     public double getHauteursousplafont() {

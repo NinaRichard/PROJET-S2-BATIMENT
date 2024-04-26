@@ -18,6 +18,7 @@ public class Logement {
 
     public Logement(int id) {
         this.id = id;
+        this.nbrpiece = 0;
     }
 
     public int getId() {

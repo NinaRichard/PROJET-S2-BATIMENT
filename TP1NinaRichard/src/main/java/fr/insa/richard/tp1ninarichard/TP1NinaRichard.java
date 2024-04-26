@@ -7,11 +7,77 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 /**
  *
  * @author nrichard01
  */
 public class TP1NinaRichard {
+    
+    public static void menu(){
+        int choix;
+        int nbrBatiment = 0;
+        nbrBatiment ++;
+                System.out.println("Votre Batiment est il 1) une maison 2) un immeuble?");
+                int type = Lire.i();
+                while(type != 1 && type != 2){
+                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT 1 ou 2! Votre Batiment est il 1) une maison 2) un immeuble?");
+                    type = Lire.i(); 
+                }
+                String typeB = "Immeuble";
+                if (type == 1){
+                    typeB = "Maison";
+                }
+                Batiment batiment = new Batiment(nbrBatiment,typeB);
+        do{
+        //System.out.println("1) Créer un batiment");
+        System.out.println("2) Créer un étage et ajouter un étage dans un batiment") ;
+        System.out.println("3) Créer un logement et ajouter un logement dans un étage") ;
+        System.out.println("4) Créer une piece et ajouter une piece dans un logement") ;
+        System.out.println("5) Créer un mur") ;
+        System.out.println("6) Créer un point");
+        System.out.println("7) suprimer un étage") ;
+        System.out.println("8) suprimer un logement ou changer un logement d'étage") ;
+        System.out.println("9) suprimer une piece et changer une piece de logement") ;
+        System.out.println("10) suprimer un mur, le modifier ou changer de piece") ;
+        System.out.println("11) suprimer un point ou le modifier");
+        System.out.println("Pour annuler ou arreter taper 0");
+        choix = Lire.i();
+        switch(choix){
+            /*case 1:
+                nbrBatiment ++;
+                System.out.println("Votre Batiment est il 1) une maison 2) un immeuble?");
+                type = Lire.i();
+                while(type != 1 && type != 2){
+                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT 1 ou 2! Votre Batiment est il 1) une maison 2) un immeuble?");
+                    type = Lire.i(); 
+                }
+                if (type == 1){
+                    Batiment batiment2 = new Batiment(nbrBatiment,"Maison");
+                } else {
+                    Batiment batiment2 = new Batiment(nbrBatiment,"Immeuble");
+                }
+                //mettre option annuler
+            */
+            case 2:
+                System.out.println("A quel batiment vouler vous ajouter un étage?");
+                //peut on choper un object par son id?
+                System.out.println("Quel est la hauteur sous plafont de cet étage?");
+                double hauteurSousPlafont=Lire.d();
+                Etage etage = new Etage(batiment.getNbrEtage(),hauteurSousPlafont);
+                batiment.setNbrEtage(batiment.getNbrEtage()+1);
+                batiment.ajouterEtage(etage);
+            break;
+            case 3:
+                System.out.println("A quel étage vouler vous ajouter un étage?");
+                //peut on choper un object par son id?
+                Logement appartement = new Logement(etage.getnbrdappart());
+                etage.setnbrdappart(etage.getnbrdappart()+1);
+                etage.ajouterAppartement(appartement);
+            break;
+        }
+        }while (choix != 0);
+    }
 
     public static void main(String[] args) {
          // Définition du chemin du fichier de sortie

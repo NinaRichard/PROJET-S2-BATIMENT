@@ -20,6 +20,7 @@ public class Batiment {
     public Batiment(int id, String type) {
         this.id = id;
         this.type = type;
+        this.nbrEtage = 0;
     }
 
     public Batiment(int id, String type, int nbrEtage) {
@@ -46,6 +47,14 @@ public class Batiment {
         this.type = type;
     }
 
+    public int getNbrEtage() {
+        return nbrEtage;
+    }
+
+    public void setNbrEtage(int nbrEtage) {
+        this.nbrEtage = nbrEtage;
+    }
+
     
     public List<Etage> getBatiment() {
         return batiment;
@@ -59,6 +68,11 @@ public class Batiment {
      public void ajouterEtage( Etage nouvelEtage){
         batiment.add(nouvelEtage);
         this.nbrEtage ++;
+    }
+
+    @Override
+    public String toString() {
+        return "Batiment n°" + id + " est un/une" + type + "possède actuellement" + nbrEtage + " etages" ;
     }
     
 }
