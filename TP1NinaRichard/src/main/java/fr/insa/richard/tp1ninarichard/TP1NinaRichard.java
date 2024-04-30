@@ -14,7 +14,9 @@ import java.io.IOException;
  */
 public class TP1NinaRichard {
     
+    // voir mettre dans des tableau
     public static void menu(){
+        
         int choix;
         int nbrBatiment = 0;
         nbrBatiment ++;
@@ -32,15 +34,16 @@ public class TP1NinaRichard {
         do{
         //System.out.println("1) Créer un batiment");
         System.out.println("2) Créer un étage et ajouter un étage dans un batiment") ;
-        System.out.println("3) Créer un logement et ajouter un logement dans un étage") ;
-        System.out.println("4) Créer une piece et ajouter une piece dans un logement") ;
-        System.out.println("5) Créer un mur") ;
+        System.out.println("3) Créer un logement et ajouter un logement dans un étage");
+        System.out.println("4) Créer une piece et ajouter une piece dans un logement");
+        System.out.println("5) Créer un mur");
         System.out.println("6) Créer un point");
-        System.out.println("7) suprimer un étage") ;
-        System.out.println("8) suprimer un logement ou changer un logement d'étage") ;
-        System.out.println("9) suprimer une piece et changer une piece de logement") ;
-        System.out.println("10) suprimer un mur, le modifier ou changer de piece") ;
+        System.out.println("7) suprimer un étage");
+        System.out.println("8) suprimer un logement ou changer un logement d'étage");
+        System.out.println("9) suprimer une piece et changer une piece de logement");
+        System.out.println("10) suprimer un mur, le modifier ou changer de piece");
         System.out.println("11) suprimer un point ou le modifier");
+        System.out.println("12) Passer à la partie revetement");
         System.out.println("Pour annuler ou arreter taper 0");
         choix = Lire.i();
         switch(choix){
@@ -71,12 +74,28 @@ public class TP1NinaRichard {
             case 3:
                 System.out.println("A quel étage vouler vous ajouter un étage?");
                 //peut on choper un object par son id?
-                Logement appartement = new Logement(etage.getnbrdappart());
-                etage.setnbrdappart(etage.getnbrdappart()+1);
+                Logement appartement = new Logement(etage.getNbrdappart());
+                etage.setNbrdappart(etage.getNbrdappart()+1);
                 etage.ajouterAppartement(appartement);
+            break;
+            /*
+            case 4:
+                System.out.println("A quel étage vouler vous ajouter un étage?");
+                //peut on choper un object par son id?
+                Logement appartement = new Logement(etage.getNbrdappart());
+                etage.setNbrdappart(etage.getNbrdappart()+1);
+                etage.ajouterAppartement(appartement);
+            break;
+            */
+            case 12:
+                //menuRevetement()mettre les nbrs ect..
             break;
         }
         }while (choix != 0);
+    }
+    
+    public static void menuRevetement(){
+        System.out.println("1) Je veux mettre tel revetement sur un sol un mur ...");
     }
 
     public static void main(String[] args) {
