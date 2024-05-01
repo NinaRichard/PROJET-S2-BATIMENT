@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -79,11 +81,7 @@ public class Revetement {
     
     
     public void Parametres(int Type){
-        int idrevetement=0;
-        String revetements="";
-        int pourmur=0, poursol=0, pourplafond=0;
-        boolean mur=true, sol=true, plafond=true;
-        Double prixunitaire=0.0;
+        /*int pourmur=0, poursol=0, pourplafond=0;
         try (Scanner fileScanner = new Scanner(new File("CatalogueRevetements.txt"))){
         String ligne=fileScanner.nextLine();
         
@@ -92,50 +90,53 @@ public class Revetement {
                 ligne=fileScanner.nextLine();//lit toutes les lignes jusqu'a la bonne
                 System.out.println(ligne);
             }
+        */
         
-            
-        Scanner lineScanner=new Scanner( ligne);
+        
+   
+    String lignelue="";
+    int test=0;
+    try{
+        BufferedReader flux=new BufferedReader(new FileReader("CatalogueRevetements.txt"));
+        while (test<=Type){
+            lignelue=flux.readLine();
+            test=test+1;
+        }
+        System.out.println(lignelue);
+        Scanner lineScanner=new Scanner( lignelue);
         lineScanner.useDelimiter(";");
-        
-        idrevetement=lineScanner.nextInt();
-        revetements=lineScanner.next();
-        System.out.println(revetements);
+        int pourmur, poursol, pourplafond;
+        this.idRevetement=lineScanner.nextInt();
+        this.revetement=lineScanner.next();
         pourmur=lineScanner.nextInt();
-        System.out.println(pourmur);
         poursol=lineScanner.nextInt();
         pourplafond=lineScanner.nextInt();
-        prixunitaire=lineScanner.nextDouble();
+        this.prixUnitaire=lineScanner.nextDouble();
         
         if (pourmur==1){
-            mur=true;
+            this.pourMur=true;
         }else{
-            mur=false;
+            this.pourMur=false;
         }
         
         if (poursol==1){
-            sol=true;
+            this.pourSol=true;
         }else{
-            sol=false;
+            this.pourSol=false;
         }
         
         if (pourplafond==1){
-            plafond=true;
+            this.pourPlafond=true;
         }else{
-            plafond=false;
+            this.pourPlafond=false;
         }
         
-        System.out.println(prixunitaire);
-        
-        this.idRevetement=idrevetement;
-        this.revetement=revetements;
-        this.pourMur=mur;
-        this.pourSol=sol;
-        this.pourPlafond=plafond;
-        this.prixUnitaire=prixunitaire;
        }catch (FileNotFoundException e){
            e.printStackTrace();
-       }
-        //this.idRevetement=idrevetement;
-        
+       } catch (IOException ex) {
+            Logger.getLogger(Revetement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
+
 }
