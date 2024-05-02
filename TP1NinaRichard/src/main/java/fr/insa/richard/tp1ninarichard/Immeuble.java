@@ -10,8 +10,8 @@ package fr.insa.richard.tp1ninarichard;
  */
 public class Immeuble extends Batiment{
 
-    public Immeuble(int id, int nbrEtage) {
-        super(id, "Immeuble", nbrEtage);
+    public Immeuble(int id,String adresse) {
+        super(id, "Immeuble", adresse);
     }
     
 }

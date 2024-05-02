@@ -234,13 +234,14 @@ public class TP1NinaRichard {
         System.out.println("ATENTION LES CHOIX POSSIBLE SONT 1 ou 2! Votre Batiment est il 1) une maison 2) un immeuble?");
         type = Lire.i(); 
     }
-    String typeB = "Immeuble";
-    if (type == 1){
-        typeB = "Maison";
-    }
     nbrdeBatiment ++;
-    Batiment batiment = new Batiment(nbrdeBatiment,typeB,adresse);
-    liste_Batiment.add(batiment);
+    if (type == 1){
+        Maison batiment = new Maison(nbrdeBatiment,adresse);
+        
+    }else {
+        Immeuble batiment = new Immeuble(nbrdeBatiment,adresse);
+    }
+    liste_Batiment.add(batiment); //pk?
     
     menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmise vide?
      
