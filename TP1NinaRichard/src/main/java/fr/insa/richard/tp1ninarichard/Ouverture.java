@@ -12,6 +12,7 @@ package fr.insa.richard.tp1ninarichard;
 public abstract class Ouverture {
    private int id;
     
+   //Calcul surface
    public double Surface(double hauteur, double largeur) {
        return hauteur*largeur;
    }

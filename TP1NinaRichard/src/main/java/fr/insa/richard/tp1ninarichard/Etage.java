@@ -10,7 +10,7 @@ package fr.insa.richard.tp1ninarichard;
  * @author inspi
  */
 public class Etage {
-    private int id;
+    protected int id;
     private double hauteursousplafond;
     
     //Constructeurs
@@ -31,8 +31,8 @@ public class Etage {
         this.id = id;
     }
 
-    //HauteursousPlafont
-    public double getHauteursousplafont() {
+    //HauteursousPlafond
+    public double getHauteursousplafond() {
         return hauteursousplafond;
     }
     public void setHauteursousplafond(double hauteursousplafond) {

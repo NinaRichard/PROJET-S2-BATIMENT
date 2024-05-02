@@ -14,13 +14,13 @@ public class Coin {
     private double y;
     private static int nbrCoin = 0;
     // private double 
-    /**
+    /*
      * WIKIVERSITY
      */
 
+    //Constructeurs
     public Coin() {
     }
-
     public Coin(int id, double x, double y) {
         this.id = id;
         this.x = x;
@@ -28,32 +28,35 @@ public class Coin {
         nbrCoin ++;
     }
 
+    //Getter et Setter
+    //Id
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    //Getter et Setter
+    //coordonnee x
     public double getX() {
         return x;
     }
-
     public void setX(double x) {
         this.x = x;
     }
 
+    //Getter et Setter
+    //Coordonnee y
     public double getY() {
         return y;
     }
-
     public void setY(double y) {
         this.y = y;
     }
     
     @Override
     public String toString() {
-        return "Coin{" + "id=" + id + ", x=" + x + ", y=" + y + '}';
+        return "Le coin numero " + id + " a pour coordonnees x=" + x + " et y=" + y + ".";
     }
 }

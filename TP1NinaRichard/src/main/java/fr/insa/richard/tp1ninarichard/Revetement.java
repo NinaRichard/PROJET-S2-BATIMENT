@@ -28,36 +28,38 @@ public class Revetement {
     private boolean pourPlafond; 
     private double prixUnitaire;
     
+    //Constructeurs
     public Revetement(int id) {
         this.id = id;
     }
-
     public Revetement(int id, int type) {
         this.id = id;
         this.type = type;
     }
 
+    //Getter et Setter
+    //Type
     public int getType() {
         return type;
     }
-
     public void setType(int type) {
         this.type = type;
     }
 
-    
+    //Getter et Setter
+    //Id
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    //Getter et Setter
+    //Utiliser
     public List<Piece> getUtiliser() {
         return utiliser;
     }
-
     public void setUtiliser(List<Piece> utiliser) {
         this.utiliser = utiliser;
     }
@@ -66,20 +68,23 @@ public class Revetement {
         utiliser.add(nouvellePiece);
     }
 
+    //Getter
+    //Prix unitaire
     public double getPrixUnitaire() {//test
         return prixUnitaire;
     }
-
+    
+    //Getter et Setter
+    //Id revetement
     public int getIdRevetement() {
         return idRevetement;
     }
-
     public void setRevetement(int idRevetement) {
         this.idRevetement = idRevetement;
     }
     
     
-    
+   //instancie les parametre en fonction de la ligne dans le catalogue revetement 
     public void Parametres(int Type){
         /*int pourmur=0, poursol=0, pourplafond=0;
         try (Scanner fileScanner = new Scanner(new File("CatalogueRevetements.txt"))){

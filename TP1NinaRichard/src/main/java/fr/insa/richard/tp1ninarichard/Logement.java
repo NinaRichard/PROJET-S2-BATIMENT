@@ -31,7 +31,7 @@ public class Logement {
         this.id = id;
     }
 
-    //Liste de piece
+    //Liste de pieces
     public List<Piece> getAppartement() {
         return appartement;
     }
@@ -44,10 +44,9 @@ public class Logement {
         this.nbrpiece ++;
     }
 
-    //A rendre plus lisible pas l'utilisateur
     @Override
     public String toString() {
-        return "Logement{" + "id=" + id + ", nbrpiece=" + nbrpiece + ", appartement=" + appartement + '}';
+        return "Le logement numero " + id + " contient " + nbrpiece + " pieces.";//, appartement=" + appartement + '}';
     }
     
     

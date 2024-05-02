@@ -38,6 +38,7 @@ public class EtageI extends Etage{
     public void setAppartementEtage(List<Logement> appartementEtage) {
         this.appartementEtage = appartementEtage;
     }
+    
     //Ajouter un appartement à la liste
     public void ajouterAppartement( Logement nouvelAppartement){
         appartementEtage.add(nouvelAppartement);
@@ -47,7 +48,7 @@ public class EtageI extends Etage{
     // redefinir avec l'id et tout de la classe super
     @Override
     public String toString() {
-        return "EtageI{" + "nbrdappart=" + nbrdappart + ", appartementEtage=" + appartementEtage + '}';
+        return "L'etage "+super.id+" contient " + nbrdappart + " appartement(s).";//, appartementEtage=" + appartementEtage + '}';
     }
 
 }

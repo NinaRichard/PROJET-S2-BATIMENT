@@ -19,6 +19,7 @@ public class Batiment {
     private String address;
     private List<Etage> batiment= new ArrayList();
 
+    //COnstructeurs
     public Batiment(int id, String type) {
         this.id = id;
         this.type = type;
@@ -29,7 +30,6 @@ public class Batiment {
         }  
         this.nbrEtage = 0;
     }
-    
     public Batiment(int id, String type, int nbrEtage) {
         this.id = id;
         this.type = type;
@@ -40,7 +40,6 @@ public class Batiment {
         } 
         this.nbrEtage = nbrEtage;
     }
-
     public Batiment(int id, String type, String address) {
         this.id = id;
         this.type = type;
@@ -55,20 +54,21 @@ public class Batiment {
 
     
     
-    
+    //Getter et Setter
+    //Id
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    //Getter et Setter
+    //Type
     public String getType() {
         return type;
     }
-
-    //ne devrai pas etre modifiable
+    //ne devrait pas etre modifiable
     public void setType(String type) {
         this.type = type;
         if (type.equals("Maison")){
@@ -78,41 +78,45 @@ public class Batiment {
         } 
     }
 
+    //Getter et Setter
+    //NbrEtage
     public int getNbrEtage() {
         return nbrEtage;
     }
-
     public void setNbrEtage(int nbrEtage) {
         this.nbrEtage = nbrEtage;
     }
 
-    
+    //Getter et Setter
+    //List<Etage> batiment
     public List<Etage> getBatiment() {
         return batiment;
     }
-
     public void setBatiment(List<Etage> batiment) {
         this.batiment = batiment;
         nbrEtage = 1;// mettre le nbr de truc dans l'autre
     }
     
-     public void ajouterEtage( Etage nouvelEtage){
+    //Ajouter un etage à la liste
+    public void ajouterEtage( Etage nouvelEtage){
         batiment.add(nouvelEtage);
         this.nbrEtage ++;
     }
 
+    //Getter et Setter
+    //Address
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
 
+    //Getter et Setter
+    //typeIM
     public int getTypeIM() {
         return typeIM;
     }
-
     public void setTypeIM(int typeIM) {
         this.typeIM = typeIM;
     }
@@ -120,10 +124,7 @@ public class Batiment {
     
     @Override
     public String toString() {
-        return "Batiment{" + "id=" + id + ", type=" + type + ", nbrEtage=" + nbrEtage + ", address=" + address + ", batiment=" + batiment + '}';
-    }
-     
-     
-    
+        return "Le Batiment numéro " + id + " est un(e) " + type + " avec " + nbrEtage + " étages, a l'adresse " + address + ".";//, batiment=" + batiment + '}';  FAUT-IL METTRE LA VARIABLE BATIMENT DANS LES INFOS ?
+    }   
     
 }

@@ -13,43 +13,47 @@ public class Baie extends Ouverture{
     private double hauteur;//ASSURER HAUTEUR OUVERTURE INFERIEURE A HAUTEUR MUR
     private double largeur;//IDEM LARGEUR
 
+    //Constructeurs
     public Baie(int id, double hauteur, double largeur) {
         this.id = id;
         this.hauteur = hauteur;
         this.largeur = largeur;
     }
-
     public Baie(int id) {
         this.id = id;
     }
 
+    
+    //Getter et Setter
+    //Id
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    //Getter et Setter
+    //Hauteur
     public double getHauteur() {
         return hauteur;
     }
-
     public void setHauteur(double hauteur) {
         this.hauteur = hauteur;
     }
 
+    //Getter et Setter
+    //Largeur
     public double getLargeur() {
         return largeur;
     }
-
     public void setLargeur(double largeur) {
         this.largeur = largeur;
     }
 
     @Override
     public String toString() {
-        return "Porte{" + "id=" + id + ", hauteur=" + hauteur + ", largeur=" + largeur + '}';
+        return " La Porte numero " + id + " a une hauteur de " + hauteur + " et une largeur de " + largeur + ".";
     }
      
     public double Surface(){

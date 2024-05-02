@@ -36,7 +36,8 @@ public class EtageM extends Etage{
     public void setPieceEtage(List<Piece> pieceEtage) {
         this.pieceEtage = pieceEtage;
     }
-    //Ajouter un piece à la liste
+    
+    //Ajouter une piece à la liste
     public void ajouterPiece( Piece nouvellePiece){
         pieceEtage.add(nouvellePiece);
         nbrdePiece ++;
@@ -45,7 +46,7 @@ public class EtageM extends Etage{
     // redefinir avec l'id et tout de la classe super
     @Override
     public String toString() {
-        return "EtageM{" + "nbrdePiece=" + nbrdePiece + ", pieceEtage=" + pieceEtage + '}';
+        return "L'etage "+ super.id + " contient " + nbrdePiece + " pieces.";//, pieceEtage=" + pieceEtage + '}';
     }
     
     

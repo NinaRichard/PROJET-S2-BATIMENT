@@ -13,39 +13,44 @@ public class Porte extends Ouverture{
     private double hauteur=2.10 ;
     private double largeur=0.90 ;
 
+    //Constructeur
     public Porte(int id) {
         this.id = id;
     }
 
+    //Getter et Setter
+    //Id
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    //Getter et Setter
+    //Hauteur
     public double getHauteur() {
         return hauteur;
     }
-
     public void setHauteur(double hauteur) {
         this.hauteur = hauteur;
     }
 
+    //Getter et Setter
+    //Largeur
     public double getLargeur() {
         return largeur;
     }
-
     public void setLargeur(double largeur) {
         this.largeur = largeur;
     }
 
     @Override
     public String toString() {
-        return "Porte{" + "id=" + id + ", hauteur=" + hauteur + ", largeur=" + largeur + '}';
+        return "La porte numero " + id + " a une hauteur de " + hauteur + " et une largeur de " + largeur + ".";
     }
      
+    //calcule surface porte
     public double Surface(){
        return Surface(this.hauteur, this.largeur);
     }

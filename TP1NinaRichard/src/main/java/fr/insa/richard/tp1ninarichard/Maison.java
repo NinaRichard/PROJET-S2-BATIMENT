@@ -10,10 +10,10 @@ package fr.insa.richard.tp1ninarichard;
  */
 public class Maison extends Batiment{
 
+    //Constructeurs
     public Maison(int id, int nbrEtage) {
         super(id, "Maison", nbrEtage);
     }
-    
     public Maison(int id, String address) {
         super(id, "Maison",address);
     }
