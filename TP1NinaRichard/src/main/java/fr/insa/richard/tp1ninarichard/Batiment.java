@@ -14,6 +14,7 @@ import java.util.List;
 public class Batiment {
     private int id;
     private String type;
+    private int typeIM;
     private int nbrEtage;
     private String address;
     private List<Etage> batiment= new ArrayList();
@@ -21,18 +22,33 @@ public class Batiment {
     public Batiment(int id, String type) {
         this.id = id;
         this.type = type;
+        if (type.equals("Maison")){
+            this.typeIM = 1;
+        } else{
+            this.typeIM = 0;
+        }  
         this.nbrEtage = 0;
     }
     
     public Batiment(int id, String type, int nbrEtage) {
         this.id = id;
         this.type = type;
+        if (type.equals("Maison")){
+            this.typeIM = 1;
+        } else{
+            this.typeIM = 0;
+        } 
         this.nbrEtage = nbrEtage;
     }
 
     public Batiment(int id, String type, String address) {
         this.id = id;
         this.type = type;
+        if (type.equals("Maison")){
+            this.typeIM = 1;
+        } else{
+            this.typeIM = 0;
+        } 
         this.address = address;
         this.nbrEtage = 0;
     }
@@ -52,8 +68,14 @@ public class Batiment {
         return type;
     }
 
+    //ne devrai pas etre modifiable
     public void setType(String type) {
         this.type = type;
+        if (type.equals("Maison")){
+            this.typeIM = 1;
+        } else{
+            this.typeIM = 0;
+        } 
     }
 
     public int getNbrEtage() {
@@ -87,6 +109,15 @@ public class Batiment {
         this.address = address;
     }
 
+    public int getTypeIM() {
+        return typeIM;
+    }
+
+    public void setTypeIM(int typeIM) {
+        this.typeIM = typeIM;
+    }
+
+    
     @Override
     public String toString() {
         return "Batiment{" + "id=" + id + ", type=" + type + ", nbrEtage=" + nbrEtage + ", address=" + address + ", batiment=" + batiment + '}';
