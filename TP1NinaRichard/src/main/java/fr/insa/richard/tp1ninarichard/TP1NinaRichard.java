@@ -6,6 +6,7 @@ package fr.insa.richard.tp1ninarichard;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -15,24 +16,14 @@ import java.io.IOException;
 public class TP1NinaRichard {
     
     // voir mettre dans des tableau
-    public static void menu(){
+    // 
+    public static void menu(ArrayList<Batiment> liste_Batiment, ArrayList<Coin> liste_Coin, ArrayList<Mur> liste_Mur){
         
         int choix;
-        int nbrBatiment = 0;
-        nbrBatiment ++;
-                System.out.println("Votre Batiment est il 1) une maison 2) un immeuble?");
-                int type = Lire.i();
-                while(type != 1 && type != 2){
-                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT 1 ou 2! Votre Batiment est il 1) une maison 2) un immeuble?");
-                    type = Lire.i(); 
-                }
-                String typeB = "Immeuble";
-                if (type == 1){
-                    typeB = "Maison";
-                }
-                Batiment batiment = new Batiment(nbrBatiment,typeB);
+        int nbrBatiment = 1;
+        int type;
         do{
-        //System.out.println("1) Créer un batiment");
+        System.out.println("1) Créer un batiment");
         System.out.println("2) Créer un étage et ajouter un étage dans un batiment") ;
         System.out.println("3) Créer un logement et ajouter un logement dans un étage");
         System.out.println("4) Créer une piece et ajouter une piece dans un logement");
@@ -47,7 +38,7 @@ public class TP1NinaRichard {
         System.out.println("Pour annuler ou arreter taper 0");
         choix = Lire.i();
         switch(choix){
-            /*case 1:
+            case 1:
                 nbrBatiment ++;
                 System.out.println("Votre Batiment est il 1) une maison 2) un immeuble?");
                 type = Lire.i();
@@ -56,20 +47,31 @@ public class TP1NinaRichard {
                     type = Lire.i(); 
                 }
                 if (type == 1){
-                    Batiment batiment2 = new Batiment(nbrBatiment,"Maison");
+                    Batiment batiment = new Batiment(nbrBatiment,"Maison");
+                    liste_Batiment.add(batiment);
                 } else {
-                    Batiment batiment2 = new Batiment(nbrBatiment,"Immeuble");
+                    Batiment batiment = new Batiment(nbrBatiment,"Immeuble");
+                    liste_Batiment.add(batiment);
                 }
+                
                 //mettre option annuler
-            */
+            
             case 2:
-                System.out.println("A quel batiment vouler vous ajouter un étage?");
-                //peut on choper un object par son id?
+                System.out.println("A quel batiment vouler vous ajouter un étage? Voici les batiments à votre disposition");
+                int i=0;
+                for (Batiment batiment : liste_Batiment) {
+                    System.out.print("Batiment "+ i);
+                    i++;
+                     batiment.toString();
+                }
+                System.out.print("Indiquer les numero du batiment sélectionner");
+                int batimentChoisi = Lire.i();
+                Batiment batimentMod = liste_Batiment.get(batimentChoisi);
                 System.out.println("Quel est la hauteur sous plafont de cet étage?");
                 double hauteurSousPlafont=Lire.d();
-                Etage etage = new Etage(batiment.getNbrEtage(),hauteurSousPlafont);
-                batiment.setNbrEtage(batiment.getNbrEtage()+1);
-                batiment.ajouterEtage(etage);
+                Etage etage = new Etage(batimentMod.getNbrEtage(),hauteurSousPlafont);
+                batimentMod.setNbrEtage(batimentMod.getNbrEtage()+1);
+                batimentMod.ajouterEtage(etage);
             break;
             case 3:
                 System.out.println("A quel étage vouler vous ajouter un étage?");
@@ -99,6 +101,7 @@ public class TP1NinaRichard {
     }
 
     public static void main(String[] args) {
+        /*
          // Définition du chemin du fichier de sortie
         String filePath = "batiment.txt";
         // Écriture du code LaTeX avec TikZ dans le fichier de sortie
@@ -158,5 +161,29 @@ public class TP1NinaRichard {
         Porte p1 = new Porte(1);
         double s = p1.Surface();
         System.out.println("la surface vaut "+s);*/
+    int nbrdeBatiment = 0;  
+    ArrayList<Batiment> liste_Batiment;
+    ArrayList<Coin> liste_Coin;
+    ArrayList<Mur> liste_Mur;
+    System.out.println("Bonjour, bienvenue dans notre générateur de devis, dans un premier temps nous allons modéliser votre batiment, puis vous pourrez choisir vos revetements de murs, sols et plafonds.");
+    System.out.println("Première étape: Créer un batiment pour cela veuiller nous renseigner:");
+    System.out.print("L'adresse du Batiment: ");
+    String adresse = Lire.S();
+    System.out.println("Votre Batiment est il 1) une maison 2) un immeuble?");
+    int type = Lire.i();
+    while(type != 1 && type != 2){
+        System.out.println("ATENTION LES CHOIX POSSIBLE SONT 1 ou 2! Votre Batiment est il 1) une maison 2) un immeuble?");
+        type = Lire.i(); 
+    }
+    String typeB = "Immeuble";
+    if (type == 1){
+        typeB = "Maison";
+    }
+    nbrdeBatiment ++;
+    Batiment batiment = new Batiment(nbrdeBatiment,typeB,adresse);
+    liste_Batiment.add(batiment);
+    
+    menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmise vide?
+     
     }
 }

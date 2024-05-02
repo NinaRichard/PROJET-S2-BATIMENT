@@ -12,6 +12,7 @@ import static java.lang.Math.sqrt;
  */
 public class Mur {
     // devrait on y associer in revetement
+    // champs point 
     private int id;
     private Coin coin1;
     private Coin coin2;

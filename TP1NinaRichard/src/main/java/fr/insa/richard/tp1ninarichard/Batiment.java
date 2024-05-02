@@ -15,6 +15,7 @@ public class Batiment {
     private int id;
     private String type;
     private int nbrEtage;
+    private String address;
     private List<Etage> batiment= new ArrayList();
 
     public Batiment(int id, String type) {
@@ -22,13 +23,21 @@ public class Batiment {
         this.type = type;
         this.nbrEtage = 0;
     }
-
+    
     public Batiment(int id, String type, int nbrEtage) {
         this.id = id;
         this.type = type;
         this.nbrEtage = nbrEtage;
     }
 
+    public Batiment(int id, String type, String address) {
+        this.id = id;
+        this.type = type;
+        this.address = address;
+        this.nbrEtage = 0;
+    }
+
+    
     
     
     public int getId() {
@@ -70,9 +79,20 @@ public class Batiment {
         this.nbrEtage ++;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
-        return "Batiment n°" + id + " est un/une" + type + "possède actuellement" + nbrEtage + " etages" ;
+        return "Batiment{" + "id=" + id + ", type=" + type + ", nbrEtage=" + nbrEtage + ", address=" + address + ", batiment=" + batiment + '}';
     }
+     
+     
+    
     
 }

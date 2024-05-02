@@ -13,33 +13,41 @@ import java.util.List;
  */
 public class Logement {
     private int id;
-    private List<Piece> appartement= new ArrayList();
     private int nbrpiece;
-
+    private List<Piece> appartement= new ArrayList();
+    
+    //Constructeur
     public Logement(int id) {
         this.id = id;
         this.nbrpiece = 0;
     }
 
+    //Getter et Setter
+    //Id
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    //Liste de piece
     public List<Piece> getAppartement() {
         return appartement;
     }
-
     public void setAppartement(List<Piece> appartement) {
         this.appartement = appartement;
     }
-    
+    //Ajouter une piece
     public void ajouterPiece( Piece nouvellePiece){
         appartement.add(nouvellePiece);
         this.nbrpiece ++;
+    }
+
+    //A rendre plus lisible pas l'utilisateur
+    @Override
+    public String toString() {
+        return "Logement{" + "id=" + id + ", nbrpiece=" + nbrpiece + ", appartement=" + appartement + '}';
     }
     
     

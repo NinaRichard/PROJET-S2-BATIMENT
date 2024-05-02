@@ -13,6 +13,10 @@ public class Coin {
     private double x;
     private double y;
     private static int nbrCoin = 0;
+    // private double 
+    /**
+     * WIKIVERSITY
+     */
 
     public Coin() {
     }
