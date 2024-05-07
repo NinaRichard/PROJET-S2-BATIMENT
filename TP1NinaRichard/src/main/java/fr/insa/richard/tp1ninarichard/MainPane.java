@@ -24,15 +24,13 @@ public class MainPane extends BorderPane {
     private Button bCreation;
     private Button bRevetement;
     
-    private Canvas cPlan;
-    
     public MainPane(){
         this.rbCreation = new RadioButton("Créer");
         this.rbEnlever = new RadioButton("Enlever");
         this.rbChanger = new RadioButton("(é-)Changer");
         
         VBox vbDroite = new VBox(this.rbCreation, this.rbEnlever, this.rbChanger);
-        this.setLeft(vbDroite);
+        this.setRight(vbDroite);
         
         HBox buttonBar = new HBox(20, this.bCreation,this.bRevetement);
         this.setTop(buttonBar);

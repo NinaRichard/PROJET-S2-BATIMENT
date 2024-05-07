@@ -18,7 +18,7 @@ public class TP1NinaRichard {
     
     // voir mettre dans des tableau
     // 
-    public static void menu(ArrayList<Batiment> liste_Batiment, ArrayList<Coin> liste_Coin, ArrayList<Mur> liste_Mur){
+    public static void menu(ArrayList<Batiment> liste_Batiment,ArrayList<Maison> liste_Maison, ArrayList<Immeuble> liste_Immeuble, ArrayList<Coin> liste_Coin, ArrayList<Mur> liste_Mur){
         
         int choix;
         int nbrBatiment = 1;
@@ -26,6 +26,8 @@ public class TP1NinaRichard {
         int i;
         int batimentChoisi;
         int etageChoisi;
+        int maisonChoisi;
+        int immeubleChoisi;
         List<Etage> liste_Etage;
         List<EtageI> liste_EtageI;
         List<EtageM> liste_EtageM;
@@ -64,62 +66,79 @@ public class TP1NinaRichard {
                 //mettre option annuler
             
             case 2:
-                // faire modif Maison et Batiment séparement
-                System.out.println("A quel batiment vouler vous ajouter un étage? Voici les batiments à votre disposition");
+                System.out.println("Voulez vous modifier 1) une maison,2) un immeuble ?");
+                type = Lire.i();
+                while(type != 1 && type != 2){
+                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT 1 ou 2! Votre Batiment est il 1) une maison 2) un immeuble?");
+                    type = Lire.i(); 
+                }
+                if (type == 1){
+                    i=0;
+                    for (Maison maison : liste_Maison) {
+                        System.out.print("Batiment "+ i);
+                        i++;
+                        maison.toString();
+                    }
+                    System.out.print("Indiquer les numero de la Maison sélectionner");
+                    maisonChoisi = Lire.i();
+                    Maison maisonMod = liste_Maison.get(maisonChoisi);
+
+                    System.out.println("Quel est la hauteur sous plafont de cet étage?");
+                    double hauteurSousPlafont=Lire.d();
+                    EtageM etageM = new EtageM(maisonMod.getNbrEtage(),hauteurSousPlafont);
+                    //maisonMod.setNbrEtage(maisonMod.getNbrEtage()+1);
+                    maisonMod.ajouterEtage(etageM);
+                } else {
+                    i=0;
+                    for (Immeuble immeuble : liste_Immeuble) {
+                        System.out.print("Batiment "+ i);
+                        i++;
+                        immeuble.toString();
+                    }
+                    System.out.print("Indiquer les numero de l'Immeuble sélectionner");
+                    immeubleChoisi = Lire.i();
+                    Immeuble immeubleMod = liste_Immeuble.get(immeubleChoisi);
+
+                    System.out.println("Quel est la hauteur sous plafont de cet étage?");
+                    double hauteurSousPlafont=Lire.d();
+                    EtageI etageI = new EtageI(immeubleMod.getNbrEtage(),hauteurSousPlafont);
+                    //immeubleMod.setNbrEtage(immeubleMod.getNbrEtage()+1);
+                    immeubleMod.ajouterEtage(etageI);
+                    
+                }   
+            break;
+            
+            case 3:
+                System.out.println("A quelle immeuble vouler vous ajouter un logement?");
                 i=0;
-                for (Batiment batiment : liste_Batiment) {
+                for (Immeuble immeuble : liste_Immeuble) {
                     System.out.print("Batiment "+ i);
                     i++;
-                     batiment.toString();
-                }
-                System.out.print("Indiquer les numero du batiment sélectionner");
-                batimentChoisi = Lire.i();
-                Batiment batimentMod = liste_Batiment.get(batimentChoisi);
-                if (batimentMod.getTypeIM()!=0){
-                    //Maison maisonMod = liste_Batiment.get(batimentChoisi);
-                    System.out.println("Quel est la hauteur sous plafont de cet étage?");
-                    double hauteurSousPlafont=Lire.d();
-                    EtageM etageM = new EtageM(batimentMod.getNbrEtage(),hauteurSousPlafont);
-                    batimentMod.setNbrEtage(batimentMod.getNbrEtage()+1);
-                    batimentMod.ajouterEtage(etageM);
-                }else{
-                    System.out.println("Quel est la hauteur sous plafont de cet étage?");
-                    double hauteurSousPlafont=Lire.d();
-                    EtageI etageI = new EtageI(batimentMod.getNbrEtage(),hauteurSousPlafont);
-                    batimentMod.setNbrEtage(batimentMod.getNbrEtage()+1);
-                    batimentMod.ajouterEtage(etageI);
+                    immeuble.toString();
                 }
                 
-            break;
-            case 3:
-                System.out.println("A quel batiment vouler vous ajouter un étage? Voici les batiments à votre disposition");
+                System.out.print("Indiquer les numero de l'Immeuble sélectionner");
+                immeubleChoisi = Lire.i();
+                Immeuble immeubleMod3 = liste_Immeuble.get(immeubleChoisi);
+                
+                System.out.println("A quel étage vouler vous ajouter un Logement?");
+                liste_EtageI = immeubleMod3.getBatiment();
                 i=0;
-                for (Batiment batiment : liste_Batiment) {
-                    System.out.print("Batiment "+ i);
-                    i++;
-                     batiment.toString();
-                }
-                System.out.print("Indiquer les numero du batiment sélectionner");
-                batimentChoisi = Lire.i();
-                Batiment batimentMod3 = liste_Batiment.get(batimentChoisi);
-                System.out.println("A quel étage vouler vous ajouter un étage?");
-                liste_Etage = batimentMod3.getBatiment();
-                i=0;
-                for (Etage etageaC : liste_Etage) {
+                for (Etage etageaC : liste_EtageI) {
                     System.out.print("Etage "+ i);
                     i++;
                     etageaC.toString();
                 }
                 System.out.print("Indiquer les numero de l'étage sélectionner");
                 etageChoisi = Lire.i();
-                Etage etageMod = liste_Etage.get(etageChoisi);
+                EtageI etageMod = liste_EtageI.get(etageChoisi);
                 Logement appartement = new Logement(etageMod.getNbrdappart());
-                etageMod.setNbrdappart(etageMod.getNbrdappart()+1);
+                //etageMod.setNbrdappart(etageMod.getNbrdappart()+1);
                 etageMod.ajouterAppartement(appartement);
-                //normal modifier etage I en etage..
+                
             break;
             case 4:
-                System.out.println("A quel batiment vouler vous ajouter un étage? Voici les batiments à votre disposition");
+                /*System.out.println("A quel batiment vouler vous ajouter un étage? Voici les batiments à votre disposition");
                 i=0;
                 for (Batiment batiment : liste_Batiment) {
                     System.out.print("Batiment "+ i);
@@ -128,23 +147,61 @@ public class TP1NinaRichard {
                 }
                 System.out.print("Indiquer les numero du batiment sélectionner");
                 batimentChoisi = Lire.i();
-                Batiment batimentMod4 = liste_Batiment.get(batimentChoisi);
-                System.out.println("A quel étage voulez vous ajouter un étage?");
-                liste_Etage = batimentMod4.getBatiment();
-                i=0;
-                for (Etage etageaC : liste_Etage) {
-                    System.out.print("Etage "+ i);
-                    i++;
-                    etageaC.toString();
+                */
+                System.out.println("Voulez vous modifier 1) une maison,2) un immeuble ?");
+                type = Lire.i();
+                while(type != 1 && type != 2){
+                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT 1 ou 2! Votre Batiment est il 1) une maison 2) un immeuble?");
+                    type = Lire.i(); 
                 }
-                System.out.print("Indiquer les numero de l'étage sélectionner");
-                etageChoisi = Lire.i();
-                Etage etageMod4 = liste_Etage.get(etageChoisi);
-                System.out.println("Dans quel logement voulez vous ajouter une piece?");
-                //liste_logement = etageMod4.get
-                Logement appartement = new Logement(etage.getNbrdappart());
-                etage.setNbrdappart(etage.getNbrdappart()+1);
-                etage.ajouterAppartement(appartement);
+                if (type == 1){
+                    i=0;
+                    for (Maison maison : liste_Maison) {
+                        System.out.print("Batiment "+ i);
+                        i++;
+                        maison.toString();
+                    }
+                    System.out.print("Indiquer les numero de la Maison sélectionner");
+                    maisonChoisi = Lire.i();
+                    Maison maisonMod = liste_Maison.get(maisonChoisi);
+
+                    System.out.println("A quel étage voulez vous ajouter un étage?");
+                    liste_EtageM = maisonMod.getBatiment();
+                    i=0;
+                    for (EtageM etageaC : liste_EtageM) {
+                        System.out.print("Etage "+ i);
+                        i++;
+                        etageaC.toString();
+                    }
+                    System.out.print("Indiquer les numero de l'étage sélectionner");
+                    etageChoisi = Lire.i();
+                    EtageM etageMod4 = liste_EtageM.get(etageChoisi);
+                    //ajouter piece
+                } else {
+                    i=0;
+                    for (Immeuble immeuble : liste_Immeuble) {
+                        System.out.print("Batiment "+ i);
+                        i++;
+                        immeuble.toString();
+                    }
+                    System.out.print("Indiquer les numero de l'Immeuble sélectionner");
+                    immeubleChoisi = Lire.i();
+                    Immeuble immeubleMod = liste_Immeuble.get(immeubleChoisi);  
+                    
+                    System.out.println("A quel étage voulez vous ajouter un étage?");
+                    liste_EtageI = immeubleMod.getBatiment();
+                    i=0;
+                    for (EtageI etageaC : liste_EtageI) {
+                        System.out.print("Etage "+ i);
+                        i++;
+                        etageaC.toString();
+                    }
+                    System.out.print("Indiquer les numero de l'étage sélectionner");
+                    etageChoisi = Lire.i();
+                    EtageI etageMod4 = liste_EtageI.get(etageChoisi);
+                    //selection Logement + creation piece
+                }
+               
             break;
             case 12:
                 //menuRevetement()mettre les nbrs ect..
@@ -241,9 +298,9 @@ public class TP1NinaRichard {
     }else {
         Immeuble batiment = new Immeuble(nbrdeBatiment,adresse);
     }
-    liste_Batiment.add(batiment); //pk?
+    //liste_Batiment.add(batiment); //pk?
     
-    menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmise vide?
+    //menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmise vide?
      
     }
 }

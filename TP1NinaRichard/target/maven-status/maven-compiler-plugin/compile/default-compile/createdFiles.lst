@@ -7,12 +7,15 @@ fr\insa\richard\tp1ninarichard\Piece.class
 fr\insa\richard\tp1ninarichard\Porte.class
 fr\insa\richard\tp1ninarichard\Coin.class
 fr\insa\richard\tp1ninarichard\Ouverture.class
+fr\insa\richard\tp1ninarichard\EtageM.class
+fr\insa\richard\tp1ninarichard\EtageI.class
 fr\insa\richard\tp1ninarichard\Mur.class
 fr\insa\richard\tp1ninarichard\Lire.class
 fr\insa\richard\tp1ninarichard\Revetement.class
 fr\insa\richard\tp1ninarichard\SystemInfo.class
 Revetement.class
 fr\insa\richard\tp1ninarichard\Batiment.class
+fr\insa\richard\tp1ninarichard\MainPane.class
 fr\insa\richard\tp1ninarichard\Plafond.class
 fr\insa\richard\tp1ninarichard\Maison.class
 fr\insa\richard\tp1ninarichard\App.class

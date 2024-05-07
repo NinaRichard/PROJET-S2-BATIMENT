@@ -17,7 +17,6 @@ public class Batiment {
     private int typeIM;
     private int nbrEtage;
     private String address;
-    private List<Etage> batiment= new ArrayList();
 
     //COnstructeurs
     public Batiment(int id, String type) {
@@ -87,21 +86,6 @@ public class Batiment {
         this.nbrEtage = nbrEtage;
     }
 
-    //Getter et Setter
-    //List<Etage> batiment
-    public List<Etage> getBatiment() {
-        return batiment;
-    }
-    public void setBatiment(List<Etage> batiment) {
-        this.batiment = batiment;
-        nbrEtage = 1;// mettre le nbr de truc dans l'autre
-    }
-    
-    //Ajouter un etage à la liste
-    public void ajouterEtage( Etage nouvelEtage){
-        batiment.add(nouvelEtage);
-        this.nbrEtage ++;
-    }
 
     //Getter et Setter
     //Address
