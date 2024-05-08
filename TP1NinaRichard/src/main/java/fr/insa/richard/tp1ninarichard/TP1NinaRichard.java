@@ -203,6 +203,17 @@ public class TP1NinaRichard {
                 }
                
             break;
+            /*
+            System.out.println("5) Créer un mur"); VOIR liste mur ds pice
+            System.out.println("6) Créer un point"); EST - CE Vraiment Utile ;
+            System.out.println("7) suprimer un étage");
+            System.out.println("8) suprimer un logement ou changer un logement d'étage");
+            System.out.println("9) suprimer une piece et changer une piece de logement");
+            System.out.println("10) suprimer un mur, le modifier ou changer de piece");
+            System.out.println("11) suprimer un point ou le modifier");
+            System.out.println("12) Passer à la partie revetement");
+            System.out.println("Pour annuler ou arreter taper 0");
+            */
             case 12:
                 //menuRevetement()mettre les nbrs ect..
             break;
