@@ -5,6 +5,7 @@
 package fr.insa.richard.tp1ninarichard;
 
 import static java.lang.Math.sqrt;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,7 +21,56 @@ public class Piece {
     private Sol sol;
     private String usage;
     private Plafond plafond;
-
+    //"attribut" general ajouter pour l'essai si dessus potentiellement il faudrai modifier le code pour que ça marche et soit optimiser
+    private static int nbrDePiece;
+    //tentative de constructeur qui permet à l'utilisateur de renseigner les informationn au fur et a mesure
+    public Piece(ArrayList<Mur> liste_Mur, ArrayList<Coin> liste_Coin){
+        this.id = nbrDePiece; // ou nbr de pice +1 à voir
+        nbrDePiece++; //a mettre avant en fct de si on commence à 0 ou pas
+        System.out.println("Quels murs definie votre piece?");
+        int i=1;
+        for (Mur mur : liste_Mur) {
+                        System.out.print("Mur "+ i);
+                        i++;
+                        mur.toString();
+        }
+        System.out.print("Mur 1 (renseigner le numero du mur, si il n'exite pas taper 0) ");
+        int choixMur = Lire.i();
+        if (choixMur == 0){
+            //Creation d'un mur + ajouter le à la liste
+        } else{
+            this.mur1 = liste_Mur.get(choixMur);
+        }
+        System.out.print("Mur 2 (renseigner le numero du mur, si il n'exite pas taper 0) ");
+        choixMur = Lire.i();
+        if (choixMur == 0){
+            //Creation d'un mur + ajouter le à la liste
+        } else{
+            this.mur2 = liste_Mur.get(choixMur);
+        }
+        System.out.print("Mur 3 (renseigner le numero du mur, si il n'exite pas taper 0) ");
+        choixMur = Lire.i();
+        if (choixMur == 0){
+            //Creation d'un mur + ajouter le à la liste
+        } else{
+            this.mur3 = liste_Mur.get(choixMur);
+        }
+        System.out.print("Mur 4 (renseigner le numero du mur, si il n'exite pas taper 0) ");
+        choixMur = Lire.i();
+        if (choixMur == 0){
+            //Creation d'un mur + ajouter le à la liste
+        } else{
+            this.mur3 = liste_Mur.get(choixMur);
+        }
+    }
+    public Mur creationMur(ArrayList<Mur> liste_Mur, ArrayList<Coin> liste_Coin){
+        int id = lenght.liste_Mur;
+        Coin coin1;
+        Coin coin2;
+        
+        return new Mur(id, coin1 ; coin2);
+    }
+    
     //Constructeurs
     public Piece(int id, Mur mur1, Mur mur2, Mur mur3, Mur mur4,Sol sol, Plafond plafond) {
         this.id = id;
