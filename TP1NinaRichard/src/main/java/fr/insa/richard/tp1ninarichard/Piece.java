@@ -37,38 +37,66 @@ public class Piece {
         System.out.print("Mur 1 (renseigner le numero du mur, si il n'exite pas taper 0) ");
         int choixMur = Lire.i();
         if (choixMur == 0){
-            //Creation d'un mur + ajouter le à la liste
+            this.mur1 = creationMur(liste_Mur,liste_Coin);
         } else{
             this.mur1 = liste_Mur.get(choixMur);
         }
         System.out.print("Mur 2 (renseigner le numero du mur, si il n'exite pas taper 0) ");
         choixMur = Lire.i();
         if (choixMur == 0){
-            //Creation d'un mur + ajouter le à la liste
+            this.mur2 = creationMur(liste_Mur,liste_Coin);
         } else{
             this.mur2 = liste_Mur.get(choixMur);
         }
         System.out.print("Mur 3 (renseigner le numero du mur, si il n'exite pas taper 0) ");
         choixMur = Lire.i();
         if (choixMur == 0){
-            //Creation d'un mur + ajouter le à la liste
+           this.mur3 = creationMur(liste_Mur,liste_Coin);
         } else{
             this.mur3 = liste_Mur.get(choixMur);
         }
         System.out.print("Mur 4 (renseigner le numero du mur, si il n'exite pas taper 0) ");
         choixMur = Lire.i();
         if (choixMur == 0){
-            //Creation d'un mur + ajouter le à la liste
+            this.mur4 = creationMur(liste_Mur,liste_Coin);
         } else{
-            this.mur3 = liste_Mur.get(choixMur);
+            this.mur4 = liste_Mur.get(choixMur);
         }
     }
     public Mur creationMur(ArrayList<Mur> liste_Mur, ArrayList<Coin> liste_Coin){
-        int id = lenght.liste_Mur;
-        Coin coin1;
+        int id = liste_Mur.size();
+        int i=0; Coin coin1;
         Coin coin2;
-        
-        return new Mur(id, coin1 ; coin2);
+        for (Coin coin : liste_Coin) {
+                        System.out.print("Coin "+ i);
+                        i++;
+                        coin.toString();
+        }
+        System.out.print("Premier Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
+        int choixCoin = Lire.i();
+        if (choixCoin == 0){
+            System.out.print("Donner l'absysse de votre nouveau point:");
+            double x = Lire.i();
+            System.out.print("Donner l'ordonné de votre nouveau point:");
+            double y = Lire.i();
+            coin1 = new Coin(liste_Coin.size(),x,y);
+            liste_Coin.add(coin1);
+        } else{
+            coin1 = liste_Coin.get(choixCoin);
+        }
+        System.out.print("Deuxieme Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
+        choixCoin = Lire.i();
+        if (choixCoin == 0){
+            System.out.print("Donner l'absysse de votre nouveau point:");
+            double x = Lire.i();
+            System.out.print("Donner l'ordonné de votre nouveau point:");
+            double y = Lire.i();
+            coin2 = new Coin(liste_Coin.size(),x,y);
+            liste_Coin.add(coin2);
+        } else{
+            coin2 = liste_Coin.get(choixCoin);
+        }
+        return new Mur(id, coin1,coin2);
     }
     
     //Constructeurs
