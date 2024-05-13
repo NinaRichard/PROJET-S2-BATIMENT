@@ -176,7 +176,7 @@ public class TP1NinaRichard {
                     System.out.print("Indiquer les numero de l'étage sélectionner");
                     etageChoisi = Lire.i();
                     EtageM etageMod4 = liste_EtageM.get(etageChoisi);
-                    //ajouter piece
+                    //ajouter piece (LA CREE MAIS IL Y A UNE METHODE POUR CA DANS PIECE)
                 } else {
                     i=0;
                     for (Immeuble immeuble : liste_Immeuble) {
@@ -199,7 +199,7 @@ public class TP1NinaRichard {
                     System.out.print("Indiquer les numero de l'étage sélectionner");
                     etageChoisi = Lire.i();
                     EtageI etageMod4 = liste_EtageI.get(etageChoisi);
-                    //selection Logement + creation piece
+                    //selection Logement + creation piece (il Y A UNE MERTODE POU CA DANS PIECE
                 }
                
             break;
