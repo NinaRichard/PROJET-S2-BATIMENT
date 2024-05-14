@@ -74,9 +74,9 @@ public class Piece {
         System.out.print("Premier Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
         int choixCoin = Lire.i();
         if (choixCoin == 0){
-            System.out.print("Donner l'absysse de votre nouveau point:");
+            System.out.print("Donner l'absisse de votre nouveau point:");
             double x = Lire.i();
-            System.out.print("Donner l'ordonné de votre nouveau point:");
+            System.out.print("Donner l'ordonnée de votre nouveau point:");
             double y = Lire.i();
             coin1 = new Coin(x,y);
             liste_Coin.add(coin1);
@@ -86,9 +86,9 @@ public class Piece {
         System.out.print("Deuxieme Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
         choixCoin = Lire.i();
         if (choixCoin == 0){
-            System.out.print("Donner l'absysse de votre nouveau point:");
+            System.out.print("Donner l'absisse de votre nouveau point:");
             double x = Lire.i();
-            System.out.print("Donner l'ordonné de votre nouveau point:");
+            System.out.print("Donner l'ordonnée de votre nouveau point:");
             double y = Lire.i();
             coin2 = new Coin(x,y);
             liste_Coin.add(coin2);
