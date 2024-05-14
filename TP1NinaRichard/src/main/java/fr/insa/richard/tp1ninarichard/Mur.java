@@ -5,6 +5,7 @@
 package fr.insa.richard.tp1ninarichard;
 
 import static java.lang.Math.sqrt;
+import java.util.ArrayList;
 
 /**
  *
@@ -39,6 +40,41 @@ public class Mur {
         this.interior = interior;
         nbrMur++;
     }
+    public Mur(ArrayList<Mur> liste_Mur, ArrayList<Coin> liste_Coin){
+        this.id=nbrMur;
+        nbrMur++;
+        int i=0;
+        for (Coin coin : liste_Coin) {
+                        System.out.print("Coin "+ i);
+                        i++;
+                        coin.toString();
+        }
+        System.out.print("Premier Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
+        int choixCoin = Lire.i();
+        if (choixCoin == 0){
+            System.out.print("Donner l'absysse de votre nouveau point:");
+            double x = Lire.i();
+            System.out.print("Donner l'ordonné de votre nouveau point:");
+            double y = Lire.i();
+            this.coin1 = new Coin(x,y);
+            liste_Coin.add(this.coin1);
+        } else{
+            this.coin1 = liste_Coin.get(choixCoin);
+        }
+        System.out.print("Deuxieme Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
+        choixCoin = Lire.i();
+        if (choixCoin == 0){
+            System.out.print("Donner l'absisse de votre nouveau point:");
+            double x = Lire.i();
+            System.out.print("Donner l'ordonnée de votre nouveau point:");
+            double y = Lire.i();
+            this.coin2 = new Coin(x,y);
+            liste_Coin.add(this.coin2);
+        } else{
+            this.coin2 = liste_Coin.get(choixCoin);
+        }
+    }    
+
     
     //Getter et Setter
     //Id
