@@ -62,7 +62,7 @@ public class App extends Application {
         stage.show();
 */
         BorderPane mainPane = new BorderPane();
-    
+        //NE DEVRAIT APPARATRE QUE EN MENU CREATION
         RadioButton rbCreation = new RadioButton("Créer");
         RadioButton rbEnlever = new RadioButton("Enlever");
         RadioButton rbChanger = new RadioButton("(é-)Changer");

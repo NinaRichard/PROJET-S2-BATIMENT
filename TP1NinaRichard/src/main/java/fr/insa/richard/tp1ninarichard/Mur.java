@@ -17,18 +17,27 @@ public class Mur {
     private Coin coin1;
     private Coin coin2;
     private boolean interior;
+    private static int nbrMur;
 
     //Constructeurs
     public Mur(int id, Coin coin1, Coin coin2) {
         this.id = id;
         this.coin1 = coin1;
         this.coin2 = coin2;
+        nbrMur ++;
+    }
+    public Mur(Coin coin1, Coin coin2) {
+        this.id = nbrMur;//voir si mettre après
+        this.coin1 = coin1;
+        this.coin2 = coin2;
+        nbrMur ++;
     }
     public Mur(int id, Coin coin1, Coin coin2, boolean interior) {
         this.id = id;
         this.coin1 = coin1;
         this.coin2 = coin2;
         this.interior = interior;
+        nbrMur++;
     }
     
     //Getter et Setter

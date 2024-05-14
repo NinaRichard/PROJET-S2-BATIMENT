@@ -64,7 +64,6 @@ public class Piece {
         }
     }
     public Mur creationMur(ArrayList<Mur> liste_Mur, ArrayList<Coin> liste_Coin){
-        int id = liste_Mur.size();
         int i=0; Coin coin1;
         Coin coin2;
         for (Coin coin : liste_Coin) {
@@ -79,7 +78,7 @@ public class Piece {
             double x = Lire.i();
             System.out.print("Donner l'ordonné de votre nouveau point:");
             double y = Lire.i();
-            coin1 = new Coin(liste_Coin.size(),x,y);
+            coin1 = new Coin(x,y);
             liste_Coin.add(coin1);
         } else{
             coin1 = liste_Coin.get(choixCoin);
@@ -91,12 +90,12 @@ public class Piece {
             double x = Lire.i();
             System.out.print("Donner l'ordonné de votre nouveau point:");
             double y = Lire.i();
-            coin2 = new Coin(liste_Coin.size(),x,y);
+            coin2 = new Coin(x,y);
             liste_Coin.add(coin2);
         } else{
             coin2 = liste_Coin.get(choixCoin);
         }
-        return new Mur(id, coin1,coin2);
+        return new Mur(coin1,coin2);
     }
     
     //Constructeurs

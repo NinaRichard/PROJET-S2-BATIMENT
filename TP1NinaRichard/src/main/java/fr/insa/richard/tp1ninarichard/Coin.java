@@ -13,7 +13,6 @@ public class Coin {
     private double x;
     private double y;
     private static int nbrCoin = 0;
-    // private double 
     /*
      * WIKIVERSITY
      */
@@ -23,6 +22,12 @@ public class Coin {
     }
     public Coin(int id, double x, double y) {
         this.id = id;
+        this.x = x;
+        this.y = y;
+        nbrCoin ++;
+    }
+    public Coin(double x, double y) {
+        this.id = nbrCoin;
         this.x = x;
         this.y = y;
         nbrCoin ++;
