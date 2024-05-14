@@ -1,6 +1,7 @@
 package fr.insa.richard.tp1ninarichard;
 
 //import java.io.IOException;
+import java.awt.event.MouseEvent;
 import javafx.application.Application;
 
 import javafx.event.ActionEvent;
@@ -62,7 +63,7 @@ public class App extends Application {
         stage.show();
 */
         BorderPane mainPane = new BorderPane();
-        //NE DEVRAIT APPARATRE QUE EN MENU CREATION
+        //NE DEVRAIT APPARATRE QUE EN MENU 
         RadioButton rbCreation = new RadioButton("Créer");
         RadioButton rbEnlever = new RadioButton("Enlever");
         RadioButton rbChanger = new RadioButton("(é-)Changer");
@@ -72,8 +73,23 @@ public class App extends Application {
         mainPane.setRight(vbDroite);
         
         Button bCreation = new Button("Menu Création");
+        //Premiere syntaxe plus explicite
+        bCreation.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent t){
+                System.out.println("bouton creation cliquer");
+            }
+        });
         Button bRevetement = new Button("Menu Revetement");
-        
+        //Deuxieme syntaxe plus compact
+        bRevetement.setOnAction((t) -> {
+            System.out.println("bouton Revetement cliquer");
+        });
+        //ici la premier redac ne marche pas on sait pas pk!
+        bRevetement.setOnMouseEntered((t)->{
+                    System.out.println("enterder  on: " + t.getX() +", "+ t.getY());
+            }
+        );
         HBox buttonBar = new HBox(20, bCreation,bRevetement);
         mainPane.setTop(buttonBar);
         
