@@ -18,7 +18,7 @@ public class Batiment {
     private int nbrEtage;
     private String address;
 
-    //COnstructeurs
+    //Constructeurs
     public Batiment(int id, String type) {
         this.id = id;
         this.type = type;
@@ -108,7 +108,7 @@ public class Batiment {
     
     @Override
     public String toString() {
-        return "Le Batiment numéro " + id + " est un(e) " + type + " avec " + nbrEtage + " étages, a l'adresse " + address + ".";//, batiment=" + batiment + '}';  FAUT-IL METTRE LA VARIABLE BATIMENT DANS LES INFOS ?
+        return "Le Batiment numéro " + id + " est un(e) " + type + " avec " + nbrEtage + " étages, a l'adresse " + address + ".";
     }   
     
 }

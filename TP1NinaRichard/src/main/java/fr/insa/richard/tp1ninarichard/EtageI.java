@@ -23,7 +23,7 @@ public class EtageI extends Etage{
     }
     
     //Getter et Setter
-    //nbrd'appart
+    //nbr d'appart
     public int getNbrdappart() {
         return nbrdappart;
     }
