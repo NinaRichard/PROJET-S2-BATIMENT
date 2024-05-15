@@ -578,6 +578,9 @@ public class TP1NinaRichard {
                     }   
                     
                 }
+                if (reponse==0){
+                    liste_Mur.remove(murChoisi);
+                }
             break;
             /*System.out.println("10) suprimer un point ou le modifier");
             System.out.println("11) Passer à la partie revetement");
