@@ -155,7 +155,7 @@ public class TP1NinaRichard {
                         i++;
                         maison.toString();
                     }
-                    System.out.print("Indiquer les numero de la Maison sélectionner");
+                    System.out.print("Indiquer le numero de la Maison sélectionner");
                     maisonChoisi = Lire.i();
                     Maison maisonMod = liste_Maison.get(maisonChoisi);
 
@@ -170,7 +170,8 @@ public class TP1NinaRichard {
                     System.out.print("Indiquer les numero de l'étage sélectionner");
                     etageChoisi = Lire.i();
                     EtageM etageMod4 = liste_EtageM.get(etageChoisi);
-                    //ajouter piece (LA CREE MAIS IL Y A UNE METHODE POUR CA DANS PIECE)
+                    Piece pieceMod=new Piece(liste_Mur, liste_Coin);
+                    etageMod4.ajouterPiece(pieceMod);
                 } else {
                     i=0;
                     for (Immeuble immeuble : liste_Immeuble) {
@@ -193,12 +194,26 @@ public class TP1NinaRichard {
                     System.out.print("Indiquer les numero de l'étage sélectionner");
                     etageChoisi = Lire.i();
                     EtageI etageMod4 = liste_EtageI.get(etageChoisi);
-                    //selection Logement + creation piece (il Y A UNE MERTODE POU CA DANS PIECE
+                    //choix Logement
+                    i=0;
+                    liste_Logement=etageMod4.getAppartementEtage();
+                    for (Logement logement : liste_Logement){//choix etage
+                        System.out.print("Etage "+ i);
+                        i++;
+                        logement.toString();
+                    }
+                    System.out.print("Indiquer le numero du Logement dans lequel ajouter une piece");
+                    logementChoisi = Lire.i();
+                    logementMod=liste_Logement.get(logementChoisi);
+                    
+                    //Ajouter piece dans logement choisi
+                    Piece pieceMod=new Piece(liste_Mur, liste_Coin);
+                    logementMod.ajouterPiece(pieceMod);
                 }
                
             break;
             case 5://Créer un mur
-            //ATTENTION : LE MUR CREE AINSI N'EST PAS RELIE A UN ETAE MEME SI ON A DEMANDE L'EMPLACEMENT
+            //ATTENTION : LE MUR CREE AINSI N'EST PAS RELIE A UN ETAGE MEME SI ON A DEMANDE L'EMPLACEMENT
                 System.out.println("Voulez-vous modifier 1) une maison; 2) un immeuble ?");
                 type = Lire.i();
                 while(type != 1 && type != 2){
@@ -379,7 +394,7 @@ public class TP1NinaRichard {
                     etageMod.ajouterAppartement(logementMod);
                 }
             break;
-            case 9://Suprimer une piece et changer une piece de logement //DEPLACEMENT VRAIMENT A FAIRE ???
+            case 8://Suprimer une piece et changer une piece de logement 
                 System.out.println("Voulez-vous modifier 1) une maison; 2) un immeuble ?");
                 type = Lire.i();
                 while(type != 1 && type != 2){
@@ -427,18 +442,41 @@ public class TP1NinaRichard {
                     liste_Piece.remove(pieceChoisi);
                     etageModified.setPieceEtage(liste_Piece);
                     
-                    
+                    //Deplacement
+                    System.out.println("voulez-vous 1) déplacer ou 2)supprimer la piece ?");
+                    type=Lire.i();
+                    while(type != 1 && type != 2){
+                        System.out.println("ATENTION LES CHOIX POSSIBLES SONT 1 OU 2! voulez-vous 1) déplacer ou 2)supprimer la piece ?");
+                        type = Lire.i(); 
+                    }
+                    if (type==1){
+                    //choix etage
+                    System.out.println("Dans quel étage de la maison voulez vous déplacer cette pièce ?");
+                    liste_EtageM = maisonMod.getBatiment();
+                    i=0;
+                    for (Etage etage : liste_EtageM) {
+                        System.out.print("Etage "+ i);
+                        i++;
+                        etage.toString();
+                    }
+                    System.out.print("Indiquez le numero de l'étage sélectionne");
+                    etageChoisi = Lire.i();
+                    etageModified = liste_EtageM.get(etageChoisi);
+                    etageModified.ajouterPiece(pieceMod);
+                    }
                 } else {
+                    //Choix immeuble
                     i=0;
                     for (Immeuble immeuble : liste_Immeuble) {
                         System.out.print("immeuble "+ i);
                         i++;
                         immeuble.toString();
                     }
-                    System.out.print("Indiquer le numero de l'Immeuble sélectionner");
+                    System.out.print("Indiquer le numero de l'Immeuble sélectionne");
                     immeubleChoisi = Lire.i();
                     immeubleMod3 = liste_Immeuble.get(immeubleChoisi);
-
+                    
+                    //choix etage
                     liste_EtageI = immeubleMod3.getBatiment();
                     i=0;
                     for (Etage etageaC : liste_EtageI) {
@@ -450,14 +488,99 @@ public class TP1NinaRichard {
                     etageChoisi = Lire.i();
                     etageMod = liste_EtageI.get(etageChoisi);
                     
-                    //Creation mur
-                    Mur mur= new Mur(liste_Mur, liste_Coin);
+                    //choix logement
+                    i=0;
+                    liste_Logement=etageMod.getAppartementEtage();
+                    for (Logement logement : liste_Logement){
+                        System.out.print("Logement "+ i);
+                        i++;
+                        logement.toString();
+                    }
+                    System.out.print("Indiquer le numero du Logement choisi");
+                    logementChoisi = Lire.i();
+                    logementMod=liste_Logement.get(logementChoisi);
+                    //choix piece
+                    i=0;
+                    liste_Piece=logementMod.getAppartement();
+                    for (Piece piece : liste_Piece){//choix etage
+                        System.out.print("Etage "+ i);
+                        i++;
+                        piece.toString();
+                    }
+                    System.out.print("Indiquer le numero de la piece a supprimer/deplacer");
+                    pieceChoisi = Lire.i();
+                    //garde en memoire piece a supprimer (pour si deplacement)
+                    Piece pieceMod=liste_Piece.get(pieceChoisi);
+                    //suppression
+                    liste_Piece.remove(pieceChoisi);
+                    logementMod.setAppartement(liste_Piece);
+                    
+                    //Deplacement
+                    System.out.println("voulez-vous 1) déplacer ou 2)supprimer la piece ?");
+                    type=Lire.i();
+                    while(type != 1 && type != 2){
+                        System.out.println("ATENTION LES CHOIX POSSIBLES SONT 1 OU 2! voulez-vous 1) déplacer ou 2)supprimer la piece ?");
+                        type = Lire.i(); 
+                    }
+                    if (type==1){
+                        //choix logement
+                        i=0;
+                        liste_Logement=etageMod.getAppartementEtage();
+                        for (Logement logement : liste_Logement){
+                            System.out.print("Logement "+ i);
+                            i++;
+                            logement.toString();
+                        }
+                        System.out.print("Indiquer le numero du Logement ou deplacer la piece");
+                        logementChoisi = Lire.i();
+                        logementMod=liste_Logement.get(logementChoisi);
+                        logementMod.ajouterPiece(pieceMod);
+                    }
                 }
-            break;    
-            /*System.out.println("9) suprimer un mur, le modifier ou changer de piece");//attention autres listes : piece + attention pas supprimer piece, liste murs 
-            System.out.println("10) suprimer un point ou le modifier");
+            break;
+            case 9 : //Suprimer un mur, le modifier ou changer de piece //attention autres listes : piece + attention pas supprimer piece, liste murs 
+                //Choix Mur
+                i=0;
+                    for (Mur mur : liste_Mur) {
+                        System.out.print("Mur "+ i);
+                        i++;
+                        mur.toString();
+                    }
+                System.out.print("Indiquer le numero du mur selectionne");
+                int murChoisi = Lire.i();
+                Mur murMod = liste_Mur.get(murChoisi);
+                //Teste si appartient a une piece
+                i=0;int j,k;
+                int reponse=1;
+                //cherche dans maisons existentes
+                for (Maison maison : liste_Maison) {
+                    liste_EtageM = maison.getBatiment();
+                    j=0;
+                //cherche dans etages
+                     for (EtageM etage : liste_EtageM) {
+                        liste_Piece=etage.getPieceEtage();
+                        j++;
+                        k=0;
+                //cherche dans pieces
+                        for (Piece piece : liste_Piece){
+                            if(reponse==0){
+                            if ((piece.getMur1().equals(murMod))||(piece.getMur2().equals(murMod))||(piece.getMur3().equals(murMod))||(piece.getMur4().equals(murMod))){
+                                System.out.println("Attention, si vous supprimez ce mur, la piece "+piece.toString()+" dans l'etage "+etage.toString()+" de la maison "+maison.toString()+" sera detruite.");
+                                System.out.print("Voulez-vous vraiment detruire le mur ? (taper 0 si oui, 1 si non)");
+                                reponse=Lire.i();
+                                while(reponse != 0 && reponse != 1){
+                                    System.out.println("ATENTION LES CHOIX POSSIBLES SONT 1 OU 2! Voulez-vous vraiment detruire le mur ? (taper 0 si oui, 1 si non)");
+                                    type = Lire.i(); 
+                                }
+                            }}
+                        }
+                         
+                    }   
+                    
+                }
+            break;
+            /*System.out.println("10) suprimer un point ou le modifier");
             System.out.println("11) Passer à la partie revetement");
-            System.out.println("Pour annuler ou arreter taper 0");
             */
             case 11:
                 //menuRevetement()mettre les nbrs ect..
