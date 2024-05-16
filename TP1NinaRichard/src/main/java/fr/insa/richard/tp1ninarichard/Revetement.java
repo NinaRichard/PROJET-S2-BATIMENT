@@ -27,6 +27,7 @@ public class Revetement {
     private boolean pourSol;
     private boolean pourPlafond; 
     private double prixUnitaire;
+    private double surface;
     
     //Constructeurs
     public Revetement(int id) {
@@ -83,22 +84,47 @@ public class Revetement {
         this.idRevetement = idRevetement;
     }
     
+    //Getter et Setter
+    //Surface
+    public double getSurface() {
+        return surface;
+    }
+
+    public void setSurface(double surface) {
+        this.surface = surface;
+    }
+
+    
+    //Getter et Setter
+    //tests boolean
+    public boolean isPourMur() {
+        return pourMur;
+    }
+
+    public void setPourMur(boolean pourMur) {
+        this.pourMur = pourMur;
+    }
+
+    public boolean isPourSol() {
+        return pourSol;
+    }
+
+    public void setPourSol(boolean pourSol) {
+        this.pourSol = pourSol;
+    }
+
+    public boolean isPourPlafond() {
+        return pourPlafond;
+    }
+
+    public void setPourPlafond(boolean pourPlafond) {
+        this.pourPlafond = pourPlafond;
+    }
+    
     
    //instancie les parametre en fonction de la ligne dans le catalogue revetement 
     public void Parametres(int Type){
-        /*int pourmur=0, poursol=0, pourplafond=0;
-        try (Scanner fileScanner = new Scanner(new File("CatalogueRevetements.txt"))){
-        String ligne=fileScanner.nextLine();
-        
-        //if (Type>1){
-            for (int compt=1; compt<=Type; compt++){
-                ligne=fileScanner.nextLine();//lit toutes les lignes jusqu'a la bonne
-                System.out.println(ligne);
-            }
-        */
-        
-        
-   
+       
     String lignelue="";
     int test=0;
     try{

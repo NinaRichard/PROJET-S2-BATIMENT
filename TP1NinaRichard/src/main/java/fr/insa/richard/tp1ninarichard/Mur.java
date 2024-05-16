@@ -52,9 +52,9 @@ public class Mur {
         System.out.print("Premier Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
         int choixCoin = Lire.i();
         if (choixCoin == 0){
-            System.out.print("Donner l'absysse de votre nouveau point:");
+            System.out.print("Donner l'absisse de votre nouveau point:");
             double x = Lire.i();
-            System.out.print("Donner l'ordonné de votre nouveau point:");
+            System.out.print("Donner l'ordonnée de votre nouveau point:");
             double y = Lire.i();
             this.coin1 = new Coin(x,y);
             liste_Coin.add(this.coin1);

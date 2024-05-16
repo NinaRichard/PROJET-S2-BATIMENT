@@ -18,7 +18,7 @@ public class TP1NinaRichard {
     
     // voir mettre dans des tableau
     // 
-    public static void menu(ArrayList<Batiment> liste_Batiment,ArrayList<Maison> liste_Maison, ArrayList<Immeuble> liste_Immeuble, ArrayList<Coin> liste_Coin, ArrayList<Mur> liste_Mur){
+    public static void menu(ArrayList<Batiment> liste_Batiment,ArrayList<Maison> liste_Maison, ArrayList<Immeuble> liste_Immeuble, ArrayList<Coin> liste_Coin, ArrayList<Mur> liste_Mur, ArrayList<Revetement> liste_Revetement, int nbrevetement){
         
         int choix;
         int nbrBatiment = 1;
@@ -646,7 +646,7 @@ public class TP1NinaRichard {
                 }
             break;
             case 11://Passer à la partie revetement
-                menuRevetement(liste_Mur);
+                menuRevetement(liste_Mur, liste_Revetement, nbrevetement);
             break;
             default :
                 System.out.println("Veuillez entrer un nombre entre 0 et 11.");
@@ -655,7 +655,7 @@ public class TP1NinaRichard {
         }while (choix != 0);
     }
     
-    public static void menuRevetement(ArrayList<Mur> liste_Mur){
+    public static void menuRevetement(ArrayList<Mur> liste_Mur, ArrayList<Revetement> liste_Revetement, int nbrevetement){
         do{
         System.out.println("Voulez-vous mettre un revetement sur 1) un mur; 2) un sol; 3) un plafond ? Tapez 0 pour arreter");
         switch(Lire.i()){
@@ -680,7 +680,36 @@ public class TP1NinaRichard {
                 }
                 murMod.setInterior(test);
                 //appelle le choix de revetements
-                
+                System.out.println("Veuillez choisir un revetement :");
+                System.out.println("1) Peinture 1");
+                System.out.println("2) Carrelage 1");
+                System.out.println("3) Lambris 1");
+                System.out.println("4) Marbre");
+                System.out.println("5) Crepi");
+                System.out.println("6) Papier peint");
+                System.out.println("7) Plaquettes de parement");
+                System.out.println("8) Peinture 2");
+                System.out.println("9) Peinture 3");
+                System.out.println("10) Carrelage 2");
+                System.out.println("11) Lambris 2");
+                System.out.println("12) Liege 1");
+                System.out.println("13) Parquet");
+                System.out.println("14) Vinyle Lino");
+                System.out.println("15) Moquette");
+                System.out.println("16) Stratifie");
+                System.out.println("17) Gazon");
+                System.out.println("18) Liege 2");
+                System.out.println("19) Carrelage 3");
+                int type=Lire.i();
+                while(type != 1 && type != 2 && type != 13 && type != 4 && type != 5 && type != 6 && type != 7 && type != 8 && type != 9 && type != 10 && type != 11 && type != 12 && type != 13 && type != 14 && type != 15 && type != 16 && type != 17 && type != 18 && type != 19 ){
+                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT ENTRE 1 ET 19 ! Veuillez choisir un revetement :");
+                    type = Lire.i(); 
+                }
+                Revetement revetement=new Revetement(nbrevetement);
+                revetement.Parametres(type);
+                if (revetement.isPourMur()==true){
+                    revetement.getSurface(3);
+                }
             break;
             case 2:
                 
@@ -761,6 +790,10 @@ public class TP1NinaRichard {
         System.out.println("la surface vaut "+s);*/
     int nbrdeBatiment = 0; 
     int nbrCoin=0, nbrMur=0;
+    ArrayList<Revetement> liste_Revetement=new ArrayList<Revetement>();
+    int nbrevetement=0;
+    Revetement revetement=new Revetement(nbrevetement);
+    liste_Revetement.add(revetement);
     ArrayList<Batiment> liste_Batiment=new ArrayList<Batiment>();
     ArrayList<Maison> liste_Maison=new ArrayList<Maison>();
     ArrayList<Immeuble> liste_Immeuble=new ArrayList<Immeuble>();
@@ -802,9 +835,15 @@ public class TP1NinaRichard {
     Mur mur=new Mur(nbrMur, coin, coin);
     liste_Mur.add(mur);
     //liste_Batiment.add(batiment); //pk?
-    menu(liste_Batiment, liste_Maison, liste_Immeuble, liste_Coin, liste_Mur);
+    menu(liste_Batiment, liste_Maison, liste_Immeuble, liste_Coin, liste_Mur, liste_Revetement, nbrevetement);
     
     //menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmise vide?
-     
+    
+    //calcul des surfaces par revetement
+    
+    
+    
+    
+    
     }
 }
