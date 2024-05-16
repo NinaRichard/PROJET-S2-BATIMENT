@@ -646,8 +646,7 @@ public class TP1NinaRichard {
                 }
             break;
             case 11://Passer à la partie revetement
-                //menuRevetement()mettre les nbrs ect..
-                menuRevetement();//C'EST CA QU'IL FAUT FAIRE ??
+                menuRevetement(liste_Mur);
             break;
             default :
                 System.out.println("Veuillez entrer un nombre entre 0 et 11.");
@@ -656,7 +655,46 @@ public class TP1NinaRichard {
         }while (choix != 0);
     }
     
-    public static void menuRevetement(){
+    public static void menuRevetement(ArrayList<Mur> liste_Mur){
+        do{
+        System.out.println("Voulez-vous mettre un revetement sur 1) un mur; 2) un sol; 3) un plafond ? Tapez 0 pour arreter");
+        switch(Lire.i()){
+            case 1:
+                //Choix Mur
+                int i=0;
+                    for (Mur mur : liste_Mur) {
+                        System.out.print("Mur "+ i);
+                        i++;
+                        mur.toString();
+                    }
+                System.out.print("Indiquer le numero du mur selectionne");
+                int murChoisi = Lire.i();
+                Mur murMod = liste_Mur.get(murChoisi);
+                //interieur/exterieur
+                boolean test;
+                System.out.println("ce mur est-il 1) interieur ou 2) exterieur ? (cote revetement)");
+                if (Lire.i()==1){
+                    test=true;
+                }else{
+                    test=false;
+                }
+                murMod.setInterior(test);
+                //appelle le choix de revetements
+                
+            break;
+            case 2:
+                
+            break;
+            case 3:
+                
+            break;
+            default:
+                System.out.println("Veuillez entrer un nombre entre 0 et 3.");
+            break;
+        }
+        }while(Lire.i()!=0);
+
+        
         System.out.println("1) Je veux mettre tel revetement sur un sol un mur ...");
     }
 
