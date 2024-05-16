@@ -210,7 +210,6 @@ public class TP1NinaRichard {
                     Piece pieceMod=new Piece(liste_Mur, liste_Coin);
                     logementMod.ajouterPiece(pieceMod);
                 }
-               
             break;
             case 5://Créer un mur
             //ATTENTION : LE MUR CREE AINSI N'EST PAS RELIE A UN ETAGE MEME SI ON A DEMANDE L'EMPLACEMENT
@@ -579,14 +578,76 @@ public class TP1NinaRichard {
                     
                 }
                 if (reponse==0){
+                    System.out.println("Aucune action sur le mur selectionne n'a ete effectue");
+                }else{
                     liste_Mur.remove(murChoisi);
+                    System.out.println("Voulez-vous 1) seulement detruire le mur; 2) le modifier; 3) le changer de piece");
+                    
                 }
             break;
-            /*System.out.println("10) suprimer un point ou le modifier");
-            System.out.println("11) Passer à la partie revetement");
-            */
-            case 11:
+            case 10 ://System.out.println("10) suprimer un point ou le modifier");
+            //Choix coin
+                i=0;
+                    for (Coin coin : liste_Coin) {
+                        System.out.print("Coin "+ i);
+                        i++;
+                        coin.toString();
+                    }
+                System.out.print("Indiquer le numero du coin selectionne");
+                int coinChoisi = Lire.i();
+                Coin coinMod = liste_Coin.get(coinChoisi);
+                //teste si appartient a un mur
+                reponse=1;
+                for (Mur mur : liste_Mur){
+                    if (mur.getCoin1().equals(coinMod)||mur.getCoin2().equals(coinMod)){
+                       System.out.print("attention : si vous supprimez ce coin, le mur "+mur.toString()+" sera supprime egalement.");
+                       //Teste si mur appartient a une piece
+                        i=0;
+                        //cherche dans maisons existentes
+                        for (Maison maison : liste_Maison) {
+                            liste_EtageM = maison.getBatiment();
+                            j=0;
+                        //cherche dans etages
+                             for (EtageM etage : liste_EtageM) {
+                                liste_Piece=etage.getPieceEtage();
+                                j++;
+                                k=0;
+                        //cherche dans pieces
+                                for (Piece piece : liste_Piece){
+                                    if(reponse==0){
+                                    if ((piece.getMur1().equals(mur))||(piece.getMur2().equals(mur))||(piece.getMur3().equals(mur))||(piece.getMur4().equals(mur))){
+                                        System.out.println("Attention, si vous supprimez ce mur, la piece "+piece.toString()+" dans l'etage "+etage.toString()+" de la maison "+maison.toString()+" sera detruite.");
+                                        System.out.print("Voulez-vous vraiment detruire le coin ? (taper 0 si oui, 1 si non)");
+                                        reponse=Lire.i();
+                                        while(reponse != 0 && reponse != 1){
+                                            System.out.println("ATENTION LES CHOIX POSSIBLES SONT 0 OU 1! Voulez-vous vraiment detruire le mur ? (taper 0 si oui, 1 si non)");
+                                            type = Lire.i(); 
+                                        }
+                                    }}
+                                }
+
+                            }   
+
+                        }
+                    }
+                }
+                
+                if (reponse==1){
+                    System.out.println("Aucune action sur le coin selectionne n'a ete effectuee");
+                }else{
+                    liste_Coin.remove(coinChoisi);
+                    System.out.println("Voulez-vous 1) seulement detruire le coin; 2) le modifier ?");
+                    if (Lire.i()==2){
+                        System.out.print("Donnez la nouvelle coordonnee X :");
+                        coinMod.setX(Lire.d());
+                        System.out.print("Donnez la nouvelle coordonnee Y :");
+                        coinMod.setY(Lire.d());
+                    }
+                }
+            break;
+            case 11://Passer à la partie revetement
                 //menuRevetement()mettre les nbrs ect..
+                menuRevetement();//C'EST CA QU'IL FAUT FAIRE ??
             break;
             default :
                 System.out.println("Veuillez entrer un nombre entre 0 et 11.");
@@ -660,12 +721,13 @@ public class TP1NinaRichard {
         Porte p1 = new Porte(1);
         double s = p1.Surface();
         System.out.println("la surface vaut "+s);*/
-    int nbrdeBatiment = 0;  
-    ArrayList<Batiment> liste_Batiment;
-    ArrayList<Maison> liste_Maison;
-    ArrayList<Immeuble> liste_Immeuble;
-    ArrayList<Coin> liste_Coin;
-    ArrayList<Mur> liste_Mur;
+    int nbrdeBatiment = 0; 
+    int nbrCoin=0, nbrMur=0;
+    ArrayList<Batiment> liste_Batiment=new ArrayList<Batiment>();
+    ArrayList<Maison> liste_Maison=new ArrayList<Maison>();
+    ArrayList<Immeuble> liste_Immeuble=new ArrayList<Immeuble>();
+    ArrayList<Coin> liste_Coin=new ArrayList<Coin>();
+    ArrayList<Mur> liste_Mur=new ArrayList<Mur>();
     System.out.println("Bonjour, bienvenue dans notre générateur de devis, dans un premier temps nous allons modéliser votre batiment, puis vous pourrez choisir vos revetements de murs, sols et plafonds.");
     System.out.println("Première étape: Créer un batiment pour cela veuiller nous renseigner:");
     System.out.print("L'adresse du Batiment: ");
@@ -677,13 +739,32 @@ public class TP1NinaRichard {
         type = Lire.i(); 
     }
     nbrdeBatiment ++;
+    Maison maison= new Maison(nbrdeBatiment,adresse);
+    liste_Maison.add(maison);
+    nbrdeBatiment ++;
+    Immeuble immeuble = new Immeuble(nbrdeBatiment,adresse);
+    liste_Immeuble.add(immeuble);
+    nbrdeBatiment ++;
     if (type == 1){
-        Maison batiment = new Maison(nbrdeBatiment,adresse);
-        
+        String typeB="Maison";
+        Batiment batiment =new Batiment(nbrdeBatiment, typeB);
+        //Maison batiment = new Maison(nbrdeBatiment,adresse);
+        liste_Batiment.add(batiment);
     }else {
-        Immeuble batiment = new Immeuble(nbrdeBatiment,adresse);
+        String typeB="Immeuble";
+        Batiment batiment =new Batiment(nbrdeBatiment, typeB);
+        //Immeuble batiment = new Immeuble(nbrdeBatiment,adresse);
+        liste_Batiment.add(batiment);
     }
+    //Batiment batiment=new Batiment();
+    //liste_Batiment.add(batiment);
+    Coin coin=new Coin(nbrCoin,0,0);
+    nbrCoin++;
+    liste_Coin.add(coin);
+    Mur mur=new Mur(nbrMur, coin, coin);
+    liste_Mur.add(mur);
     //liste_Batiment.add(batiment); //pk?
+    menu(liste_Batiment, liste_Maison, liste_Immeuble, liste_Coin, liste_Mur);
     
     //menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmise vide?
      
