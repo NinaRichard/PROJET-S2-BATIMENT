@@ -19,6 +19,7 @@ public class Mur {
     private Coin coin2;
     private boolean interior;
     private static int nbrMur;
+    private double surface;
 
     //Constructeurs
     public Mur(int id, Coin coin1, Coin coin2) {
@@ -40,7 +41,7 @@ public class Mur {
         this.interior = interior;
         nbrMur++;
     }
-    public Mur(ArrayList<Mur> liste_Mur, ArrayList<Coin> liste_Coin){
+    public Mur(ArrayList<Mur> liste_Mur, ArrayList<Coin> liste_Coin, Etage etage){
         this.id=nbrMur;
         nbrMur++;
         int i=0;
@@ -73,6 +74,7 @@ public class Mur {
         } else{
             this.coin2 = liste_Coin.get(choixCoin);
         }
+        this.surface=Longueur()*etage.getHauteursousplafond();
     }    
 
     
@@ -101,6 +103,15 @@ public class Mur {
     }
     public void setCoin2(Coin coin2) {
         this.coin2 = coin2;
+    }
+    
+    //Getter et Setter
+    //Surface
+    public double getSurface() {
+        return surface;
+    }
+    public void setSurface(double surface) {
+        this.surface = surface;
     }
 
     //dit si mur interieur ou exterieur

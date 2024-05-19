@@ -80,7 +80,7 @@ public class Revetement {
     public int getIdRevetement() {
         return idRevetement;
     }
-    public void setRevetement(int idRevetement) {
+    public void setIdRevetement(int idRevetement) {
         this.idRevetement = idRevetement;
     }
     
