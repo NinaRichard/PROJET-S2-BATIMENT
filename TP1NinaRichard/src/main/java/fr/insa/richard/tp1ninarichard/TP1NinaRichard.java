@@ -244,7 +244,7 @@ public class TP1NinaRichard {
                     EtageM etageModified = liste_EtageM.get(etageChoisi);
                     
                     //Creation mur
-                    Mur mur= new Mur(liste_Mur, liste_Coin);
+                    Mur mur= new Mur(liste_Mur, liste_Coin, etageModified);
 
                 } else {
                     i=0;
@@ -269,7 +269,7 @@ public class TP1NinaRichard {
                     etageMod = liste_EtageI.get(etageChoisi);
                     
                     //Creation mur
-                    Mur mur= new Mur(liste_Mur, liste_Coin);
+                    Mur mur= new Mur(liste_Mur, liste_Coin, etageMod);
                 }
             break;
             case 6:
@@ -646,7 +646,104 @@ public class TP1NinaRichard {
                 }
             break;
             case 11://Passer à la partie revetement
-                menuRevetement(liste_Mur, liste_Revetement, nbrevetement);
+                int compt;
+                Piece pieceMod=new Piece();
+                do {
+                    System.out.println("Voulez-vous mettre un revetement sur 1) un mur; 2) un sol; 3) un plafond ? Tapez 0 pour arreter");
+                    compt=Lire.i();
+                    if ((compt==2)||(compt==3)){//cherche piece si plafond ou sol
+                        System.out.println("Voulez-vous modifier 1) une maison; 2) un immeuble ?");
+                        type = Lire.i();
+                        while(type != 1 && type != 2){
+                            System.out.println("ATENTION LES CHOIX POSSIBLES SONT 1 OU 2! Votre Batiment est il 1) une maison; 2) un immeuble?");
+                            type = Lire.i(); 
+                        }
+                        //cas maison
+                        if (compt == 1){
+                            //choix maison
+                            i=0;
+                            for (Maison maison : liste_Maison) {//indique les maisons existentes
+                                System.out.print("Maison "+ i);
+                                i++;
+                                maison.toString();
+                            }
+                            System.out.print("Indiquer le numero de la Maison selectionnee");
+                            maisonChoisi = Lire.i();
+                            Maison maisonMod = liste_Maison.get(maisonChoisi);
+
+                            //choix etage
+                            liste_EtageM = maisonMod.getBatiment();
+                            i=0;
+                            for (Etage etage : liste_EtageM) {
+                                System.out.print("Etage "+ i);
+                                i++;
+                                etage.toString();
+                            }
+                            System.out.print("Indiquez le numero de l'étage sélectionne");
+                            etageChoisi = Lire.i();
+                            EtageM etageModified = liste_EtageM.get(etageChoisi);
+
+                            //choix piece
+                            i=0;
+                            liste_Piece=etageModified.getPieceEtage();
+                            for (Piece piece : liste_Piece){//choix etage
+                                System.out.print("Etage "+ i);
+                                i++;
+                                piece.toString();
+                            }
+                            System.out.print("Indiquer le numero de la piece a supprimer/deplacer");
+                            pieceChoisi = Lire.i();
+                            pieceMod=liste_Piece.get(pieceChoisi);
+                        } else {
+                            //Choix immeuble
+                            i=0;
+                            for (Immeuble immeuble : liste_Immeuble) {
+                                System.out.print("immeuble "+ i);
+                                i++;
+                                immeuble.toString();
+                            }
+                            System.out.print("Indiquer le numero de l'Immeuble sélectionne");
+                            immeubleChoisi = Lire.i();
+                            immeubleMod3 = liste_Immeuble.get(immeubleChoisi);
+
+                            //choix etage
+                            liste_EtageI = immeubleMod3.getBatiment();
+                            i=0;
+                            for (Etage etageaC : liste_EtageI) {
+                                System.out.print("Etage "+ i);
+                                i++;
+                                etageaC.toString();
+                            }
+                            System.out.print("Indiquer le numero de l'étage sélectionne");
+                            etageChoisi = Lire.i();
+                            etageMod = liste_EtageI.get(etageChoisi);
+
+                            //choix logement
+                            i=0;
+                            liste_Logement=etageMod.getAppartementEtage();
+                            for (Logement logement : liste_Logement){
+                                System.out.print("Logement "+ i);
+                                i++;
+                                logement.toString();
+                            }
+                            System.out.print("Indiquer le numero du Logement choisi");
+                            logementChoisi = Lire.i();
+                            logementMod=liste_Logement.get(logementChoisi);
+                            //choix piece
+                            i=0;
+                            liste_Piece=logementMod.getAppartement();
+                            for (Piece piece : liste_Piece){//choix etage
+                                System.out.print("Etage "+ i);
+                                i++;
+                                piece.toString();
+                            }
+                            System.out.print("Indiquer le numero de la piece a supprimer/deplacer");
+                            pieceChoisi = Lire.i();
+                            pieceMod=liste_Piece.get(pieceChoisi);
+                            }
+                }
+                menuRevetement(liste_Mur, liste_Revetement, nbrevetement, compt, pieceMod);
+                }while(compt!=0);
             break;
             default :
                 System.out.println("Veuillez entrer un nombre entre 0 et 11.");
@@ -655,10 +752,9 @@ public class TP1NinaRichard {
         }while (choix != 0);
     }
     
-    public static void menuRevetement(ArrayList<Mur> liste_Mur, ArrayList<Revetement> liste_Revetement, int nbrevetement){
+    public static void menuRevetement(ArrayList<Mur> liste_Mur, ArrayList<Revetement> liste_Revetement, int nbrevetement, int compt, Piece pieceMod){
         do{
-        System.out.println("Voulez-vous mettre un revetement sur 1) un mur; 2) un sol; 3) un plafond ? Tapez 0 pour arreter");
-        switch(Lire.i()){
+        switch(compt){
             case 1:
                 //Choix Mur
                 int i=0;
@@ -680,6 +776,10 @@ public class TP1NinaRichard {
                 }
                 murMod.setInterior(test);
                 //appelle le choix de revetements
+                Revetement revetement=new Revetement(nbrevetement);
+                nbrevetement++;
+                revetement.setPourMur(false);
+                do{
                 System.out.println("Veuillez choisir un revetement :");
                 System.out.println("1) Peinture 1");
                 System.out.println("2) Carrelage 1");
@@ -705,26 +805,88 @@ public class TP1NinaRichard {
                     System.out.println("ATENTION LES CHOIX POSSIBLE SONT ENTRE 1 ET 19 ! Veuillez choisir un revetement :");
                     type = Lire.i(); 
                 }
-                Revetement revetement=new Revetement(nbrevetement);
                 revetement.Parametres(type);
-                if (revetement.isPourMur()==true){
-                    revetement.getSurface(3);
-                }
+                }while(revetement.isPourMur()==false);
+                revetement.setSurface(murMod.getSurface());
+                liste_Revetement.add(revetement);
             break;
             case 2:
-                
+                //appelle le choix de revetements
+                revetement=new Revetement(nbrevetement);
+                nbrevetement++;
+                revetement.setPourSol(false);
+                do{
+                System.out.println("Veuillez choisir un revetement :");
+                System.out.println("1) Peinture 1");
+                System.out.println("2) Carrelage 1");
+                System.out.println("3) Lambris 1");
+                System.out.println("4) Marbre");
+                System.out.println("5) Crepi");
+                System.out.println("6) Papier peint");
+                System.out.println("7) Plaquettes de parement");
+                System.out.println("8) Peinture 2");
+                System.out.println("9) Peinture 3");
+                System.out.println("10) Carrelage 2");
+                System.out.println("11) Lambris 2");
+                System.out.println("12) Liege 1");
+                System.out.println("13) Parquet");
+                System.out.println("14) Vinyle Lino");
+                System.out.println("15) Moquette");
+                System.out.println("16) Stratifie");
+                System.out.println("17) Gazon");
+                System.out.println("18) Liege 2");
+                System.out.println("19) Carrelage 3");
+                int type=Lire.i();
+                while(type != 1 && type != 2 && type != 13 && type != 4 && type != 5 && type != 6 && type != 7 && type != 8 && type != 9 && type != 10 && type != 11 && type != 12 && type != 13 && type != 14 && type != 15 && type != 16 && type != 17 && type != 18 && type != 19 ){
+                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT ENTRE 1 ET 19 ! Veuillez choisir un revetement :");
+                    type = Lire.i(); 
+                }
+                revetement.Parametres(type);
+                }while(revetement.isPourSol()==false);
+                revetement.setSurface(pieceMod.Surface());
+                liste_Revetement.add(revetement);
             break;
             case 3:
-                
+                //appelle le choix de revetements
+                revetement=new Revetement(nbrevetement);
+                nbrevetement++;
+                revetement.setPourPlafond(false);
+                do{
+                System.out.println("Veuillez choisir un revetement :");
+                System.out.println("1) Peinture 1");
+                System.out.println("2) Carrelage 1");
+                System.out.println("3) Lambris 1");
+                System.out.println("4) Marbre");
+                System.out.println("5) Crepi");
+                System.out.println("6) Papier peint");
+                System.out.println("7) Plaquettes de parement");
+                System.out.println("8) Peinture 2");
+                System.out.println("9) Peinture 3");
+                System.out.println("10) Carrelage 2");
+                System.out.println("11) Lambris 2");
+                System.out.println("12) Liege 1");
+                System.out.println("13) Parquet");
+                System.out.println("14) Vinyle Lino");
+                System.out.println("15) Moquette");
+                System.out.println("16) Stratifie");
+                System.out.println("17) Gazon");
+                System.out.println("18) Liege 2");
+                System.out.println("19) Carrelage 3");
+                int type=Lire.i();
+                while(type != 1 && type != 2 && type != 13 && type != 4 && type != 5 && type != 6 && type != 7 && type != 8 && type != 9 && type != 10 && type != 11 && type != 12 && type != 13 && type != 14 && type != 15 && type != 16 && type != 17 && type != 18 && type != 19 ){
+                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT ENTRE 1 ET 19 ! Veuillez choisir un revetement :");
+                    type = Lire.i(); 
+                }
+                revetement.Parametres(type);
+                }while(revetement.isPourPlafond()==false);
+                revetement.setSurface(pieceMod.Surface());
+                liste_Revetement.add(revetement);
             break;
             default:
                 System.out.println("Veuillez entrer un nombre entre 0 et 3.");
             break;
         }
         }while(Lire.i()!=0);
-
-        
-        System.out.println("1) Je veux mettre tel revetement sur un sol un mur ...");
     }
 
     public static void main(String[] args) {
@@ -792,8 +954,8 @@ public class TP1NinaRichard {
     int nbrCoin=0, nbrMur=0;
     ArrayList<Revetement> liste_Revetement=new ArrayList<Revetement>();
     int nbrevetement=0;
-    Revetement revetement=new Revetement(nbrevetement);
-    liste_Revetement.add(revetement);
+    Revetement revetement1=new Revetement(nbrevetement);
+    liste_Revetement.add(revetement1);
     ArrayList<Batiment> liste_Batiment=new ArrayList<Batiment>();
     ArrayList<Maison> liste_Maison=new ArrayList<Maison>();
     ArrayList<Immeuble> liste_Immeuble=new ArrayList<Immeuble>();
@@ -837,11 +999,76 @@ public class TP1NinaRichard {
     //liste_Batiment.add(batiment); //pk?
     menu(liste_Batiment, liste_Maison, liste_Immeuble, liste_Coin, liste_Mur, liste_Revetement, nbrevetement);
     
-    //menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmise vide?
+    //menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmises vides?
     
     //calcul des surfaces par revetement
-    
-    
+    int i=0;
+    double peinture1=0, carrelage1=0, lambris1=0, marbre=0, crepi=0, papierpeint=0, plaquettesdeparement=0, peinture2=0, peinture3=0, carrelage2=0, lambris2=0, liege1=0, parquet=0, vinylelino=0, moquette=0, stratifie=0, gazon=0, liege2=0, carrelage3=0;
+    for (Revetement revetement : liste_Revetement){
+        int id=revetement.getIdRevetement();
+        switch (id) {
+            case 125 :
+                peinture1=peinture1+revetement.getSurface();
+            break;
+            case 23 :
+                carrelage1=carrelage1+revetement.getSurface();
+            break;
+            case 43 :
+                lambris1=lambris1+revetement.getSurface();
+            break;
+            case 48 :
+                marbre=marbre+revetement.getSurface();
+            break;
+            case 105 :
+                crepi=crepi+revetement.getSurface();
+            break;
+            case 60 :
+                papierpeint=papierpeint+revetement.getSurface();
+            break;
+            case 75 :
+                plaquettesdeparement=plaquettesdeparement+revetement.getSurface();
+            break;
+            case 8 :
+                peinture2=peinture2+revetement.getSurface();
+            break;
+            case 19 :
+                peinture3=peinture3+revetement.getSurface();
+            break;
+            case 15 :
+                carrelage2=carrelage2+revetement.getSurface();
+            break;
+            case 110 :
+                lambris2=lambris2+revetement.getSurface();
+            break;
+            case 102 :
+                liege1=liege1+revetement.getSurface();
+            break;
+            case 132 :
+                parquet=parquet+revetement.getSurface();
+            break;
+            case 114 :
+                vinylelino=vinylelino+revetement.getSurface();
+            break;
+            case 156 :
+                moquette=moquette+revetement.getSurface();
+            break;
+            case 1126 :
+                stratifie=stratifie+revetement.getSurface();
+            break;
+            case 174 :
+                gazon=gazon+revetement.getSurface();
+            break;
+            case 180 :
+                liege2=liege2+revetement.getSurface();
+            break;
+            case 115 :
+                carrelage3=carrelage3+revetement.getSurface();
+            break;
+        }    
+    }
+    Devis devis=new Devis();
+    devis.fichier(peinture1, carrelage1, lambris1, marbre, crepi, papierpeint, plaquettesdeparement, peinture2, peinture3, carrelage2, lambris2, liege1, parquet, 
+            vinylelino, moquette, stratifie, gazon, liege2, carrelage3);
     
     
     

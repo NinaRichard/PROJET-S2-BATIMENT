@@ -119,6 +119,10 @@ public class Piece {
         plafond.setPiece(this);
     }
 
+    public Piece() {
+    }
+    
+
     //Getter et Setter
     //Id
     public int getId() {
