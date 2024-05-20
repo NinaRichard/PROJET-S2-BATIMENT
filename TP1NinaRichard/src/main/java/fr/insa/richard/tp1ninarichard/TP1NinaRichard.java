@@ -15,10 +15,12 @@ import java.util.List;
  * @author nrichard01
  */
 public class TP1NinaRichard {
-    
+    //Test pour faire marcher App
+    public TP1NinaRichard(){
+    }
     // voir mettre dans des tableau
     // 
-    public static void menu(ArrayList<Batiment> liste_Batiment,ArrayList<Maison> liste_Maison, ArrayList<Immeuble> liste_Immeuble, ArrayList<Coin> liste_Coin, ArrayList<Mur> liste_Mur, ArrayList<Revetement> liste_Revetement, int nbrevetement){
+    public static ArrayList<Batiment> menu(ArrayList<Batiment> liste_Batiment,ArrayList<Maison> liste_Maison, ArrayList<Immeuble> liste_Immeuble, ArrayList<Coin> liste_Coin, ArrayList<Mur> liste_Mur, ArrayList<Revetement> liste_Revetement, int nbrevetement){
         
         int choix;
         int nbrBatiment = 1;
@@ -51,6 +53,8 @@ public class TP1NinaRichard {
         System.out.println("Pour annuler ou arreter taper 0");
         choix = Lire.i();
         switch(choix){
+            case 0:
+            break;
             case 1://creer un batiment
                 nbrBatiment ++;
                 System.out.println("Votre Batiment est-il 1) une maison; 2) un immeuble?");
@@ -68,6 +72,7 @@ public class TP1NinaRichard {
                 }
                 
                 //mettre option annuler
+            break;
             
             case 2://Créer un étage et ajouter un étage dans un batiment
                 System.out.println("Voulez vous modifier 1) une maison; 2) un immeuble ?");
@@ -750,6 +755,7 @@ public class TP1NinaRichard {
             break;
         }
         }while (choix != 0);
+        return liste_Batiment;
     }
     
     public static void menuRevetement(ArrayList<Mur> liste_Mur, ArrayList<Revetement> liste_Revetement, int nbrevetement, int compt, Piece pieceMod){
