@@ -44,6 +44,7 @@ public class TP1NinaRichard {
             Maison maison=new Maison(0, batiment.getAddress());
             
             do{
+                System.out.println("Voulez-vous : ") ;
                 System.out.println("1) Créer un étage et ajouter un étage dans le batiment") ;
                 System.out.println("2) Créer une piece et ajouter une piece dans un logement");
                 System.out.println("3) Créer un mur");
@@ -66,8 +67,8 @@ public class TP1NinaRichard {
                             liste_EtageM = maison.getBatiment();
                             i=0;
                             for (EtageM etageaC : liste_EtageM) {
-                                System.out.println("Etage "+ i);
-                                etageaC.toString();
+                                System.out.print("Etage "+ i);
+                                System.out.println(etageaC.toString());
                                 i++;
                             }
                             System.out.println("Indiquer le numero de l'étage sélectionne : ");
@@ -82,8 +83,8 @@ public class TP1NinaRichard {
                             liste_EtageM = maison.getBatiment();
                             i=0;
                             for (Etage etage : liste_EtageM) {
-                                System.out.println("Etage "+ i);
-                                etage.toString();
+                                System.out.print("Etage "+ i);
+                                System.out.println(etage.toString());
                                 i++;
                             }
                             System.out.println("Indiquez le numero de l'étage sélectionne :");
@@ -98,8 +99,8 @@ public class TP1NinaRichard {
                             i=0;
                             liste_EtageM=maison.getBatiment();
                             for (Etage etage : liste_EtageM){
-                                System.out.println("Etage "+ i);
-                                etage.toString();
+                                System.out.print("Etage "+ i);
+                                System.out.println(etage.toString());
                                 i++;
                             }
                             System.out.println("Indiquer le numero de l'Etage a supprimer :");
@@ -112,8 +113,8 @@ public class TP1NinaRichard {
                             liste_EtageM = maison.getBatiment();
                             i=0;
                             for (Etage etage : liste_EtageM) {
-                                System.out.println("Etage "+ i);
-                                etage.toString();
+                                System.out.print("Etage "+ i);
+                                System.out.println(etage.toString());
                                 i++;
                             }
                             System.out.println("Indiquez le numero de l'étage sélectionne :");
@@ -124,8 +125,8 @@ public class TP1NinaRichard {
                             i=0;
                             liste_Piece=etageModified.getPieceEtage();
                             for (Piece piece : liste_Piece){//choix etage
-                                System.out.println("Piece "+ i);
-                                piece.toString();
+                                System.out.print("Piece "+ i);
+                                System.out.println(piece.toString());
                                 i++;
                             }
                             System.out.println("Indiquer le numero de la piece a supprimer/deplacer :");
@@ -151,8 +152,8 @@ public class TP1NinaRichard {
                             liste_EtageM = maison.getBatiment();
                             i=0;
                             for (Etage etage : liste_EtageM) {
-                                System.out.println("Etage "+ i);
-                                etage.toString();
+                                System.out.print("Etage "+ i);
+                                System.out.println(etage.toString());
                                 i++;
                             }
                             System.out.println("Indiquez le numero de l'étage sélectionne :");
@@ -165,8 +166,8 @@ public class TP1NinaRichard {
                         //Choix Mur
                         i=0;
                             for (Mur mur1 : liste_Mur) {
-                                System.out.println("Mur "+ i);
-                                mur1.toString();
+                                System.out.print("Mur "+ i);
+                                System.out.println(mur1.toString());
                                 i++;
                             }
                         System.out.println("Indiquer le numero du mur selectionne :");
@@ -209,8 +210,8 @@ public class TP1NinaRichard {
                     //Choix coin
                         i=0;
                             for (Coin coin : liste_Coin) {
-                                System.out.println("Coin "+ i);
-                                coin.toString();
+                                System.out.print("Coin "+ i);
+                                System.out.println(coin.toString());
                                 i++;
                             }
                         System.out.println("Indiquer le numero du coin selectionne :");
@@ -275,8 +276,8 @@ public class TP1NinaRichard {
                                     liste_EtageM = maison.getBatiment();
                                     i=0;
                                     for (Etage etage : liste_EtageM) {
-                                        System.out.println("Etage "+ i);
-                                        etage.toString();
+                                        System.out.print("Etage "+ i);
+                                        System.out.println(etage.toString());
                                         i++;
                                     }
                                     System.out.println("Indiquez le numero de l'étage sélectionne :");
@@ -287,8 +288,8 @@ public class TP1NinaRichard {
                                     i=0;
                                     liste_Piece=etageModified.getPieceEtage();
                                     for (Piece piece : liste_Piece){//choix etage
-                                        System.out.println("Piece "+ i);
-                                        piece.toString();
+                                        System.out.print("Piece "+ i);
+                                        System.out.println(piece.toString());
                                         i++;
                                     }
                                     System.out.println("Indiquer le numero de la piece a supprimer/deplacer :");
@@ -310,6 +311,7 @@ public class TP1NinaRichard {
             
             //lancement actions pour construire l'immeuble
             do{
+            System.out.println("Voulez-vous : ") ;
             System.out.println("2) Créer un étage et ajouter un étage dans le batiment") ;
             System.out.println("3) Créer un logement et ajouter un logement dans l'étage");
             System.out.println("4) Créer une piece et ajouter une piece dans un logement");
@@ -336,8 +338,8 @@ public class TP1NinaRichard {
                     liste_EtageI = immeuble.getBatiment();
                     i=0;
                     for (Etage etageaC : liste_EtageI) {
-                        System.out.println("Etage "+ i);
-                        etageaC.toString();
+                        System.out.print("Etage "+ i);
+                        System.out.println(etageaC.toString());
                         i++;
                     }
                     System.out.println("Indiquer le numero de l'étage sélectionne :");
@@ -354,8 +356,8 @@ public class TP1NinaRichard {
                         liste_EtageI = immeuble.getBatiment();
                         i=0;
                         for (EtageI etageaC : liste_EtageI) {
-                            System.out.println("Etage "+ i);
-                            etageaC.toString();
+                            System.out.print("Etage "+ i);
+                            System.out.println(etageaC.toString());
                             i++;
                         }
                         System.out.println("Indiquez le numero de l'étage sélectionne :");
@@ -366,8 +368,8 @@ public class TP1NinaRichard {
                         i=0;
                         liste_Logement=etageMod4.getAppartementEtage();
                         for (Logement logement : liste_Logement){//choix etage
-                            System.out.println("Logement "+ i);
-                            logement.toString();
+                            System.out.print("Logement "+ i);
+                            System.out.println(logement.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero du Logement dans lequel ajouter une piece :");
@@ -385,8 +387,8 @@ public class TP1NinaRichard {
                         liste_EtageI = immeuble.getBatiment();
                         i=0;
                         for (Etage etageaC : liste_EtageI) {
-                            System.out.println("Etage "+ i);
-                            etageaC.toString();
+                            System.out.print("Etage "+ i);
+                            System.out.println(etageaC.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero de l'étage sélectionne :");
@@ -401,8 +403,8 @@ public class TP1NinaRichard {
                         //choix etage a supprimer
                         liste_EtageI=immeuble.getBatiment();
                         for (Etage etage : liste_EtageI){//choix etage
-                            System.out.println("Etage "+ i);
-                            etage.toString();
+                            System.out.print("Etage "+ i);
+                            System.out.println(etage.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero de l'Etage a supprimer :");
@@ -423,8 +425,8 @@ public class TP1NinaRichard {
                     liste_EtageI = immeuble.getBatiment();
                     i=0;
                     for (Etage etageaC : liste_EtageI) {
-                        System.out.println("Etage "+ i);
-                        etageaC.toString();
+                        System.out.print("Etage "+ i);
+                        System.out.println(etageaC.toString());
                         i++;
                     }
                     System.out.println("Indiquer le numero de l'étage choisi :");
@@ -435,8 +437,8 @@ public class TP1NinaRichard {
                     i=0;
                     liste_Logement=etageMod.getAppartementEtage();
                     for (Logement logement : liste_Logement){
-                        System.out.println("Logement "+ i);
-                        logement.toString();
+                        System.out.print("Logement "+ i);
+                        System.out.println(logement.toString());
                         i++;
                     }
                     System.out.println("Indiquer le numero du Logement a supprimer :");
@@ -456,8 +458,8 @@ public class TP1NinaRichard {
                         liste_EtageI = immeuble.getBatiment();
                         i=0;
                         for (Etage etageaC : liste_EtageI) {
-                            System.out.println("Etage "+ i);
-                            etageaC.toString();
+                            System.out.print("Etage "+ i);
+                            System.out.println(etageaC.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero du logement choisi :");
@@ -472,8 +474,8 @@ public class TP1NinaRichard {
                         liste_EtageI = immeuble.getBatiment();
                         i=0;
                         for (Etage etageaC : liste_EtageI) {
-                            System.out.println("Etage "+ i);
-                            etageaC.toString();
+                            System.out.print("Etage "+ i);
+                            System.out.println(etageaC.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero de l'étage sélectionne :");
@@ -484,8 +486,8 @@ public class TP1NinaRichard {
                         i=0;
                         liste_Logement=etageMod.getAppartementEtage();
                         for (Logement logement : liste_Logement){
-                            System.out.println("Logement "+ i);
-                            logement.toString();
+                            System.out.print("Logement "+ i);
+                            System.out.println(logement.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero du Logement choisi :");
@@ -496,8 +498,8 @@ public class TP1NinaRichard {
                         i=0;
                         liste_Piece=logementMod.getAppartement();
                         for (Piece piece : liste_Piece){//choix etage
-                            System.out.println("Piece "+ i);
-                            piece.toString();
+                            System.out.print("Piece "+ i);
+                            System.out.println(piece.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero de la piece a supprimer/deplacer :");
@@ -520,8 +522,8 @@ public class TP1NinaRichard {
                             i=0;
                             liste_Logement=etageMod.getAppartementEtage();
                             for (Logement logement : liste_Logement){
-                                System.out.println("Logement "+ i);
-                                logement.toString();
+                                System.out.print("Logement "+ i);
+                                System.out.println(logement.toString());
                                 i++;
                             }
                             System.out.println("Indiquer le numero du Logement où deplacer la piece :");
@@ -534,8 +536,8 @@ public class TP1NinaRichard {
                     //Choix Mur
                     i=0;
                         for (Mur mur1 : liste_Mur) {
-                            System.out.println("Mur "+ i);
-                            mur1.toString();
+                            System.out.print("Mur "+ i);
+                            System.out.println(mur1.toString());
                             i++;
                         }
                     System.out.println("Indiquer le numero du mur selectionne :");
@@ -584,8 +586,8 @@ public class TP1NinaRichard {
                 //Choix coin
                     i=0;
                         for (Coin coin : liste_Coin) {
-                            System.out.println("Coin "+ i);
-                            coin.toString();
+                            System.out.print("Coin "+ i);
+                            System.out.println(coin.toString());
                             i++;
                         }
                     System.out.println("Indiquer le numero du coin selectionne :");
@@ -656,8 +658,8 @@ public class TP1NinaRichard {
                                 liste_EtageI = immeuble.getBatiment();
                                 i=0;
                                 for (Etage etageaC : liste_EtageI) {
-                                    System.out.println("Etage "+ i);
-                                    etageaC.toString();
+                                    System.out.print("Etage "+ i);
+                                    System.out.println(etageaC.toString());
                                     i++;
                                 }
                                 System.out.println("Indiquer le numero de l'étage sélectionne :");
@@ -668,8 +670,8 @@ public class TP1NinaRichard {
                                 i=0;
                                 liste_Logement=etageMod.getAppartementEtage();
                                 for (Logement logement : liste_Logement){
-                                    System.out.println("Logement "+ i);
-                                    logement.toString();
+                                    System.out.print("Logement "+ i);
+                                    System.out.println(logement.toString());
                                     i++;
                                 }
                                 System.out.println("Indiquer le numero du Logement choisi :");
@@ -680,8 +682,8 @@ public class TP1NinaRichard {
                                 i=0;
                                 liste_Piece=logementMod.getAppartement();
                                 for (Piece piece : liste_Piece){
-                                    System.out.println("Piece "+ i);
-                                    piece.toString();
+                                    System.out.print("Piece "+ i);
+                                    System.out.println(piece.toString());
                                     i++;
                                 }
                                 System.out.println("Indiquer le numero de la piece a supprimer/deplacer :");
