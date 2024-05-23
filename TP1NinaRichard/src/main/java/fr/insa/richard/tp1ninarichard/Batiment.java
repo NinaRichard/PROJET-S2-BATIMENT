@@ -19,13 +19,13 @@ public class Batiment {
     private String address;
 
     //Constructeurs
-    public Batiment(int id, String type) {
+    public Batiment(int id, int type) {
         this.id = id;
-        this.type = type;
-        if (type.equals("Maison")){
-            this.typeIM = 1;
+        this.typeIM = type;
+        if (type==1){
+            this.type = "Maison";
         } else{
-            this.typeIM = 0;
+            this.type = "Immeuble";
         }  
         this.nbrEtage = 0;
     }
@@ -88,7 +88,7 @@ public class Batiment {
 
 
     //Getter et Setter
-    //Address
+    //Adresse
     public String getAddress() {
         return address;
     }

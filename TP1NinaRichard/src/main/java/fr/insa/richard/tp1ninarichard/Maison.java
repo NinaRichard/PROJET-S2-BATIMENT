@@ -29,7 +29,7 @@ public class Maison extends Batiment{
     }
     public void setBatiment(List<EtageM> batiment) {
         this.batiment = batiment;
-        this.setNbrEtage(1);// mettre le nbr de truc dans l'autre
+        this.setNbrEtage(1);// mettre le nbr de trucs dans l'autre
     }
     
     //Ajouter un etage à la liste
