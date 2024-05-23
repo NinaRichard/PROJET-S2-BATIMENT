@@ -21,6 +21,7 @@ public class Piece {
     private Sol sol;
     private String usage;
     private Plafond plafond;
+    private int Etage;
     //"attribut" general ajouter pour l'essai si dessus potentiellement il faudrai modifier le code pour que ça marche et soit optimiser
     private static int nbrDePiece;
     //tentative de constructeur qui permet à l'utilisateur de renseigner les informationn au fur et a mesure
@@ -193,6 +194,14 @@ public class Piece {
     }
     public void setPlafond(Plafond plafond) {
         this.plafond = plafond;
+    }
+
+    public int getEtage() {
+        return Etage;
+    }
+
+    public void setEtage(int Etage) {
+        this.Etage = Etage;
     }
 
     
