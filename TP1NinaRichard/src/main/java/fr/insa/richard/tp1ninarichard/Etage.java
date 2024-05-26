@@ -4,6 +4,9 @@
  */
 package fr.insa.richard.tp1ninarichard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -12,6 +15,8 @@ package fr.insa.richard.tp1ninarichard;
 public class Etage {
     protected int id;
     private double hauteursousplafond;
+    private int nbrMur;
+    private List<Mur> murEtage= new ArrayList();
     
     //Constructeurs
     public Etage(int id) {
@@ -39,4 +44,17 @@ public class Etage {
         this.hauteursousplafond = hauteursousplafond;
     }
 
+    // Liste de Mur
+    public List<Mur> getMurEtage() {
+        return murEtage;
+    }
+    public void setMurEtage(List<Mur> murEtage) {
+        this.murEtage = murEtage;
+        nbrMur = murEtage.size();
+    }
+    
+    public void ajouterMur( Mur nouveauMur){
+        murEtage.add(nouveauMur);
+        nbrMur ++;
+    }
 }

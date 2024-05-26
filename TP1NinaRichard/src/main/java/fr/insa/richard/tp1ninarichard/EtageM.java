@@ -36,6 +36,8 @@ public class EtageM extends Etage{
     public void setPieceEtage(List<Piece> pieceEtage) {
         this.pieceEtage = pieceEtage;
     }
+
+    
     
     //Ajouter une piece à la liste
     public void ajouterPiece( Piece nouvellePiece){
@@ -43,6 +45,7 @@ public class EtageM extends Etage{
         nbrdePiece ++;
     }
 
+    
     // redefinir avec l'id et tout de la classe super
     @Override
     public String toString() {
