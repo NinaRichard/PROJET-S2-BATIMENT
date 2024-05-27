@@ -106,7 +106,7 @@ public class App extends Application {
         treeView =  updateTreeView();
         mainPane.setLeft(treeView);
         
-        
+        //reaction bouton Creer un point
         Button bCPoint = new Button("Créer un Point");
         bCPoint.setOnAction((t) -> {
             //ArrayList<String> choices = new ArrayList();
@@ -193,6 +193,8 @@ public class App extends Application {
             treeView =updateTreeView();
             mainPane.setLeft(treeView);
         });
+        
+        //reaction bouton Creer un mur
         Button bCMur = new Button("Créer un mur");
         bCMur.setOnAction((t) -> {
             if (nbrEtage == 0){
@@ -249,6 +251,7 @@ public class App extends Application {
                     cDial.setContentText("Choix :");
                     
                     Optional<String> selection = cDial.showAndWait();
+                    System.out.println(10);
                     if(selection.isPresent()){
                         String selectionStr = selection.orElse("0");
                         int length = selectionStr.length();
@@ -263,6 +266,7 @@ public class App extends Application {
                         etagem = liste_EtageM.get(etagenum);
                     }
                     //mettre si OK est cliquer
+                    System.out.println(11);
                      JDialog fenetreMur = new JDialog();
                      fenetreMur.setSize(550, 270);
                      fenetreMur.setLocationRelativeTo(null);
@@ -272,8 +276,7 @@ public class App extends Application {
                      JRadioButton rbM2Existant, rbM2Acree;
                      //JRadioButton rbM3Existant, rbM3Acree;
                      //JRadioButton rbM4Existant, rbM4Acree;
-                     JComboBox cbUtilite;
-                     
+                     System.out.println(12);
                      
                      //Coin 1 
                      JPanel panCoin1 = new JPanel();
@@ -344,15 +347,12 @@ public class App extends Application {
                                      (rbM2Acree.isSelected()) ? rbM2Acree.getText() :
                                     rbM2Existant.getText() ;
                          }
+                     });
+                }
                          
-                         
-            
-            
-            
-            
-            
-            
         });
+                     
+                     
         Button bCPiece = new Button("Créer une Piece");
         Button bCEtage = new Button("Créer un étage");
         bCEtage.setOnAction((new EventHandler<ActionEvent>() {
@@ -646,7 +646,17 @@ public class App extends Application {
         Canvas canvas = new Canvas();
         StackPane canvasContainer = new StackPane(canvas);
         mainPane.setCenter(canvasContainer);
-
+        // Bind the canvas size to the container size
+         canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
+             canvas.setWidth(newVal.doubleValue());
+             redraw(canvas);
+         });
+         canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
+             canvas.setHeight(newVal.doubleValue());
+             redraw(canvas);
+         });
+         
+        //menu avec revetements sur la droite
         Accordion accordion = new Accordion();
         TitledPane pane1 = new TitledPane("Peinture 1", new Label("Prix: 10,95€  \n Valide pour: \n Mur \n Plafond"));
         TitledPane pane2 = new TitledPane("Carrelage 1", new Label("Prix: 49,75€  \n Valide pour: \n Mur \n Sol"));
@@ -670,15 +680,7 @@ public class App extends Application {
         accordion.getPanes().addAll(pane1, pane2,pane3, pane4,pane5, pane6,pane7, pane8, pane9, pane10,pane11, pane12, pane13, pane14,pane15, pane16,pane17, pane18,pane19);
         mainPane.setRight(accordion);
 
-         // Bind the canvas size to the container size
-         canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
-             canvas.setWidth(newVal.doubleValue());
-             redraw(canvas);
-         });
-         canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
-             canvas.setHeight(newVal.doubleValue());
-             redraw(canvas);
-         });
+         
          
         Scene scene = new Scene(mainPane, 800, 600);
         stage.setScene(scene);
@@ -686,7 +688,8 @@ public class App extends Application {
         stage.show();
 
 
-}}}
+}
+
     private TreeView updateTreeView(){
         int k; int i;int j;
         List<Logement> logement;
@@ -698,7 +701,6 @@ public class App extends Application {
             liste_EtageI = immeuble.getBatiment();
             k =0;
             for (EtageI etageaC : liste_EtageI) {
-                
                     TreeItem<String> root_etage = new TreeItem<>("Etage " + k);
                     logement = etageaC.getAppartementEtage();
                     for (Logement logementaC : logement){
