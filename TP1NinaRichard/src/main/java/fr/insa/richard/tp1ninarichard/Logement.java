@@ -46,7 +46,7 @@ public class Logement {
 
     @Override
     public String toString() {
-        return "Le logement numero " + id + " contient " + nbrpiece + " pieces.";//, appartement=" + appartement + '}';
+        return "Le logement numero " + id + " contient " + nbrpiece + " pieces.";//
     }
     
     

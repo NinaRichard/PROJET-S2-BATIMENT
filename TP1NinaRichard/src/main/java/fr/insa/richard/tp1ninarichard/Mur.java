@@ -22,6 +22,10 @@ public class Mur {
     private double surface;
 
     //Constructeurs
+    
+    public Mur() {
+    }
+
     public Mur(int id, Coin coin1, Coin coin2) {
         this.id = id;
         this.coin1 = coin1;

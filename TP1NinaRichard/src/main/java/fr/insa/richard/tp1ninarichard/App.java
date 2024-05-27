@@ -44,7 +44,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-
 /**
  * JavaFX App
  */
@@ -57,15 +56,17 @@ public class App extends Application {
     private Maison maison;
     private int nbrEtage;
     private int nbrCoin;
+    private int nbrevetement;
     private List<EtageI> liste_EtageI = new ArrayList();
     private List<EtageM> liste_EtageM = new ArrayList();
+    private List<Revetement> liste_Revetement = new ArrayList();
     private TreeView<String> treeView;
     private EtageI  etagei;
     private EtageM etagem;
     
     @Override
     public void start(Stage stage) {
-        nbrEtage = 0; nbrCoin=0;
+        nbrEtage = 0; nbrCoin=0; nbrevetement=0;
         BorderPane mainPane = new BorderPane();
 
         Alert entree = new Alert(AlertType.CONFIRMATION);
@@ -321,7 +322,7 @@ public class App extends Application {
                                 existant ++;
                             }
                             fenetreMur.setVisible(false);
-                            if (existant>etagem.getMurEtage().size()){
+                            if (existant>etagem.getCoinEtage().size()){
                                 int result = JOptionPane.showConfirmDialog(fenetreMur, "Vous n'avez pas assez de coins déjà existants", "Erreur dans la creation de la pièce", JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     fenetreMur.setVisible(true);
@@ -348,6 +349,25 @@ public class App extends Application {
                                     rbM2Existant.getText() ;
                          }
                      });
+                     JButton cancelButton = new JButton("Cancel");
+                     cancelButton.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent arg0){
+                            fenetreMur.setVisible(false);
+                        } 
+
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                            fenetreMur.setVisible(false);
+                        }
+                     });
+                     control.add(okButton);
+                     control.add(cancelButton);
+                     
+                     fenetreMur.getContentPane().setLayout(new BorderLayout());
+                     fenetreMur.getContentPane().add(content,BorderLayout.CENTER);
+                     fenetreMur.getContentPane().add(control,BorderLayout.SOUTH);
+                     
+                     fenetreMur.setVisible(true);
                 }
                          
         });
@@ -355,6 +375,7 @@ public class App extends Application {
                      
         Button bCPiece = new Button("Créer une Piece");
         Button bCEtage = new Button("Créer un étage");
+        Button bCRevetement = new Button("Ajouter un Revetement");
         bCEtage.setOnAction((new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent t) {
@@ -641,6 +662,152 @@ public class App extends Application {
                 }
             }
         }));
+        bCRevetement.setOnAction((t) -> {
+            if (nbrEtage == 0){
+                    Alert dialogC = new Alert(AlertType.CONFIRMATION);
+                    
+                    dialogC.setTitle("Erreur: Batiment sans Etage");
+                    dialogC.setHeaderText(null);
+                    dialogC.setContentText("Attention, il est impossible d'ajouter un revetement dans un batiment sans étage , Veuillez en créer un avant en appuillant sur OK.");
+                    Optional<ButtonType> answer = dialogC.showAndWait();
+                    
+                    if(answer.get()== ButtonType.OK){
+                        TextInputDialog inDialog1 = new TextInputDialog("2,20");
+                        inDialog1.setTitle("Création d'un Etage");
+                        inDialog1.setHeaderText("Création d'un Etage");
+                        String contentText = "Numéro de l'étage: " + nbrEtage + "\n Hauteur sous plafond:";
+                        inDialog1.setContentText(contentText);
+
+                        Optional<String> hauteursousplafondO = inDialog1.showAndWait();
+                        if (hauteursousplafondO.isPresent()){
+                            String hauteursousplafond = hauteursousplafondO.orElse("2,20");
+                            Scanner lineScanner = new Scanner(hauteursousplafond);
+                            double hsp = lineScanner.nextDouble();
+                            System.out.println(hauteursousplafond);
+                            System.out.println(hsp);
+
+                            if (type == 0){
+                                EtageI etage = new EtageI(nbrEtage,hsp);
+                                immeuble.ajouterEtage(etage);
+                                nbrEtage ++;
+                            }else{
+                                EtageM etage = new EtageM(nbrEtage,hsp);
+                                nbrEtage ++;
+                                maison.ajouterEtage(etage);
+                            }
+                        }
+                        treeView =updateTreeView();
+                        mainPane.setLeft(treeView);
+                    }
+                }else if (type == 0){
+                    
+                } else {
+                    Revetement revetement=new Revetement(nbrevetement);
+                    //ArrayList<String> choices = new ArrayList();
+                    String[] choicesA = new String[nbrEtage];
+                    int h = 0;
+                    for(EtageM etage : liste_EtageM){
+                        String choice2 = "Etage " + h;
+                        choicesA[h] = choice2;
+                        h ++;
+                    }
+                    //String[] choicesA = (String[]) choices.toArray();
+                    ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                    cDial.setTitle("Selection de l'étage");
+                    cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter une piece.");
+                    cDial.setContentText("Choix :");
+                    
+                    Optional<String> selection = cDial.showAndWait();
+                    System.out.println(10);
+                    if(selection.isPresent()){
+                        String selectionStr = selection.orElse("0");
+                        int length = selectionStr.length();
+                        //int length_min = length - 6;
+                        String c = Character.toString(selectionStr.charAt(6));
+                        for(int i= 7 ; i<length ; i++){
+                            c = c + selectionStr.charAt(i);
+                        }
+                        Scanner lineScanner = new Scanner(c);
+                        int etagenum = lineScanner.nextInt();
+                        System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                        etagem = liste_EtageM.get(etagenum);
+                    }
+                    //mettre si OK est cliquer
+            
+                    String[] choicesB = new String[3];
+                    choicesB[0] = "Mur";
+                    choicesB[1] = "Sol";
+                    choicesB[2] = "Plafond";
+
+                    ChoiceDialog<String> cDial1 = new ChoiceDialog<>(choicesB[2],choicesB);
+                    cDial.setTitle("Selection de la surface");
+                    cDial.setHeaderText("Veuillez selectionner la surface sur laquelle vous voulez ajouter un revetement.");
+                    cDial.setContentText("Choix :");
+                    Optional<String> selection1 = cDial1.showAndWait();
+                    System.out.println(46);
+                    cDial.close();
+                    if(selection1.isPresent()){
+                        String rep = selection1.orElse("0");//convertit en String
+                        if (rep.equals("Mur")){
+                            //choix mur
+                              List<Mur> liste_Mur=etagem.getMurEtage();
+                                String[] choicesC = new String[liste_Mur.size()];
+                                h = 0;
+                                for(Mur mur : liste_Mur){
+                                    String choice2 = "Mur " + h+mur.toString();
+                                    choicesC[h] = choice2;
+                                    h ++;
+                                }
+                                ChoiceDialog<String> cDial2 = new ChoiceDialog<>(choicesC[h-1],choicesC);
+                                cDial.setTitle("Selection du mur");
+                                cDial.setHeaderText("Veuillez selectionner le mur auquel vous voulez ajouter un revetement.");
+                                cDial.setContentText("Choix :");
+
+                                Optional<String> selection2 = cDial2.showAndWait();
+                                Mur murMod=new Mur();
+                                if(selection2.isPresent()){
+                                    String selectionStr = selection2.orElse("0");
+                                    int length = selectionStr.length();
+                                    //int length_min = length - 6;
+                                    String c = Character.toString(selectionStr.charAt(6));
+                                    for(int i= 7 ; i<length ; i++){
+                                        c = c + selectionStr.charAt(i);
+                                    }
+                                    Scanner lineScanner = new Scanner(c);
+                                    int murnum = lineScanner.nextInt();
+                                    System.out.println(murnum + " " + selection2 + " "+ selectionStr);
+                                    murMod = liste_Mur.get(murnum);
+                                    
+                                }
+                                
+                                //choix revetement
+                                String[] choicesD={"Peinture 1", "Carrelage 1","Lambris 1","Marbre","Crepi","Papier peint","Plaquettes de parement","Peinture 2","Peinture 3","Carrelage 2","Lambris 2","Liege 1","Parquet","Vinyle Lino","Moquette", "Stratifie", "Gazon","Liege 2","Carrelage 3"};
+                                ChoiceDialog<String> cDial11 = new ChoiceDialog<>(choicesB[2],choicesB);
+                                cDial.setTitle("Selection du revetement (premier cote)");
+                                cDial.setHeaderText("Veuillez selectionner le revetement.");
+                                cDial.setContentText("Choix :");
+                                Optional<String> selection3 = cDial11.showAndWait();
+                                cDial.close();
+                                if(selection3.isPresent()){
+                                    String selectionStr = selection.orElse("0");//convertit en String
+                                        revetement.Parametres(type);
+                                    }while(revetement.isPourMur()==false);
+                                revetement.setSurface(murMod.getSurface());
+                                liste_Revetement.add(revetement);
+                        
+                            
+                        }else if (rep.equals("Sol")){
+
+                        }else {//plafond
+
+                        }
+                    }
+
+
+                }
+            
+            
+        });
         
         // Add the Canvas
         Canvas canvas = new Canvas();
@@ -703,6 +870,8 @@ public class App extends Application {
             for (EtageI etageaC : liste_EtageI) {
                     TreeItem<String> root_etage = new TreeItem<>("Etage " + k);
                     logement = etageaC.getAppartementEtage();
+                        
+         
                     for (Logement logementaC : logement){
                         i=0;
                         TreeItem<String> root_app = new TreeItem<>("Appartement " + i);
@@ -723,6 +892,10 @@ public class App extends Application {
             k=0;
             for (EtageM etageaC : liste_EtageM) {
                 TreeItem<String> root_etage = new TreeItem<>("Etage " + k);
+                        Canvas canvas = redraw();
+                        //root_etage.getChildren().add(canvas);
+                        
+                        
                 pieces = etageaC.getPieceEtage();
                 j=0;
                 for(Piece pieceaC : pieces){
@@ -733,18 +906,21 @@ public class App extends Application {
                 k++;
             }
         }
+        //affichage arbre
         TreeView<String> treeView = new TreeView<>(root_Menu);
         return treeView;
     }
 
     // Method to redraw the content on the canvas when resized
-    private void redraw(Canvas canvas) {
+    private Canvas redraw() {
+        Canvas canvas = new Canvas(200, 200);
         GraphicsContext context = canvas.getGraphicsContext2D();
         context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         context.setFill(Color.PINK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getWidth());
-        // Add your drawing code here
+        canvas.setVisible(false);
         context.strokeText("Plan", 10, 10);
+        return canvas;
     }
     
     public static void main(String[] args) {

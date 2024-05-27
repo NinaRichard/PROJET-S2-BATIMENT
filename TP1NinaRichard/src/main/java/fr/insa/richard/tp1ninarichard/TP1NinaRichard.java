@@ -788,7 +788,7 @@ public class TP1NinaRichard {
                 System.out.println("19) Carrelage 3");
                 int type=Lire.i();
                 while(type != 1 && type != 2 && type != 13 && type != 4 && type != 5 && type != 6 && type != 7 && type != 8 && type != 9 && type != 10 && type != 11 && type != 12 && type != 13 && type != 14 && type != 15 && type != 16 && type != 17 && type != 18 && type != 19 ){
-                    System.out.println("ATENTION LES CHOIX POSSIBLE SONT ENTRE 1 ET 19 ! Veuillez choisir un revetement :");
+                    System.out.println("ATENTION LES CHOIX POSSIBLES SONT ENTRE 1 ET 19 ! Veuillez choisir un revetement :");
                     type = Lire.i(); 
                 }
                 revetement.Parametres(type);
