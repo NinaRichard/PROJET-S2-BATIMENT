@@ -780,7 +780,7 @@ public class App extends Application {
                                     
                                 }
                                 
-                                //choix revetement
+                                //choix revetement 1
                                 String[] choicesD={"Peinture 1", "Carrelage 1","Lambris 1","Marbre","Crepi","Papier peint","Plaquettes de parement","Peinture 2","Peinture 3","Carrelage 2","Lambris 2","Liege 1","Parquet","Vinyle Lino","Moquette", "Stratifie", "Gazon","Liege 2","Carrelage 3"};
                                 ChoiceDialog<String> cDial11 = new ChoiceDialog<>(choicesB[2],choicesB);
                                 cDial.setTitle("Selection du revetement (premier cote)");
@@ -794,7 +794,19 @@ public class App extends Application {
                                     }while(revetement.isPourMur()==false);
                                 revetement.setSurface(murMod.getSurface());
                                 liste_Revetement.add(revetement);
-                        
+                                //choix revetement 2
+                                ChoiceDialog<String> cDial111 = new ChoiceDialog<>(choicesB[2],choicesB);
+                                cDial.setTitle("Selection du revetement (deuxieme cote)");
+                                cDial.setHeaderText("Veuillez selectionner le revetement.");
+                                cDial.setContentText("Choix :");
+                                Optional<String> selection4 = cDial111.showAndWait();
+                                cDial.close();
+                                if(selection4.isPresent()){
+                                    String selectionStr = selection.orElse("0");//convertit en String
+                                        revetement.Parametres(type);
+                                    }while(revetement.isPourMur()==false);
+                                revetement.setSurface(murMod.getSurface());
+                                liste_Revetement.add(revetement);
                             
                         }else if (rep.equals("Sol")){
 
