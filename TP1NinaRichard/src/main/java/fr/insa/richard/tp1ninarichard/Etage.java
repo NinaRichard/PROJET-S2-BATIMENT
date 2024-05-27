@@ -16,7 +16,9 @@ public class Etage {
     protected int id;
     private double hauteursousplafond;
     private int nbrMur;
+    private int nbrCoin;
     private List<Mur> murEtage= new ArrayList();
+    private List<Coin> coinEtage=new ArrayList();
     
     //Constructeurs
     public Etage(int id) {
@@ -56,5 +58,18 @@ public class Etage {
     public void ajouterMur( Mur nouveauMur){
         murEtage.add(nouveauMur);
         nbrMur ++;
+    }
+    // Liste de coin
+    public List<Coin> getCoinEtage() {
+        return coinEtage;
+    }
+    public void setCoinEtage(List<Coin> murEtage) {
+        this.coinEtage = coinEtage;
+        nbrCoin = coinEtage.size();
+    }
+    
+    public void ajouterCoin( Coin nouveauCoin){
+        coinEtage.add(nouveauCoin);
+        nbrCoin ++;
     }
 }
