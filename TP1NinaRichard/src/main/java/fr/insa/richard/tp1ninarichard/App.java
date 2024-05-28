@@ -1211,7 +1211,7 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n, k=0;
+                                    int n=0, k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1291,7 +1291,7 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n, k=0;
+                                    int n=0, k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1395,7 +1395,7 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n, k=0;
+                                    int n=0, k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1416,7 +1416,7 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 if(selection4.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n, k=0;
+                                    int n=0,k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1522,7 +1522,7 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n, k=0;
+                                    int n=0, k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
