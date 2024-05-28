@@ -565,23 +565,27 @@ public class App extends Application {
 			etagei.ajouterAppartement(new Logement(etagei.getNbrdappart()));
 }
 			} else{
-String[] choicesE = new String[etagei.getNbrdappart()];
+                    String[] choicesE = new String[etagei.getNbrdappart()];
                     h = 0;
                     for(Logement appart : etagei.getAppartementEtage()){
                         String choice = appart.toString();
                         choicesE[h] = choice;
                         h ++;
                     }
-                   ChoiceDialog<String> cDialE = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                   ChoiceDialog<String> cDialE = new ChoiceDialog<>(choicesE[h-1],choicesE);
                     cDialE.setTitle("Selection de l'appartement");
                     cDialE.setHeaderText("Veuillez selectionner l'appartement dans lequel vous voulez ajouter une piece.");
                     cDialE.setContentText("Choix :");
                     Optional<String> selectionE = cDialE.showAndWait();
                     if(selection.isPresent()){
-                        String selectionStr = selection.orElse("0");int i =0;
-			while(!(selectionStr.equals(etagei.getAppartementEtage().get(i)))){
-				i++;
-}
+                        String selectionStr = selectionE.orElse("0");int i =0;
+                        System.out.print("selectionStr = " + selectionStr);
+			while(!(selectionStr.equals(etagei.getAppartementEtage().get(i).toString()))){
+                            i++;
+                            System.out.println(i);
+                            System.out.println(selectionStr);
+                            System.out.println(etagei.getAppartementEtage().get(i).toString());
+                        }
 		    
                     }
 		JDialog fenetrePiece = new JDialog();
@@ -675,21 +679,28 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                      okButton.addActionListener(new ActionListener(){
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent e) {
+                            System.out.println(0.0);
                             int existant = 0;
                             if (getMur1().equals("Existant")){
                                 existant ++;
                             }
+                            System.out.println(0.1);
                             if (getMur2().equals("Existant")){
                                 existant ++;
                             }
+                            System.out.println(0.2);
                             if (getMur3().equals("Existant")){
                                 existant ++;
                             }
+                            System.out.println(0.3);
                             if (getMur4().equals("Existant")){
                                 existant ++;
                             }
+                            System.out.println(0.4);
                             fenetrePiece.setVisible(false);
-                            if (existant>etagem.getMurEtage().size()){
+                            System.out.println(0.5);
+                            if (existant>etagei.getMurEtage().size()){
+                                System.out.println(0.6);
                                 int result = JOptionPane.showConfirmDialog(fenetrePiece, "Vous n'avez pas assez de murs déja existants", "Erreur dans la creation ce la pièce", JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     fenetrePiece.setVisible(true);
@@ -700,6 +711,7 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 if (result == JOptionPane.OK_OPTION) {
                                     System.out.println("User chose OK");
                                     JDialog choixM = new JDialog();
+                                    JPanel content = new JPanel();
                                    if (getMur1().equals("Existant")){
                                     JPanel panChoixM1 = new JPanel();
                                     panChoixM1.setPreferredSize(new Dimension(200,60));
@@ -709,30 +721,105 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                        cbChoixM1.addItem(mur.toString()); 
                                     }
                                     panChoixM1.add(cbChoixM1);
-                                    choixM.getContentPane().setLayout(new BorderLayout());
-                                    choixM.getContentPane().add(panChoixM1,BorderLayout.CENTER);
+                                   
+                                    content.add(panChoixM1);
                                     } else{
-                                       JPanel panChoixM1 = new JPanel();
-                                       panChoixM1.setPreferredSize(new Dimension(200,60));
-                                       panChoixM1.setBorder(BorderFactory.createTitledBorder("Creation M1"));
-                                       JRadioButton rbM1C1Existant = new JRadioButton("Coin 1 Existant");
-                                       rbM1C1Existant.setSelected(true);
-                                       JRadioButton rbM1C1Acree = new JRadioButton("Coin 1 A créer");
-                                       ButtonGroup bg1 = new ButtonGroup();
+                                        JPanel panChoixM1 = new JPanel();
+                                        panChoixM1.setPreferredSize(new Dimension(200,160));
+                                        panChoixM1.setBorder(BorderFactory.createTitledBorder("Creation M1"));
+                                        JRadioButton rbM1C1Existant = new JRadioButton("Coin 1 Existant");
+                                        rbM1C1Existant.setSelected(true);
+                                        JRadioButton rbM1C1Acree = new JRadioButton("Coin 1 A créer");
+                                        ButtonGroup bg1 = new ButtonGroup();
                                         bg1.add(rbM1C1Acree);
                                         bg1.add(rbM1C1Existant);
                                         JRadioButton rbM1C2Existant = new JRadioButton("Coin 1 Existant");
-                                       rbM1C2Existant.setSelected(true);
-                                       JRadioButton rbM1C2Acree = new JRadioButton("Coin 1 A créer");
-                                       ButtonGroup bg2 = new ButtonGroup();
+                                        rbM1C2Existant.setSelected(true);
+                                        JRadioButton rbM1C2Acree = new JRadioButton("Coin 1 A créer");
+                                        ButtonGroup bg2 = new ButtonGroup();
                                         bg2.add(rbM1C2Acree);
                                         bg2.add(rbM1C2Existant);
                                         panChoixM1.add(rbM1C1Acree);
                                         panChoixM1.add(rbM1C1Existant);
                                         panChoixM1.add(rbM1C2Acree);
-                                        panChoixM1.add(rbM1C2Existant);  
+                                        panChoixM1.add(rbM1C2Existant);
+                                       
+                                        content.add(panChoixM1);
+                                   }
+                                    if (getMur2().equals("Existant")){
+                                        JPanel panChoixM2 = new JPanel();
+                                        panChoixM2.setPreferredSize(new Dimension(200,200));
+                                        panChoixM2.setBorder(BorderFactory.createTitledBorder("Choix Mur 2"));
+                                        JComboBox cbChoixM2 = new JComboBox();
+                                        for(Mur mur : etagei.getMurEtage()){
+                                           cbChoixM2.addItem(mur.toString()); 
+                                        }
+                                        panChoixM2.add(cbChoixM2);
+                                        content.add(panChoixM2);
+                                    } else{
+                                        JPanel panChoixM2 = new JPanel();
+                                        panChoixM2.setPreferredSize(new Dimension(200,160));
+                                        panChoixM2.setBorder(BorderFactory.createTitledBorder("Creation M2"));
+                                        JRadioButton rbM2C1Existant = new JRadioButton("Coin 1 Existant");
+                                        rbM2C1Existant.setSelected(true);
+                                        JRadioButton rbM2C1Acree = new JRadioButton("Coin 1 A créer");
+                                        ButtonGroup bg12 = new ButtonGroup();
+                                        bg12.add(rbM2C1Acree);
+                                        bg12.add(rbM2C1Existant);
+                                        JRadioButton rbM2C2Existant = new JRadioButton("Coin 1 Existant");
+                                        rbM2C2Existant.setSelected(true);
+                                        JRadioButton rbM2C2Acree = new JRadioButton("Coin 1 A créer");
+                                        ButtonGroup bg22 = new ButtonGroup();
+                                        bg22.add(rbM2C2Acree);
+                                        bg22.add(rbM2C2Existant);
+                                        panChoixM2.add(rbM2C1Acree);
+                                        panChoixM2.add(rbM2C1Existant);
+                                        panChoixM2.add(rbM2C2Acree);
+                                        panChoixM2.add(rbM2C2Existant); 
+                                        content.add(panChoixM2);
+                                   }
+                                    if (getMur3().equals("Existant")){
+                                        JPanel panChoixM3 = new JPanel();
+                                        panChoixM3.setPreferredSize(new Dimension(200,200));
+                                        panChoixM3.setBorder(BorderFactory.createTitledBorder("Choix Mur 2"));
+                                        JComboBox cbChoixM3 = new JComboBox();
+                                        for(Mur mur : etagei.getMurEtage()){
+                                           cbChoixM3.addItem(mur.toString()); 
+                                        }
+                                        panChoixM3.add(cbChoixM3);
+                                        content.add(panChoixM3);
+                                    } else{
+                                        JPanel panChoixM3 = new JPanel();
+                                        panChoixM3.setPreferredSize(new Dimension(200,160));
+                                        panChoixM3.setBorder(BorderFactory.createTitledBorder("Creation M2"));
+                                        JRadioButton rbM3C1Existant = new JRadioButton("Coin 1 Existant");
+                                        rbM3C1Existant.setSelected(true);
+                                        JRadioButton rbM3C1Acree = new JRadioButton("Coin 1 A créer");
+                                        ButtonGroup bg13 = new ButtonGroup();
+                                        bg13.add(rbM3C1Acree);
+                                        bg13.add(rbM3C1Existant);
+                                        JRadioButton rbM3C2Existant = new JRadioButton("Coin 1 Existant");
+                                        rbM3C2Existant.setSelected(true);
+                                        JRadioButton rbM3C2Acree = new JRadioButton("Coin 1 A créer");
+                                        ButtonGroup bg23 = new ButtonGroup();
+                                        bg23.add(rbM3C2Acree);
+                                        bg23.add(rbM3C2Existant);
+                                        panChoixM3.add(rbM3C1Acree);
+                                        panChoixM3.add(rbM3C1Existant);
+                                        panChoixM3.add(rbM3C2Acree);
+                                        panChoixM3.add(rbM3C2Existant); 
+                                        content.add(panChoixM3);
                                    }
                                    //if...
+                                   
+                                     
+                                    choixM.getContentPane().setLayout(new BorderLayout());
+                                    choixM.getContentPane().add(content,BorderLayout.CENTER);
+                                    
+                                    
+                                    
+                                   choixM.setSize(550, 270);
+                                    choixM.setLocationRelativeTo(null);
                                    choixM.setVisible(true);
                                 }else {
                                 fenetrePiece.setVisible(true);
@@ -1549,11 +1636,11 @@ String[] choicesE = new String[etagei.getNbrdappart()];
         // Bind the canvas size to the container size
          canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
              canvas.setWidth(newVal.doubleValue());
-             redraw(canvas);
+           //  redraw(canvas);
          });
          canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
              canvas.setHeight(newVal.doubleValue());
-             redraw(canvas);
+           //  redraw(canvas);
          });
          
         //menu avec revetements sur la droite
