@@ -408,8 +408,81 @@ public class App extends Application {
             mainPane.setLeft(treeView);
             
         }}));
+        Button bCLogement = new Button("Créer un appartement");
+        bCLogement.setOnAction((new EventHandler<ActionEvent>(){
+            @Override 
+            public void handle(ActionEvent t){
+	if (nbrEtage == 0){
+                    Alert dialogC = new Alert(AlertType.CONFIRMATION);
+                    
+                    dialogC.setTitle("Erreur: Batiment sans Etage");
+                    dialogC.setHeaderText(null);
+                    dialogC.setContentText("Attention, il est impossible de creer un logement dans un batiment sans étage , Veuillez en créer un avant en appuillant sur OK.");
+                    Optional<ButtonType> answer = dialogC.showAndWait();
+                    
+                    if(answer.get()== ButtonType.OK){
+                        TextInputDialog inDialog = new TextInputDialog("2,20");
+                        inDialog.setTitle("Création d'un Etage");
+                        inDialog.setHeaderText("Création d'un Etage");
+                        String contentText = "Numéro de l'étage: " + nbrEtage + "\n Hauteur sous plafond:";
+                        inDialog.setContentText(contentText);
+
+                        Optional<String> hauteursousplafondO = inDialog.showAndWait();
+                        if (hauteursousplafondO.isPresent()){
+                            String hauteursousplafond = hauteursousplafondO.orElse("2,20");
+                            Scanner lineScanner = new Scanner(hauteursousplafond);
+                            double hsp = lineScanner.nextDouble();
+                            System.out.println(hauteursousplafond);
+                            System.out.println(hsp);
+
+                            if (type == 0){
+                                EtageI etage = new EtageI(nbrEtage,hsp);
+                                immeuble.ajouterEtage(etage);
+                                nbrEtage ++;
+                            }else{
+                                EtageM etage = new EtageM(nbrEtage,hsp);
+                                nbrEtage ++;
+                                maison.ajouterEtage(etage);
+                            }
+                        }
+                        treeView =updateTreeView();
+                        mainPane.setLeft(treeView);
+                    }
+                }else{
+			String[] choicesA = new String[nbrEtage];
+                    int h = 0;
+                    for(EtageI etage : liste_EtageI){
+                        String choice = "Etage " + h;
+                        choicesA[h] = choice;
+                        h ++;
+                    }
+                   ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                    cDial.setTitle("Selection de l'étage");
+                    cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter une piece.");
+                    cDial.setContentText("Choix :");
+                    Optional<String> selection = cDial.showAndWait();
+                    if(selection.isPresent()){
+                        String selectionStr = selection.orElse("0");
+                        int length = selectionStr.length();
+                        String c = Character.toString(selectionStr.charAt(6));
+                        for(int i= 7 ; i<length ; i++){
+                            c = c + selectionStr.charAt(i);
+                        }
+                        Scanner lineScanner = new Scanner(c);
+                        int etagenum = lineScanner.nextInt();
+                        System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                        etagei = liste_EtageI.get(etagenum);
+                    }
+		etagei.ajouterAppartement(new Logement(etagei.getNbrdappart()));	
+		treeView =updateTreeView();
+                mainPane.setLeft(treeView);
+}
+
+}
+})) ;
+
+        
         if (type == 0 ){
-            Button bCLogement = new Button("Créer un appartement");
             HBox bBar = new HBox(20, bCPoint, bCMur, bCPiece , bCLogement , bCEtage);
             mainPane.setBottom(bBar);
         }else{
@@ -456,7 +529,228 @@ public class App extends Application {
                         mainPane.setLeft(treeView);
                     }
                 }else if (type == 0){
+                    	String[] choicesA = new String[nbrEtage];
+                    int h = 0;
+                    for(EtageI etage : liste_EtageI){
+                        String choice = "Etage " + h;
+                        choicesA[h] = choice;
+                        h ++;
+                    }
+                   ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                    cDial.setTitle("Selection de l'étage");
+                    cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter une piece.");
+                    cDial.setContentText("Choix :");
+                    Optional<String> selection = cDial.showAndWait();
+                    if(selection.isPresent()){
+                        String selectionStr = selection.orElse("0");
+                        int length = selectionStr.length();
+                        String c = Character.toString(selectionStr.charAt(6));
+                        for(int i= 7 ; i<length ; i++){
+                            c = c + selectionStr.charAt(i);
+                        }
+                        Scanner lineScanner = new Scanner(c);
+                        int etagenum = lineScanner.nextInt();
+                        System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                        etagei = liste_EtageI.get(etagenum);
+                    }
+		if (etagei.getNbrdappart()==0){
+			Alert dialogC = new Alert(AlertType.CONFIRMATION);
                     
+                    dialogC.setTitle("Erreur: Etage sans logement");
+                    dialogC.setHeaderText(null);
+                    dialogC.setContentText("Attention, il est impossible de creer une piece dans un étage sans logement , en appuyant sur OK vous en créerez un logement dans l'étage " + etagei.getId());
+                    Optional<ButtonType> answer = dialogC.showAndWait();
+                    
+                    if(answer.get()== ButtonType.OK){
+			etagei.ajouterAppartement(new Logement(etagei.getNbrdappart()));
+}
+			} else{
+String[] choicesE = new String[etagei.getNbrdappart()];
+                    h = 0;
+                    for(Logement appart : etagei.getAppartementEtage()){
+                        String choice = appart.toString();
+                        choicesE[h] = choice;
+                        h ++;
+                    }
+                   ChoiceDialog<String> cDialE = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                    cDialE.setTitle("Selection de l'appartement");
+                    cDialE.setHeaderText("Veuillez selectionner l'appartement dans lequel vous voulez ajouter une piece.");
+                    cDialE.setContentText("Choix :");
+                    Optional<String> selectionE = cDialE.showAndWait();
+                    if(selection.isPresent()){
+                        String selectionStr = selection.orElse("0");int i =0;
+			while(!(selectionStr.equals(etagei.getAppartementEtage().get(i)))){
+				i++;
+}
+		    
+                    }
+		JDialog fenetrePiece = new JDialog();
+                     fenetrePiece.setSize(550, 270);
+                     fenetrePiece.setLocationRelativeTo(null);
+                     fenetrePiece.setVisible(true);
+                     JLabel EtageLabel, mur1Lable, mur2Label,mur3Label, mur4Label,UtiliteLabel;
+                     JRadioButton rbM1Existant, rbM1Acree;
+                     JRadioButton rbM2Existant, rbM2Acree;
+                     JRadioButton rbM3Existant, rbM3Acree;
+                     JRadioButton rbM4Existant, rbM4Acree;
+                     JComboBox cbUtilite;
+                     
+                     //Utilité de la piece
+                     JPanel panUtilite = new JPanel();
+                     panUtilite.setPreferredSize(new Dimension(200,60));
+                     panUtilite.setBorder(BorderFactory.createTitledBorder("Utilisation de la pièce"));
+                     cbUtilite = new JComboBox();
+                     cbUtilite.addItem("Salon");
+                     cbUtilite.addItem("Couloir");
+                     cbUtilite.addItem("Chambre");
+                     cbUtilite.addItem("Cuisine");
+                     cbUtilite.addItem("Salle de Bain");
+                     cbUtilite.addItem("Autre");
+                     //UtiliteLabel = new JLabel("Type de pièce: ");
+                     panUtilite.add(cbUtilite);
+                    //panUtilite.add(UtiliteLabel);
+                     
+                     //Mur 1 
+                     JPanel panMur1 = new JPanel();
+                     panMur1.setBorder(BorderFactory.createTitledBorder("Mur 1"));
+                     panMur1.setPreferredSize(new Dimension(200,60));
+                     rbM1Existant = new JRadioButton("Existant");
+                     rbM1Existant.setSelected(true);
+                     rbM1Acree = new JRadioButton("A créer");
+                     ButtonGroup bg1 = new ButtonGroup();
+                     bg1.add(rbM1Acree);
+                     bg1.add(rbM1Existant);
+                     panMur1.add(rbM1Acree);
+                     panMur1.add(rbM1Existant);
+                     
+                     //Mur 2 
+                     JPanel panMur2 = new JPanel();
+                     panMur2.setBorder(BorderFactory.createTitledBorder("Mur 2"));
+                     panMur2.setPreferredSize(new Dimension(200,60));
+                     rbM2Existant = new JRadioButton("Existant");
+                     rbM2Existant.setSelected(true);
+                     rbM2Acree = new JRadioButton("A créer");
+                     ButtonGroup bg2 = new ButtonGroup();
+                     bg2.add(rbM2Acree);
+                     bg2.add(rbM2Existant);
+                     panMur2.add(rbM2Acree);
+                     panMur2.add(rbM2Existant);
+                     
+                     //Mur 3 
+                     JPanel panMur3 = new JPanel();
+                     panMur3.setBorder(BorderFactory.createTitledBorder("Mur 3"));
+                     panMur3.setPreferredSize(new Dimension(200,60));
+                     rbM3Existant = new JRadioButton("Existant");
+                     rbM3Existant.setSelected(true);
+                     rbM3Acree = new JRadioButton("A créer");
+                     ButtonGroup bg3 = new ButtonGroup();
+                     bg3.add(rbM3Acree);
+                     bg3.add(rbM3Existant);
+                     panMur3.add(rbM3Acree);
+                     panMur3.add(rbM3Existant);
+                     
+                     //Mur 4 
+                     JPanel panMur4 = new JPanel();
+                     panMur4.setBorder(BorderFactory.createTitledBorder("Mur 4"));
+                     panMur4.setPreferredSize(new Dimension(200,60));
+                     rbM4Existant = new JRadioButton("Existant");
+                     rbM4Existant.setSelected(true);
+                     rbM4Acree = new JRadioButton("A créer");
+                     ButtonGroup bg4 = new ButtonGroup();
+                     bg4.add(rbM4Acree);
+                     bg4.add(rbM4Existant);
+                     panMur4.add(rbM4Acree);
+                     panMur4.add(rbM4Existant);
+                     
+                     JPanel content = new JPanel();
+                     content.add(panUtilite);
+                     content.add(panMur1);
+                     content.add(panMur2);
+                     content.add(panMur3);
+                     content.add(panMur4);
+                     
+                     JPanel control = new JPanel();
+                     
+                     JButton okButton = new JButton("OK");
+                     okButton.addActionListener(new ActionListener(){
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                            int existant = 0;
+                            if (getMur1().equals("Existant")){
+                                existant ++;
+                            }
+                            if (getMur2().equals("Existant")){
+                                existant ++;
+                            }
+                            if (getMur3().equals("Existant")){
+                                existant ++;
+                            }
+                            if (getMur4().equals("Existant")){
+                                existant ++;
+                            }
+                            fenetrePiece.setVisible(false);
+                            if (existant>etagem.getMurEtage().size()){
+                                int result = JOptionPane.showConfirmDialog(fenetrePiece, "Vous n'avez pas assez de murs déja existants", "Erreur dans la creation ce la pièce", JOptionPane.OK_CANCEL_OPTION);
+                                if (result == JOptionPane.OK_OPTION) {
+                                    fenetrePiece.setVisible(true);
+                                }
+                            }else{
+                                String compteRendu = "Vous avez selectionné: \n Utilité de la pièce: "+ cbUtilite.getSelectedItem() +" \n  Mur 1 : " + getMur1() + "\n Mur 2 : "+ getMur2() + "\n Mur3 : "+ getMur3() + "\n Mur 4 : " + getMur4();
+                                int result = JOptionPane.showConfirmDialog(fenetrePiece,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
+                                if (result == JOptionPane.OK_OPTION) {
+                                    System.out.println("User chose OK");
+                                }
+                                else {
+                                fenetrePiece.setVisible(true);
+                                }
+                            }
+                            
+                            
+                        }
+                         public String getMur1(){
+                             return (rbM1Existant.isSelected()) ? rbM1Existant.getText() :
+                                     (rbM1Acree.isSelected()) ? rbM1Acree.getText() :
+                                    rbM1Existant.getText() ;
+                         }
+                         public String getMur2(){
+                             return (rbM2Existant.isSelected()) ? rbM2Existant.getText() :
+                                     (rbM2Acree.isSelected()) ? rbM2Acree.getText() :
+                                    rbM2Existant.getText() ;
+                         }
+                         public String getMur3(){
+                             return (rbM3Existant.isSelected()) ? rbM3Existant.getText() :
+                                     (rbM3Acree.isSelected()) ? rbM3Acree.getText() :
+                                    rbM3Existant.getText() ;
+                         }
+                         public String getMur4(){
+                             return (rbM4Existant.isSelected()) ? rbM4Existant.getText() :
+                                     (rbM4Acree.isSelected()) ? rbM4Acree.getText() :
+                                    rbM4Existant.getText() ;
+                         }
+                         
+                     });
+                     JButton cancelButton = new JButton("Cancel");
+                     cancelButton.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent arg0){
+                            fenetrePiece.setVisible(false);
+                        } 
+
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                            fenetrePiece.setVisible(false);
+                        }
+                     });
+                     control.add(okButton);
+                     control.add(cancelButton);
+                     
+                     fenetrePiece.getContentPane().setLayout(new BorderLayout());
+                     fenetrePiece.getContentPane().add(content,BorderLayout.CENTER);
+                     fenetrePiece.getContentPane().add(control,BorderLayout.SOUTH);
+                     
+                     fenetrePiece.setVisible(true);
+
+                    }
+
                 } else {
                     System.out.println(1);
                     //ArrayList<String> choices = new ArrayList();
