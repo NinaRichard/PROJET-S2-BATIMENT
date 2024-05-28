@@ -60,6 +60,7 @@ public class App extends Application {
     private List<EtageI> liste_EtageI = new ArrayList();
     private List<EtageM> liste_EtageM = new ArrayList();
     private List<Revetement> liste_Revetement = new ArrayList();
+    private List<Canvas> liste_Canvas = new ArrayList();
     private TreeView<String> treeView;
     private EtageI  etagei;
     private EtageM etagem;
@@ -376,6 +377,27 @@ public class App extends Application {
         Button bCPiece = new Button("Créer une Piece");
         Button bCEtage = new Button("Créer un étage");
         Button bCRevetement = new Button("Ajouter un Revetement");
+        Button bCMaj = new Button("Mettre a jour");
+        
+       
+            treeView=updateTreeView();
+            mainPane.setLeft(treeView);
+            int k=0;
+            for (EtageM etageaC : liste_EtageM) {//prend liste etages sur la gauche
+                TreeItem<String> root_etage =treeView.getTreeItem(k);//renvoie l'etage
+                Canvas canvas=liste_Canvas.get(k);
+                root_etage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
+                    for (Canvas can : liste_Canvas){
+                        can.setVisible(false);
+                    }
+                    StackPane canvasContainer = new StackPane(canvas);
+                    mainPane.setCenter(canvasContainer);
+                    canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
+                    canvas.setWidth(newVal.doubleValue());});
+                    canvas.setVisible(true);
+                });
+            }
+            
         bCEtage.setOnAction((new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent t) {
@@ -1205,7 +1227,7 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0, k=0;
+                                    int n=0; k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1298,7 +1320,7 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0, k=0;
+                                    int n=0; k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1378,7 +1400,7 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0, k=0;
+                                    int n=0; k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1482,7 +1504,7 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0, k=0;
+                                    int n=0; k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1503,7 +1525,7 @@ public class App extends Application {
                                 if(selection4.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0,k=0;
+                                    int n=0;k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1556,7 +1578,7 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0, k=0;
+                                    int n=0; k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1609,7 +1631,7 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0, k=0;
+                                    int n=0; k=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
                                             n=k;
@@ -1636,11 +1658,11 @@ public class App extends Application {
         // Bind the canvas size to the container size
          canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
              canvas.setWidth(newVal.doubleValue());
-           //  redraw(canvas);
+            // redraw(canvas);
          });
          canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
              canvas.setHeight(newVal.doubleValue());
-           //  redraw(canvas);
+            // redraw(canvas);
          });
          
         //menu avec revetements sur la droite
@@ -1681,7 +1703,7 @@ public class App extends Application {
         int k; int i;int j;
         List<Logement> logement;
         List<Piece> pieces;
-        List<Canvas> list_Canvas ;
+        //List<Canvas> list_Canvas=new ArrayList<Canvas>();
 
         TreeItem<String> root_Menu = new TreeItem<>("MENU");
         root_Menu.setExpanded(true);
@@ -1713,19 +1735,18 @@ public class App extends Application {
         }else {
             liste_EtageM = maison.getBatiment();
             k=0;
-            for (EtageM etageaC : liste_EtageM) {
+            for (EtageM etageaC : liste_EtageM) {//affiche liste etages sur la gauche
                 TreeItem<String> root_etage = new TreeItem<>("Etage " + k);
-                        Canvas canvas = redraw();
-                        //root_etage.getChildren().add(canvas);
-                        
-                        
+                Canvas canvas = redraw();//cree un canva caché
+                this.liste_Canvas.add(canvas);//ajoute le canvas a la liste avec le meme indice que l'etage associe
                 pieces = etageaC.getPieceEtage();
                 j=0;
-                for(Piece pieceaC : pieces){
+                for(Piece pieceaC : pieces){//affiche pieces dans etages
                     j++;
                     root_etage.getChildren().add(new TreeItem<>("Piece " + j));
                 }
                 root_Menu.getChildren().add(root_etage);
+                
                 k++;
             }
         }
