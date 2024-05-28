@@ -483,10 +483,10 @@ public class App extends Application {
 
         
         if (type == 0 ){
-            HBox bBar = new HBox(20, bCPoint, bCMur, bCPiece , bCLogement , bCEtage);
+            HBox bBar = new HBox(20, bCPoint, bCMur, bCPiece , bCLogement , bCEtage, bCRevetement);
             mainPane.setBottom(bBar);
         }else{
-            HBox bBar = new HBox(20,bCPoint, bCMur, bCPiece , bCEtage );
+            HBox bBar = new HBox(20,bCPoint, bCMur, bCPiece , bCEtage, bCRevetement);
             mainPane.setBottom(bBar);
         }
         bCPiece.setOnAction((new EventHandler<ActionEvent>(){
@@ -1027,8 +1027,283 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                         treeView =updateTreeView();
                         mainPane.setLeft(treeView);
                     }
+                //cas immeuble
                 }else if (type == 0){
+                    Revetement revetement=new Revetement(nbrevetement);
+                    String[] choicesA = new String[nbrEtage];
+                    int h = 0;
+                    for(EtageI etage : liste_EtageI){
+                        String choice2 = "Etage " + h;
+                        choicesA[h] = choice2;
+                        h ++;
+                    }
+                    //String[] choicesA = (String[]) choices.toArray();
+                    ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                    cDial.setTitle("Selection de l'étage");
+                    cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter une piece.");
+                    cDial.setContentText("Choix :");
                     
+                    Optional<String> selection = cDial.showAndWait();
+                    System.out.println(10);
+                    if(selection.isPresent()){
+                        String selectionStr = selection.orElse("0");
+                        int length = selectionStr.length();
+                        //int length_min = length - 6;
+                        String c = Character.toString(selectionStr.charAt(6));
+                        for(int i= 7 ; i<length ; i++){
+                            c = c + selectionStr.charAt(i);
+                        }
+                        Scanner lineScanner = new Scanner(c);
+                        int etagenum = lineScanner.nextInt();
+                        System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                        etagei = liste_EtageI.get(etagenum);
+                    }
+                    //mettre si OK est cliquer
+                    String[] choicesB = new String[3];
+                    choicesB[0] = "Mur";
+                    choicesB[1] = "Sol";
+                    choicesB[2] = "Plafond";
+
+                    ChoiceDialog<String> cDial1 = new ChoiceDialog<>(choicesB[2],choicesB);
+                    cDial.setTitle("Selection de la surface");
+                    cDial.setHeaderText("Veuillez selectionner la surface sur laquelle vous voulez ajouter un revetement.");
+                    cDial.setContentText("Choix :");
+                    Optional<String> selection1 = cDial1.showAndWait();
+                    System.out.println(46);
+                    cDial.close();
+                    if(selection1.isPresent()){
+                        String rep = selection1.orElse("0");//convertit en String
+                        
+                        //Revetement sur mur
+                        if (rep.equals("Mur")){
+                            //choix mur
+                              List<Mur> liste_Mur=etagei.getMurEtage();
+                                String[] choicesC = new String[liste_Mur.size()];
+                                h = 0;
+                                for(Mur mur : liste_Mur){
+                                    String choice2 = "Mur " + h+mur.toString();
+                                    choicesC[h] = choice2;
+                                    h ++;
+                                }
+                                ChoiceDialog<String> cDial2 = new ChoiceDialog<>(choicesC[h-1],choicesC);
+                                cDial.setTitle("Selection du mur");
+                                cDial.setHeaderText("Veuillez selectionner le mur auquel vous voulez ajouter un revetement.");
+                                cDial.setContentText("Choix :");
+
+                                Optional<String> selection2 = cDial2.showAndWait();
+                                Mur murMod=new Mur();
+                                if(selection2.isPresent()){
+                                    String selectionStr = selection2.orElse("0");
+                                    int length = selectionStr.length();
+                                    //int length_min = length - 6;
+                                    String c = Character.toString(selectionStr.charAt(6));
+                                    for(int i= 7 ; i<length ; i++){
+                                        c = c + selectionStr.charAt(i);
+                                    }
+                                    Scanner lineScanner = new Scanner(c);
+                                    int murnum = lineScanner.nextInt();
+                                    System.out.println(murnum + " " + selection2 + " "+ selectionStr);
+                                    murMod = liste_Mur.get(murnum);
+                                }
+                                
+                                
+                            //choix revetement 1
+                                String[] choicesD={"Peinture 1", "Carrelage 1","Lambris 1","Marbre","Crepi","Papier peint","Plaquettes de parement","Peinture 2","Peinture 3","Carrelage 2","Lambris 2","Liege 1","Parquet","Vinyle Lino","Moquette", "Stratifie", "Gazon","Liege 2","Carrelage 3"};
+                                ChoiceDialog<String> cDial11 = new ChoiceDialog<>(choicesB[2],choicesB);
+                                cDial.setTitle("Selection du revetement (deuxieme cote)");
+                                cDial.setHeaderText("Veuillez selectionner le revetement.");
+                                cDial.setContentText("Choix :");
+                                Optional<String> selection3 = cDial11.showAndWait();
+                                cDial.close();
+                                if(selection3.isPresent()){
+                                    String selectionStr = selection.orElse("0");//convertit en String
+                                    //boucle pour utiliser la methode Parametre de la classe revetement
+                                    int n=0, k=0;
+                                    for (String revet : choicesD ){
+                                        if (revet.equals(selectionStr)){
+                                            n=k;
+                                        }
+                                        k++;
+                                    }
+                                    revetement.Parametres(n);
+                                    }
+                                revetement.setSurface(murMod.getSurface());
+                                liste_Revetement.add(revetement);
+                                //choix revetement 2
+                                ChoiceDialog<String> cDial111 = new ChoiceDialog<>(choicesB[2],choicesB);
+                                cDial.setTitle("Selection du revetement (deuxieme cote)");
+                                cDial.setHeaderText("Veuillez selectionner le revetement.");
+                                cDial.setContentText("Choix :");
+                                Optional<String> selection4 = cDial111.showAndWait();
+                                cDial.close();
+                                if(selection4.isPresent()){
+                                    String selectionStr = selection.orElse("0");//convertit en String
+                                        revetement.Parametres(type);
+                                    }
+                                revetement.setSurface(murMod.getSurface());
+                                liste_Revetement.add(revetement);
+                        //Revetement sol 
+                        }else if (rep.equals("Sol")){
+                            //choix logement
+                            List<Logement> liste_Logement = etagei.getAppartementEtage();//cherche dans logements de l'etage
+                            String[] choicesC = new String[liste_Logement.size()];
+                                h = 0;
+                                for(Logement logement : liste_Logement){
+                                    String choice2 = "Logement " + h+logement.toString();
+                                    choicesC[h] = choice2;
+                                    h ++;
+                                }
+                                ChoiceDialog<String> cDial2 = new ChoiceDialog<>(choicesC[h-1],choicesC);
+                                cDial.setTitle("Selection du logement");
+                                cDial.setHeaderText("Veuillez selectionner le logement dans lequel vous voulez ajouter un revetement.");
+                                cDial.setContentText("Choix :");
+
+                                Optional<String> selection2 = cDial2.showAndWait();
+                                Piece pieceMod= new Piece();
+                                if(selection2.isPresent()){
+                                    String selectionStr = selection2.orElse("0");
+                                    int length = selectionStr.length();
+                                    String c = Character.toString(selectionStr.charAt(6));
+                                    for(int i= 7 ; i<length ; i++){
+                                        c = c + selectionStr.charAt(i);
+                                    }
+                                    Scanner lineScanner = new Scanner(c);
+                                    int logementnum = lineScanner.nextInt();
+                                    System.out.println(logementnum + " " + selection2 + " "+ selectionStr);
+                                    Logement logementMod = liste_Logement.get(logementnum);
+                                
+                                    List<Piece> liste_Piece = logementMod.getAppartement();
+                                    String[] choicesD = new String[liste_Piece.size()];
+                                    h = 0;
+                                    for(Piece piece : liste_Piece){
+                                        String choice2 = "Piece " + h+piece.toString();
+                                        choicesD[h] = choice2;
+                                        h ++;
+                                    }
+                                    ChoiceDialog<String> cDial3 = new ChoiceDialog<>(choicesC[h-1],choicesC);
+                                    cDial.setTitle("Selection de la piece");
+                                    cDial.setHeaderText("Veuillez selectionner la piece a laquelle vous voulez ajouter un revetement.");
+                                    cDial.setContentText("Choix :");
+
+                                    Optional<String> selection3 = cDial3.showAndWait();
+                                    pieceMod= new Piece();
+                                    if(selection2.isPresent()){
+                                        String selectionStr2 = selection3.orElse("0");
+                                        length = selectionStr2.length();
+                                        c = Character.toString(selectionStr2.charAt(6));
+                                        for(int i= 7 ; i<length ; i++){
+                                            c = c + selectionStr2.charAt(i);
+                                        }
+                                        Scanner lineScanner1 = new Scanner(c);
+                                        int piecenum = lineScanner1.nextInt();
+                                        System.out.println(piecenum + " " + selection2 + " "+ selectionStr2);
+                                        pieceMod = liste_Piece.get(piecenum);
+                                }}
+                                
+                                //choix revetement
+                                String[] choicesD={"Peinture 1", "Carrelage 1","Lambris 1","Marbre","Crepi","Papier peint","Plaquettes de parement","Peinture 2","Peinture 3","Carrelage 2","Lambris 2","Liege 1","Parquet","Vinyle Lino","Moquette", "Stratifie", "Gazon","Liege 2","Carrelage 3"};
+                                ChoiceDialog<String> cDial11 = new ChoiceDialog<>(choicesB[2],choicesB);
+                                cDial.setTitle("Selection du revetement (deuxieme cote)");
+                                cDial.setHeaderText("Veuillez selectionner le revetement.");
+                                cDial.setContentText("Choix :");
+                                Optional<String> selection3 = cDial11.showAndWait();
+                                cDial.close();
+                                if(selection3.isPresent()){
+                                    String selectionStr = selection.orElse("0");//convertit en String
+                                    //boucle pour utiliser la methode Parametre de la classe revetement
+                                    int n, k=0;
+                                    for (String revet : choicesD ){
+                                        if (revet.equals(selectionStr)){
+                                            n=k;
+                                        }
+                                        k++;
+                                    }
+                                    revetement.Parametres(n);
+                                }
+                                revetement.setSurface(pieceMod.Surface());
+                                liste_Revetement.add(revetement);
+                            
+                        }else {//plafond
+                            //choix logement
+                            List<Logement> liste_Logement = etagei.getAppartementEtage();//cherche dans logements de l'etage
+                            String[] choicesC = new String[liste_Logement.size()];
+                                h = 0;
+                                for(Logement logement : liste_Logement){
+                                    String choice2 = "Logement " + h+logement.toString();
+                                    choicesC[h] = choice2;
+                                    h ++;
+                                }
+                                ChoiceDialog<String> cDial2 = new ChoiceDialog<>(choicesC[h-1],choicesC);
+                                cDial.setTitle("Selection du logement");
+                                cDial.setHeaderText("Veuillez selectionner le logement dans lequel vous voulez ajouter un revetement.");
+                                cDial.setContentText("Choix :");
+
+                                Optional<String> selection2 = cDial2.showAndWait();
+                                Piece pieceMod= new Piece();
+                                if(selection2.isPresent()){
+                                    String selectionStr = selection2.orElse("0");
+                                    int length = selectionStr.length();
+                                    String c = Character.toString(selectionStr.charAt(6));
+                                    for(int i= 7 ; i<length ; i++){
+                                        c = c + selectionStr.charAt(i);
+                                    }
+                                    Scanner lineScanner = new Scanner(c);
+                                    int logementnum = lineScanner.nextInt();
+                                    System.out.println(logementnum + " " + selection2 + " "+ selectionStr);
+                                    Logement logementMod = liste_Logement.get(logementnum);
+                                
+                                    List<Piece> liste_Piece = logementMod.getAppartement();
+                                    String[] choicesD = new String[liste_Piece.size()];
+                                    h = 0;
+                                    for(Piece piece : liste_Piece){
+                                        String choice2 = "Piece " + h+piece.toString();
+                                        choicesD[h] = choice2;
+                                        h ++;
+                                    }
+                                    ChoiceDialog<String> cDial3 = new ChoiceDialog<>(choicesC[h-1],choicesC);
+                                    cDial.setTitle("Selection de la piece");
+                                    cDial.setHeaderText("Veuillez selectionner la piece a laquelle vous voulez ajouter un revetement.");
+                                    cDial.setContentText("Choix :");
+
+                                    Optional<String> selection3 = cDial3.showAndWait();
+                                    pieceMod= new Piece();
+                                    if(selection2.isPresent()){
+                                        String selectionStr2 = selection3.orElse("0");
+                                        length = selectionStr2.length();
+                                        c = Character.toString(selectionStr2.charAt(6));
+                                        for(int i= 7 ; i<length ; i++){
+                                            c = c + selectionStr2.charAt(i);
+                                        }
+                                        Scanner lineScanner1 = new Scanner(c);
+                                        int piecenum = lineScanner1.nextInt();
+                                        System.out.println(piecenum + " " + selection2 + " "+ selectionStr2);
+                                        pieceMod = liste_Piece.get(piecenum);
+                                }}
+                                
+                                //choix revetement
+                                String[] choicesD={"Peinture 1", "Carrelage 1","Lambris 1","Marbre","Crepi","Papier peint","Plaquettes de parement","Peinture 2","Peinture 3","Carrelage 2","Lambris 2","Liege 1","Parquet","Vinyle Lino","Moquette", "Stratifie", "Gazon","Liege 2","Carrelage 3"};
+                                ChoiceDialog<String> cDial11 = new ChoiceDialog<>(choicesB[2],choicesB);
+                                cDial.setTitle("Selection du revetement (deuxieme cote)");
+                                cDial.setHeaderText("Veuillez selectionner le revetement.");
+                                cDial.setContentText("Choix :");
+                                Optional<String> selection3 = cDial11.showAndWait();
+                                cDial.close();
+                                if(selection3.isPresent()){
+                                    String selectionStr = selection.orElse("0");//convertit en String
+                                    //boucle pour utiliser la methode Parametre de la classe revetement
+                                    int n, k=0;
+                                    for (String revet : choicesD ){
+                                        if (revet.equals(selectionStr)){
+                                            n=k;
+                                        }
+                                        k++;
+                                    }
+                                    revetement.Parametres(n);
+                                }
+                                revetement.setSurface(pieceMod.Surface());
+                                liste_Revetement.add(revetement);
+                        }
+                    }
                 } else {
                     Revetement revetement=new Revetement(nbrevetement);
                     //ArrayList<String> choices = new ArrayList();
@@ -1076,6 +1351,7 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                     cDial.close();
                     if(selection1.isPresent()){
                         String rep = selection1.orElse("0");//convertit en String
+                        //Revetement sur mur
                         if (rep.equals("Mur")){
                             //choix mur
                               List<Mur> liste_Mur=etagem.getMurEtage();
@@ -1111,15 +1387,23 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 //choix revetement 1
                                 String[] choicesD={"Peinture 1", "Carrelage 1","Lambris 1","Marbre","Crepi","Papier peint","Plaquettes de parement","Peinture 2","Peinture 3","Carrelage 2","Lambris 2","Liege 1","Parquet","Vinyle Lino","Moquette", "Stratifie", "Gazon","Liege 2","Carrelage 3"};
                                 ChoiceDialog<String> cDial11 = new ChoiceDialog<>(choicesB[2],choicesB);
-                                cDial.setTitle("Selection du revetement (premier cote)");
+                                cDial.setTitle("Selection du revetement (deuxieme cote)");
                                 cDial.setHeaderText("Veuillez selectionner le revetement.");
                                 cDial.setContentText("Choix :");
                                 Optional<String> selection3 = cDial11.showAndWait();
                                 cDial.close();
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
-                                        revetement.Parametres(type);
-                                    }while(revetement.isPourMur()==false);
+                                    //boucle pour utiliser la methode Parametre de la classe revetement
+                                    int n, k=0;
+                                    for (String revet : choicesD ){
+                                        if (revet.equals(selectionStr)){
+                                            n=k;
+                                        }
+                                        k++;
+                                    }
+                                    revetement.Parametres(n);
+                                }
                                 revetement.setSurface(murMod.getSurface());
                                 liste_Revetement.add(revetement);
                                 //choix revetement 2
@@ -1131,15 +1415,124 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 cDial.close();
                                 if(selection4.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
-                                        revetement.Parametres(type);
-                                    }while(revetement.isPourMur()==false);
+                                    //boucle pour utiliser la methode Parametre de la classe revetement
+                                    int n, k=0;
+                                    for (String revet : choicesD ){
+                                        if (revet.equals(selectionStr)){
+                                            n=k;
+                                        }
+                                        k++;
+                                    }
+                                    revetement.Parametres(n);
+                                }
                                 revetement.setSurface(murMod.getSurface());
                                 liste_Revetement.add(revetement);
-                            
+                        //Revetement sol 
                         }else if (rep.equals("Sol")){
+                            //choix piece
+                            List<Piece> liste_Piece = etagem.getPieceEtage();
+                            String[] choicesC = new String[liste_Piece.size()];
+                                h = 0;
+                                for(Piece piece : liste_Piece){
+                                    String choice2 = "Piece " + h+piece.toString();
+                                    choicesC[h] = choice2;
+                                    h ++;
+                                }
+                                ChoiceDialog<String> cDial2 = new ChoiceDialog<>(choicesC[h-1],choicesC);
+                                cDial.setTitle("Selection de la piece");
+                                cDial.setHeaderText("Veuillez selectionner la piece a laquelle vous voulez ajouter un revetement.");
+                                cDial.setContentText("Choix :");
 
+                                Optional<String> selection2 = cDial2.showAndWait();
+                                Piece pieceMod= new Piece();
+                                if(selection2.isPresent()){
+                                    String selectionStr = selection2.orElse("0");
+                                    int length = selectionStr.length();
+                                    String c = Character.toString(selectionStr.charAt(6));
+                                    for(int i= 7 ; i<length ; i++){
+                                        c = c + selectionStr.charAt(i);
+                                    }
+                                    Scanner lineScanner = new Scanner(c);
+                                    int piecenum = lineScanner.nextInt();
+                                    System.out.println(piecenum + " " + selection2 + " "+ selectionStr);
+                                    pieceMod = liste_Piece.get(piecenum);
+                                }
+                                
+                                //choix revetement
+                                String[] choicesD={"Peinture 1", "Carrelage 1","Lambris 1","Marbre","Crepi","Papier peint","Plaquettes de parement","Peinture 2","Peinture 3","Carrelage 2","Lambris 2","Liege 1","Parquet","Vinyle Lino","Moquette", "Stratifie", "Gazon","Liege 2","Carrelage 3"};
+                                ChoiceDialog<String> cDial11 = new ChoiceDialog<>(choicesB[2],choicesB);
+                                cDial.setTitle("Selection du revetement (deuxieme cote)");
+                                cDial.setHeaderText("Veuillez selectionner le revetement.");
+                                cDial.setContentText("Choix :");
+                                Optional<String> selection3 = cDial11.showAndWait();
+                                cDial.close();
+                                if(selection3.isPresent()){
+                                    String selectionStr = selection.orElse("0");//convertit en String
+                                    //boucle pour utiliser la methode Parametre de la classe revetement
+                                    int n=0, k=0;
+                                    for (String revet : choicesD ){
+                                        if (revet.equals(selectionStr)){
+                                            n=k;
+                                        }
+                                        k++;
+                                    }
+                                    revetement.Parametres(n);
+                                }
+                                revetement.setSurface(pieceMod.Surface());
+                                liste_Revetement.add(revetement);
+                            
                         }else {//plafond
+                            //choix piece
+                            List<Piece> liste_Piece = etagem.getPieceEtage();
+                            String[] choicesC = new String[liste_Piece.size()];
+                                h = 0;
+                                for(Piece piece : liste_Piece){
+                                    String choice2 = "Piece " + h+piece.toString();
+                                    choicesC[h] = choice2;
+                                    h ++;
+                                }
+                                ChoiceDialog<String> cDial2 = new ChoiceDialog<>(choicesC[h-1],choicesC);
+                                cDial.setTitle("Selection de la piece");
+                                cDial.setHeaderText("Veuillez selectionner la piece a laquelle vous voulez ajouter un revetement.");
+                                cDial.setContentText("Choix :");
 
+                                Optional<String> selection2 = cDial2.showAndWait();
+                                Piece pieceMod= new Piece();
+                                if(selection2.isPresent()){
+                                    String selectionStr = selection2.orElse("0");
+                                    int length = selectionStr.length();
+                                    String c = Character.toString(selectionStr.charAt(6));
+                                    for(int i= 7 ; i<length ; i++){
+                                        c = c + selectionStr.charAt(i);
+                                    }
+                                    Scanner lineScanner = new Scanner(c);
+                                    int piecenum = lineScanner.nextInt();
+                                    System.out.println(piecenum + " " + selection2 + " "+ selectionStr);
+                                    pieceMod = liste_Piece.get(piecenum);
+                                }
+                                
+                                //choix revetement
+                                String[] choicesD={"Peinture 1", "Carrelage 1","Lambris 1","Marbre","Crepi","Papier peint","Plaquettes de parement","Peinture 2","Peinture 3","Carrelage 2","Lambris 2","Liege 1","Parquet","Vinyle Lino","Moquette", "Stratifie", "Gazon","Liege 2","Carrelage 3"};
+                                ChoiceDialog<String> cDial11 = new ChoiceDialog<>(choicesB[2],choicesB);
+                                cDial.setTitle("Selection du revetement (deuxieme cote)");
+                                cDial.setHeaderText("Veuillez selectionner le revetement.");
+                                cDial.setContentText("Choix :");
+                                Optional<String> selection3 = cDial11.showAndWait();
+                                cDial.close();
+                                if(selection3.isPresent()){
+                                    String selectionStr = selection.orElse("0");//convertit en String
+                                    //boucle pour utiliser la methode Parametre de la classe revetement
+                                    int n, k=0;
+                                    for (String revet : choicesD ){
+                                        if (revet.equals(selectionStr)){
+                                            n=k;
+                                        }
+                                        k++;
+                                    }
+                                    revetement.Parametres(n);
+                                }
+                                revetement.setSurface(pieceMod.Surface());
+                                liste_Revetement.add(revetement);
                         }
                     }
 
@@ -1201,9 +1594,11 @@ String[] choicesE = new String[etagei.getNbrdappart()];
         int k; int i;int j;
         List<Logement> logement;
         List<Piece> pieces;
+        List<Canvas> list_Canvas ;
 
         TreeItem<String> root_Menu = new TreeItem<>("MENU");
         root_Menu.setExpanded(true);
+        //cas immeuble
         if(type == 0){
             liste_EtageI = immeuble.getBatiment();
             k =0;
@@ -1227,6 +1622,7 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                     root_Menu.getChildren().add(root_etage);
                     k++;
             } 
+        //cas maison
         }else {
             liste_EtageM = maison.getBatiment();
             k=0;

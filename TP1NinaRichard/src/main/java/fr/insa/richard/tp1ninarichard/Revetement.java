@@ -124,7 +124,7 @@ public class Revetement {
     
    //instancie les parametre en fonction de la ligne dans le catalogue revetement 
     public void Parametres(int Type){
-       
+    
     String lignelue="";
     int test=0;
     try{
