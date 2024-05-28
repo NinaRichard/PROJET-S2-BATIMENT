@@ -699,8 +699,42 @@ String[] choicesE = new String[etagei.getNbrdappart()];
                                 int result = JOptionPane.showConfirmDialog(fenetrePiece,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     System.out.println("User chose OK");
-                                }
-                                else {
+                                    JDialog choixM = new JDialog();
+                                   if (getMur1().equals("Existant")){
+                                    JPanel panChoixM1 = new JPanel();
+                                    panChoixM1.setPreferredSize(new Dimension(200,60));
+                                    panChoixM1.setBorder(BorderFactory.createTitledBorder("Choix Mur 1"));
+                                    JComboBox cbChoixM1 = new JComboBox();
+                                    for(Mur mur : etagei.getMurEtage()){
+                                       cbChoixM1.addItem(mur.toString()); 
+                                    }
+                                    panChoixM1.add(cbChoixM1);
+                                    choixM.getContentPane().setLayout(new BorderLayout());
+                                    choixM.getContentPane().add(panChoixM1,BorderLayout.CENTER);
+                                    } else{
+                                       JPanel panChoixM1 = new JPanel();
+                                       panChoixM1.setPreferredSize(new Dimension(200,60));
+                                       panChoixM1.setBorder(BorderFactory.createTitledBorder("Creation M1"));
+                                       JRadioButton rbM1C1Existant = new JRadioButton("Coin 1 Existant");
+                                       rbM1C1Existant.setSelected(true);
+                                       JRadioButton rbM1C1Acree = new JRadioButton("Coin 1 A créer");
+                                       ButtonGroup bg1 = new ButtonGroup();
+                                        bg1.add(rbM1C1Acree);
+                                        bg1.add(rbM1C1Existant);
+                                        JRadioButton rbM1C2Existant = new JRadioButton("Coin 1 Existant");
+                                       rbM1C2Existant.setSelected(true);
+                                       JRadioButton rbM1C2Acree = new JRadioButton("Coin 1 A créer");
+                                       ButtonGroup bg2 = new ButtonGroup();
+                                        bg2.add(rbM1C2Acree);
+                                        bg2.add(rbM1C2Existant);
+                                        panChoixM1.add(rbM1C1Acree);
+                                        panChoixM1.add(rbM1C1Existant);
+                                        panChoixM1.add(rbM1C2Acree);
+                                        panChoixM1.add(rbM1C2Existant);  
+                                   }
+                                   //if...
+                                   choixM.setVisible(true);
+                                }else {
                                 fenetrePiece.setVisible(true);
                                 }
                             }
