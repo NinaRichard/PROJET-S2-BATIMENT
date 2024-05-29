@@ -284,7 +284,7 @@ public class App extends Application {
                         System.out.println(ord);
                         System.out.println(ord1); 
                         Coin coin = new Coin(nbrCoin,abs1, ord1);
-                        etagem.ajouterCoin(coin);
+                        etagei.ajouterCoin(coin);
                         nbrCoin ++;
                         int i=0; 
                     }}
@@ -417,7 +417,8 @@ public class App extends Application {
                             }
                             fenetreMur.setVisible(false);
                             //pas assez de coins existants
-                            if (existant>=etagei.getCoinEtage().size()){
+                            System.out.println(existant + " " + etagei.getCoinEtage().size());
+                            if (existant>etagei.getCoinEtage().size()){
                                 int result = JOptionPane.showConfirmDialog(fenetreMur, "Vous n'avez pas assez de coins déjà existants", "Erreur dans la creation de la pièce", JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     fenetreMur.setVisible(true);
@@ -460,13 +461,13 @@ public class App extends Application {
                                     }
                                     if(getCoin2().equals("Existant")){
                                          int h = 0;
-                                    h ++;
+                                    String[] choicesZ = new String[etagei.getCoinEtage().size()];
                                     for(Coin coin : etagei.getCoinEtage()){
                                         String choice3 = coin.toString();
-                                        choicesA[h] = choice3;
+                                        choicesZ[h] = choice3;
                                         h ++;
                                     }
-                                    ChoiceDialog<String> cDial6 = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                                    ChoiceDialog<String> cDial6 = new ChoiceDialog<>(choicesZ[h-1],choicesZ);
                                     cDial6.setTitle("Selection du Coin 3");
                                     cDial6.setHeaderText("Veuillez selectionner le deuxième coin.");
                                     cDial6.setContentText("Choix :");
@@ -665,7 +666,7 @@ public class App extends Application {
                             }
                             fenetreMur.setVisible(false);
                             //pas assez de coins existants
-                            if (existant>=etagem.getCoinEtage().size()){
+                            if (existant>etagem.getCoinEtage().size()){
                                 int result = JOptionPane.showConfirmDialog(fenetreMur, "Vous n'avez pas assez de coins déjà existants", "Erreur dans la creation de la pièce", JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     fenetreMur.setVisible(true);
@@ -1221,7 +1222,7 @@ public class App extends Application {
                             System.out.println(0.4);
                             fenetrePiece.setVisible(false);
                             System.out.println(0.5);
-                            if (existant>=etagei.getMurEtage().size()){
+                            if (existant>etagei.getMurEtage().size()){
                                 System.out.println(0.6);
                                 int result = JOptionPane.showConfirmDialog(fenetrePiece, "Vous n'avez pas assez de murs déja existants", "Erreur dans la creation ce la pièce", JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
@@ -1838,7 +1839,7 @@ public String getM4C2(){
                                 existant ++;
                             }
                             fenetrePiece.setVisible(false);
-                            if (existant>=etagem.getMurEtage().size()){
+                            if (existant>etagem.getMurEtage().size()){
                                 int result = JOptionPane.showConfirmDialog(fenetrePiece, "Vous n'avez pas assez de murs déja existants", "Erreur dans la creation ce la pièce", JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     fenetrePiece.setVisible(true);
