@@ -33,6 +33,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import java.awt.BorderLayout;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.stage.Stage;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -272,7 +274,7 @@ public class App extends Application {
                     
                     dialogC.setTitle("Erreur: Batiment sans Etage");
                     dialogC.setHeaderText(null);
-                    dialogC.setContentText("Attention, il est impossible de creer une piece dans un batiment sans étage , Veuillez en créer un avant en appuillant sur OK.");
+                    dialogC.setContentText("Attention, il est impossible de creer une piece dans un batiment sans étage , Veuillez en créer un avant en appuyant sur OK.");
                     Optional<ButtonType> answer = dialogC.showAndWait();
                     
                     if(answer.get()== ButtonType.OK){
@@ -851,7 +853,7 @@ public class App extends Application {
                     
                     dialogC.setTitle("Erreur: Batiment sans Etage");
                     dialogC.setHeaderText(null);
-                    dialogC.setContentText("Attention, il est impossible de creer un logement dans un batiment sans étage , Veuillez en créer un avant en appuillant sur OK.");
+                    dialogC.setContentText("Attention, il est impossible de creer un logement dans un batiment sans étage , Veuillez en créer un avant en appuyant sur OK.");
                     Optional<ButtonType> answer = dialogC.showAndWait();
                     
                     if(answer.get()== ButtonType.OK){
@@ -923,7 +925,7 @@ public class App extends Application {
                     
                     dialogC.setTitle("Erreur: Batiment sans Etage");
                     dialogC.setHeaderText(null);
-                    dialogC.setContentText("Attention, il est impossible de creer une piece dans un batiment sans étage , Veuillez en créer un avant en appuillant sur OK.");
+                    dialogC.setContentText("Attention, il est impossible de creer une piece dans un batiment sans étage , Veuillez en créer un avant en appuyant sur OK.");
                     Optional<ButtonType> answer = dialogC.showAndWait();
                     
                     if(answer.get()== ButtonType.OK){
@@ -1509,7 +1511,7 @@ public class App extends Application {
                     
                     dialogC.setTitle("Erreur: Batiment sans Etage");
                     dialogC.setHeaderText(null);
-                    dialogC.setContentText("Attention, il est impossible d'ajouter un revetement dans un batiment sans étage , Veuillez en créer un avant en appuillant sur OK.");
+                    dialogC.setContentText("Attention, il est impossible d'ajouter un revetement dans un batiment sans étage , Veuillez en créer un avant en appuyant sur OK.");
                     Optional<ButtonType> answer = dialogC.showAndWait();
                     
                     if(answer.get()== ButtonType.OK){
@@ -2132,13 +2134,19 @@ public class App extends Application {
         mainPane.setCenter(canvasContainer);
         // Bind the canvas size to the container size
         canvas=redraw();
-        canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
-             //canvas.setWidth(newVal.doubleValue());
-         });
+        canvasContainer.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> obs, Number oldVal, Number newVal) {
+                //canvas.setWidth(newVal.doubleValue());
+            }
+        })
+                
+                ;
          canvas=redraw();
          canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
-             //canvas.setHeight(newVal.doubleValue());
+         //canvas.setHeight(newVal.doubleValue());
             // redraw(canvas);
+            mainPane.setCenter(canvasContainer);
          });
          
         //menu avec revetements sur la droite
