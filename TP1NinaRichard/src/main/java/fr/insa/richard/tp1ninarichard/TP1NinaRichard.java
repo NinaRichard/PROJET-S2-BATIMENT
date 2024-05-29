@@ -840,6 +840,13 @@ public class TP1NinaRichard {
     }
 
     public static void main(String[] args) {
+        
+        Revetement revet=new Revetement(1);
+        revet.Parametres(5);
+        System.out.println("lecture fichier reussie");
+        
+        
+        
         /*
          // Définition du chemin du fichier de sortie
         String filePath = "batiment.txt";

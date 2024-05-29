@@ -122,27 +122,35 @@ public class Revetement {
     }
     
     
-   //instancie les parametre en fonction de la ligne dans le catalogue revetement 
+   //instancie les parametres en fonction de la ligne dans le catalogue revetement 
     public void Parametres(int Type){
     
     String lignelue="";
     int test=0;
     try{
-        BufferedReader flux=new BufferedReader(new FileReader("CatalogueRevetements.txt"));
+        File file = new File("C://Users/mmarescaux01/Desktop/CatalogueRevetements.txt");
+        BufferedReader flux=new BufferedReader(new FileReader(file));
         while (test<=Type){
             lignelue=flux.readLine();
             test=test+1;
         }
         System.out.println(lignelue);
+        lignelue=lignelue;
+        System.out.println(lignelue);
         Scanner lineScanner=new Scanner( lignelue);
         lineScanner.useDelimiter(";");
         int pourmur, poursol, pourplafond;
         this.idRevetement=lineScanner.nextInt();
+        System.out.println(this.idRevetement);
         this.revetement=lineScanner.next();
         pourmur=lineScanner.nextInt();
+        System.out.println(pourmur);
         poursol=lineScanner.nextInt();
+        System.out.println(poursol);
         pourplafond=lineScanner.nextInt();
-        this.prixUnitaire=lineScanner.nextDouble();
+        System.out.println(pourplafond);
+        String str=lineScanner.next();
+        this.prixUnitaire=Double.parseDouble(str);
         
         if (pourmur==1){
             this.pourMur=true;
