@@ -111,86 +111,153 @@ public class App extends Application {
         //reaction bouton Creer un point
         Button bCPoint = new Button("Créer un Point");
         bCPoint.setOnAction((t) -> {
-            //ArrayList<String> choices = new ArrayList();
-            String[] choicesA = new String[nbrEtage];
-            System.out.println(2);
-            int h = 0;
-            for(EtageM etage : liste_EtageM){
-                String choice1 = "Etage " + h;
-                choicesA[h] = choice1;
-                h ++;
-            }
-            //String[] choicesA = (String[]) choices.toArray();
-            ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
-            cDial.setTitle("Selection de l'étage");
-            cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter un point.");
-            cDial.setContentText("Choix :");
-            Optional<String> selection = cDial.showAndWait();
-            System.out.println(46);
-            cDial.close();
-            if(selection.isPresent()){
-                System.out.println(47);
-                String selectionStr = selection.orElse("0");
-                int length = selectionStr.length();
-                //int length_min = length - 6;
-                String c = Character.toString(selectionStr.charAt(6));
-                System.out.println(48);
-                for(int i= 7 ; i<length ; i++){
-                    c = c + selectionStr.charAt(i);
+            if (type==1){
+                String[] choicesA = new String[nbrEtage];
+                System.out.println(2);
+                int h = 0;
+                for(EtageM etage : liste_EtageM){
+                    String choice1 = "Etage " + h;
+                    choicesA[h] = choice1;
+                    h ++;
                 }
-                Scanner lineScanner = new Scanner(c);
-                int etagenum = lineScanner.nextInt();
-                System.out.println(etagenum + " " + selection + " "+ selectionStr);
-                //etagem = liste_EtageM.get(etagenum);
-                System.out.println(49);
-             
-            //boite de dialogue choix abscisse
-            TextInputDialog inDialog1 = new TextInputDialog("0,0");
-            inDialog1.setTitle("Création d'un Coin");
-            inDialog1.setHeaderText("Création d'un Coin");
-            String contentText = "Abscisse du coin : " + nbrEtage ;
-            inDialog1.setContentText(contentText);
-            
-            Optional<String> abscisse = inDialog1.showAndWait();
-            if (abscisse.isPresent()){
-                String abs = abscisse.orElse("2,20");
-                lineScanner = new Scanner(abs);
-                double abs1 = lineScanner.nextDouble();
-                System.out.println(abs);
-                System.out.println(abs1);  
-                
-                //boite de dialogue choix ordonnee
-                TextInputDialog inDialog2 = new TextInputDialog("0,0");
-                inDialog2.setTitle("Création d'un Coin");
-                inDialog2.setHeaderText("Création d'un Coin");
-                contentText = "Ordonnee du coin : " + nbrEtage ;
-                inDialog2.setContentText(contentText);
-                Optional<String> ordonnee = inDialog2.showAndWait();
-                if (ordonnee.isPresent()){
-                    String ord = ordonnee.orElse("2,20");
-                    Scanner lineScanner1 = new Scanner(ord);
-                    double ord1 = lineScanner1.nextDouble();
-                    System.out.println(ord);
-                    System.out.println(ord1); 
-                    Coin coin = new Coin(nbrCoin,abs1, ord1);
-                    nbrCoin ++;
-                    int i=0;
-                    if (type == 0){
-                        for (EtageI etage : liste_EtageI){
-                            if (etagenum==etage.getId()){
-                               etage.ajouterCoin(coin);
-                            }
-                            i++;
-                        }
-                    }else{
-                        for (EtageM etage : liste_EtageM){
-                            if (etagenum==etage.getId()){
-                               etage.ajouterCoin(coin);
-                            }
-                            i++;
-                        }
+                //String[] choicesA = (String[]) choices.toArray();
+                ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                cDial.setTitle("Selection de l'étage");
+                cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter un point.");
+                cDial.setContentText("Choix :");
+                Optional<String> selection = cDial.showAndWait();
+                System.out.println(46);
+                cDial.close();
+                if(selection.isPresent()){
+                    System.out.println(47);
+                    String selectionStr = selection.orElse("0");
+                    int length = selectionStr.length();
+                    //int length_min = length - 6;
+                    String c = Character.toString(selectionStr.charAt(6));
+                    System.out.println(48);
+                    for(int i= 7 ; i<length ; i++){
+                        c = c + selectionStr.charAt(i);
                     }
-                }}
+                    Scanner lineScanner = new Scanner(c);
+                    int etagenum = lineScanner.nextInt();
+                    System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                    //etagem = liste_EtageM.get(etagenum);
+                    System.out.println(49);
+
+                //boite de dialogue choix abscisse
+                TextInputDialog inDialog1 = new TextInputDialog("0,0");
+                inDialog1.setTitle("Création d'un Coin");
+                inDialog1.setHeaderText("Création d'un Coin");
+                String contentText = "Abscisse du coin : " + nbrEtage ;
+                inDialog1.setContentText(contentText);
+
+                Optional<String> abscisse = inDialog1.showAndWait();
+                if (abscisse.isPresent()){
+                    String abs = abscisse.orElse("2,20");
+                    lineScanner = new Scanner(abs);
+                    double abs1 = lineScanner.nextDouble();
+                    System.out.println(abs);
+                    System.out.println(abs1);  
+
+                    //boite de dialogue choix ordonnee
+                    TextInputDialog inDialog2 = new TextInputDialog("0,0");
+                    inDialog2.setTitle("Création d'un Coin");
+                    inDialog2.setHeaderText("Création d'un Coin");
+                    contentText = "Ordonnee du coin : " + nbrEtage ;
+                    inDialog2.setContentText(contentText);
+                    Optional<String> ordonnee = inDialog2.showAndWait();
+                    if (ordonnee.isPresent()){
+                        String ord = ordonnee.orElse("2,20");
+                        Scanner lineScanner1 = new Scanner(ord);
+                        double ord1 = lineScanner1.nextDouble();
+                        System.out.println(ord);
+                        System.out.println(ord1); 
+                        Coin coin = new Coin(nbrCoin,abs1, ord1);
+                        nbrCoin ++;
+                        int i=0;
+                        
+                            for (EtageM etage : liste_EtageM){
+                                if (etagenum==etage.getId()){
+                                   etage.ajouterCoin(coin);
+                                }
+                                i++;
+                            }
+                        
+                    }}
+                }
+            //cas immeuble
+            }else{
+                String[] choicesA = new String[nbrEtage];
+                System.out.println(2);
+                int h = 0;
+                for(EtageI etage : liste_EtageI){
+                    String choice1 = "Etage " + h;
+                    choicesA[h] = choice1;
+                    h ++;
+                }
+                //String[] choicesA = (String[]) choices.toArray();
+                ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                cDial.setTitle("Selection de l'étage");
+                cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter un point.");
+                cDial.setContentText("Choix :");
+                Optional<String> selection = cDial.showAndWait();
+                System.out.println(46);
+                cDial.close();
+                if(selection.isPresent()){
+                    System.out.println(47);
+                    String selectionStr = selection.orElse("0");
+                    int length = selectionStr.length();
+                    //int length_min = length - 6;
+                    String c = Character.toString(selectionStr.charAt(6));
+                    System.out.println(48);
+                    for(int i= 7 ; i<length ; i++){
+                        c = c + selectionStr.charAt(i);
+                    }
+                    Scanner lineScanner = new Scanner(c);
+                    int etagenum = lineScanner.nextInt();
+                    System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                    etagei = liste_EtageI.get(etagenum);
+                    System.out.println(49);
+
+                //boite de dialogue choix abscisse
+                TextInputDialog inDialog1 = new TextInputDialog("0,0");
+                inDialog1.setTitle("Création d'un Coin");
+                inDialog1.setHeaderText("Création d'un Coin");
+                String contentText = "Abscisse du coin : " + nbrEtage ;
+                inDialog1.setContentText(contentText);
+
+                Optional<String> abscisse = inDialog1.showAndWait();
+                if (abscisse.isPresent()){
+                    String abs = abscisse.orElse("2,20");
+                    lineScanner = new Scanner(abs);
+                    double abs1 = lineScanner.nextDouble();
+                    System.out.println(abs);
+                    System.out.println(abs1);  
+
+                    //boite de dialogue choix ordonnee
+                    TextInputDialog inDialog2 = new TextInputDialog("0,0");
+                    inDialog2.setTitle("Création d'un Coin");
+                    inDialog2.setHeaderText("Création d'un Coin");
+                    contentText = "Ordonnee du coin : " + nbrEtage ;
+                    inDialog2.setContentText(contentText);
+                    Optional<String> ordonnee = inDialog2.showAndWait();
+                    if (ordonnee.isPresent()){
+                        String ord = ordonnee.orElse("2,20");
+                        Scanner lineScanner1 = new Scanner(ord);
+                        double ord1 = lineScanner1.nextDouble();
+                        System.out.println(ord);
+                        System.out.println(ord1); 
+                        Coin coin = new Coin(nbrCoin,abs1, ord1);
+                        nbrCoin ++;
+                        int i=0;
+                            for (EtageI etage : liste_EtageI){
+                                if (etagenum==etage.getId()){
+                                   etage.ajouterCoin(coin);
+                                }
+                                i++;
+                            }
+                    }}
+                }
             }
             treeView =updateTreeView();
             mainPane.setLeft(treeView);
@@ -2065,11 +2132,11 @@ public class App extends Application {
         mainPane.setCenter(canvasContainer);
         // Bind the canvas size to the container size
         canvas=redraw();
-         canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
+        canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
              //canvas.setWidth(newVal.doubleValue());
          });
-         canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
          canvas=redraw();
+         canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
              //canvas.setHeight(newVal.doubleValue());
             // redraw(canvas);
          });
