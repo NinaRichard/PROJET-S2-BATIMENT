@@ -378,6 +378,7 @@ public class App extends Application {
         Button bCEtage = new Button("Créer un étage");
         Button bCRevetement = new Button("Ajouter un Revetement");
         Button bCMaj = new Button("Mettre a jour");
+        Button bCDevis = new Button("Générer le devis");
         
        
             treeView=updateTreeView();
@@ -505,10 +506,10 @@ public class App extends Application {
 
         
         if (type == 0 ){
-            HBox bBar = new HBox(20, bCPoint, bCMur, bCPiece , bCLogement , bCEtage, bCRevetement);
+            HBox bBar = new HBox(20, bCPoint, bCMur, bCPiece , bCLogement , bCEtage, bCRevetement, bCDevis);
             mainPane.setBottom(bBar);
         }else{
-            HBox bBar = new HBox(20,bCPoint, bCMur, bCPiece , bCEtage, bCRevetement);
+            HBox bBar = new HBox(20,bCPoint, bCMur, bCPiece , bCEtage, bCRevetement, bCDevis);
             mainPane.setBottom(bBar);
         }
         bCPiece.setOnAction((new EventHandler<ActionEvent>(){
@@ -1649,6 +1650,77 @@ public class App extends Application {
                 }
             
             
+        });
+        
+        bCDevis.setOnAction((t) -> {
+            int i=0;
+            double peinture1=0, carrelage1=0, lambris1=0, marbre=0, crepi=0, papierpeint=0, plaquettesdeparement=0, peinture2=0, peinture3=0, carrelage2=0, lambris2=0, liege1=0, parquet=0, vinylelino=0, moquette=0, stratifie=0, gazon=0, liege2=0, carrelage3=0;
+            for (Revetement revetement : liste_Revetement){
+                int id=revetement.getIdRevetement();
+                switch (id) {
+                    case 125 :
+                        peinture1=peinture1+revetement.getSurface();
+                    break;
+                    case 23 :
+                        carrelage1=carrelage1+revetement.getSurface();
+                    break;
+                    case 43 :
+                        lambris1=lambris1+revetement.getSurface();
+                    break;
+                    case 48 :
+                        marbre=marbre+revetement.getSurface();
+                    break;
+                    case 105 :
+                        crepi=crepi+revetement.getSurface();
+                    break;
+                    case 60 :
+                        papierpeint=papierpeint+revetement.getSurface();
+                    break;
+                    case 75 :
+                        plaquettesdeparement=plaquettesdeparement+revetement.getSurface();
+                    break;
+                    case 8 :
+                        peinture2=peinture2+revetement.getSurface();
+                    break;
+                    case 19 :
+                        peinture3=peinture3+revetement.getSurface();
+                    break;
+                    case 15 :
+                        carrelage2=carrelage2+revetement.getSurface();
+                    break;
+                    case 110 :
+                        lambris2=lambris2+revetement.getSurface();
+                    break;
+                    case 102 :
+                        liege1=liege1+revetement.getSurface();
+                    break;
+                    case 132 :
+                        parquet=parquet+revetement.getSurface();
+                    break;
+                    case 114 :
+                        vinylelino=vinylelino+revetement.getSurface();
+                    break;
+                    case 156 :
+                        moquette=moquette+revetement.getSurface();
+                    break;
+                    case 1126 :
+                        stratifie=stratifie+revetement.getSurface();
+                    break;
+                    case 174 :
+                        gazon=gazon+revetement.getSurface();
+                    break;
+                    case 180 :
+                        liege2=liege2+revetement.getSurface();
+                    break;
+                    case 115 :
+                        carrelage3=carrelage3+revetement.getSurface();
+                    break;
+                }    
+            }
+            Devis devis=new Devis();
+            devis.setAdresse(this.addresse);
+            devis.fichier(peinture1, carrelage1, lambris1, marbre, crepi, papierpeint, plaquettesdeparement, peinture2, peinture3, carrelage2, lambris2, liege1, parquet, 
+                    vinylelino, moquette, stratifie, gazon, liege2, carrelage3);
         });
         
         // Add the Canvas

@@ -15,14 +15,26 @@ import java.util.Locale;
  * @author mmarescaux01
  */
 public class Devis {
+    private String adresse;
     
     //Constructeur
-    public Devis() {     
+    public Devis() { 
     }
+
+    
+    //Getter et Setter
+    //adresse
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+    
     
     //methode pour creation fichier devis
     public void fichier(double peinture1, double carrelage1, double lambris1, double marbre, double crepi, double papierpeint, double plaquettesdeparement, double peinture2, double peinture3, double carrelage2, double lambris2, double liege1, double parquet, double vinylelino, double moquette, double stratifie, double gazon, double liege2, double carrelage3){
-        String adresse="adresse a remplir";
         File file = new File("C:/Users/mmarescaux01/Desktop/Devis.txt");//chemin a modifier si changement de machine __ voir pour choisir ou enregisterer ?
         if(!file.exists()){
             try{
@@ -39,7 +51,7 @@ public class Devis {
             DateFormat format=DateFormat.getDateInstance(DateFormat.FULL, Locale.FRENCH);
             writer.write("Strasbourg, le "+format.format(dateanglais) );
             writer.newLine();
-            writer.write("Adresse : "+adresse);
+            writer.write("Adresse : "+this.adresse);
             writer.newLine();
             writer.newLine();
 
