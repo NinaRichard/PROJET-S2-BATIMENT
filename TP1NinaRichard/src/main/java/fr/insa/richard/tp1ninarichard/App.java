@@ -376,17 +376,179 @@ public class App extends Application {
                      
         Button bCPiece = new Button("Créer une Piece");
         Button bCEtage = new Button("Créer un étage");
+        Button bCLogement = new Button("Créer un appartement");
         Button bCRevetement = new Button("Ajouter un Revetement");
         Button bCMaj = new Button("Mettre a jour");
         Button bCDevis = new Button("Générer le devis");
         
-       
-            treeView=updateTreeView();
+        
+            
+        bCEtage.setOnAction((new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent t) {
+            if (nbrEtage == 0){
+                    Alert dialogC = new Alert(AlertType.CONFIRMATION);
+                    
+                    dialogC.setTitle("Erreur: Batiment sans Etage");
+                    dialogC.setHeaderText(null);
+                    dialogC.setContentText("Attention, il est impossible de creer un logement dans un batiment sans étage , Veuillez en créer un avant en appuillant sur OK.");
+                    Optional<ButtonType> answer = dialogC.showAndWait();
+                    
+                    if(answer.get()== ButtonType.OK){
+                        TextInputDialog inDialog = new TextInputDialog("2,20");
+                        inDialog.setTitle("Création d'un Etage");
+                        inDialog.setHeaderText("Création d'un Etage");
+                        String contentText = "Numéro de l'étage: " + nbrEtage + "\n Hauteur sous plafond:";
+                        inDialog.setContentText(contentText);
+
+                        Optional<String> hauteursousplafondO = inDialog.showAndWait();
+                        if (hauteursousplafondO.isPresent()){
+                            String hauteursousplafond = hauteursousplafondO.orElse("2,20");
+                            Scanner lineScanner = new Scanner(hauteursousplafond);
+                            double hsp = lineScanner.nextDouble();
+                            System.out.println(hauteursousplafond);
+                            System.out.println(hsp);
+
+                            if (type == 0){
+                                EtageI etage = new EtageI(nbrEtage,hsp);
+                                immeuble.ajouterEtage(etage);
+                                nbrEtage ++;
+                            }else{
+                                EtageM etage = new EtageM(nbrEtage,hsp);
+                                nbrEtage ++;
+                                maison.ajouterEtage(etage);
+                            }
+                        }
+                        treeView =updateTreeView();
+                        mainPane.setLeft(treeView);
+                    }
+                }else{
+			String[] choicesA = new String[nbrEtage];
+                    int h = 0;
+                    for(EtageI etage : liste_EtageI){
+                        String choice = "Etage " + h;
+                        choicesA[h] = choice;
+                        h ++;
+                    }
+                   ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                    cDial.setTitle("Selection de l'étage");
+                    cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter une piece.");
+                    cDial.setContentText("Choix :");
+                    Optional<String> selection = cDial.showAndWait();
+                    if(selection.isPresent()){
+                        String selectionStr = selection.orElse("0");
+                        int length = selectionStr.length();
+                        String c = Character.toString(selectionStr.charAt(6));
+                        for(int i= 7 ; i<length ; i++){
+                            c = c + selectionStr.charAt(i);
+                        }
+                        Scanner lineScanner = new Scanner(c);
+                        int etagenum = lineScanner.nextInt();
+                        System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                        etagei = liste_EtageI.get(etagenum);
+                    }
+		etagei.ajouterAppartement(new Logement(etagei.getNbrdappart()));	
+		treeView =updateTreeView();
+                mainPane.setLeft(treeView);
+}
+
+}
+})) ;
+
+        
+        if (type == 0 ){
+            HBox bBar = new HBox(20, bCPoint, bCMur, bCPiece , bCLogement , bCEtage, bCRevetement, bCDevis, bCMaj);
+            mainPane.setBottom(bBar);
+        }else{
+            HBox bBar = new HBox(20,bCPoint, bCMur, bCPiece , bCEtage, bCRevetement, bCDevis, bCMaj);
+            mainPane.setBottom(bBar);
+        }
+        
+        
+        bCMaj.setOnAction((new EventHandler<ActionEvent>(){
+            @Override 
+            public void handle(ActionEvent t){
+                if (nbrEtage == 0){
+                    Alert dialogC = new Alert(AlertType.CONFIRMATION);
+                    dialogC.setTitle("Erreur: Batiment sans Etage");
+                    dialogC.setHeaderText(null);
+                    dialogC.setContentText("Attention, il est impossible d'afficher un étage inexistant, Veuillez en créer un avant");
+                    Optional<ButtonType> answer = dialogC.showAndWait();
+                    
+                    if(answer.get()== ButtonType.OK){
+                        dialogC.close();
+                    }
+                }else if (type == 0){//cas immeuble
+                    //choix etage afficher
+                    String[] choicesA = new String[nbrEtage];
+                    int h = 0;
+                    for(EtageI etage : liste_EtageI){
+                        String choice = "Etage " + h;
+                        choicesA[h] = choice;
+                        h ++;
+                    }
+                   ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                    cDial.setTitle("Selection de l'étage");
+                    cDial.setHeaderText("Veuillez selectionner l'Etage à afficher.");
+                    cDial.setContentText("Choix :");
+                    Optional<String> selection = cDial.showAndWait();
+                    if(selection.isPresent()){
+                        String selectionStr = selection.orElse("0");
+                        int length = selectionStr.length();
+                        String c = Character.toString(selectionStr.charAt(6));
+                        for(int i= 7 ; i<length ; i++){
+                            c = c + selectionStr.charAt(i);
+                        }
+                        Scanner lineScanner = new Scanner(c);
+                        int etagenum = lineScanner.nextInt();
+                        System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                        etagei = liste_EtageI.get(etagenum);
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+            } else {//cas maison
+                    String[] choicesA = new String[nbrEtage];
+                    int h = 0;
+                    for(EtageM etage : liste_EtageM){
+                        String choice = "Etage " + h;
+                        choicesA[h] = choice;
+                        h ++;
+                    }
+                    ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                    cDial.setTitle("Selection de l'étage");
+                    cDial.setHeaderText("Veuillez selectionner l'Etage à afficher.");
+                    cDial.setContentText("Choix :");
+                    
+                    Optional<String> selection = cDial.showAndWait();
+                    if(selection.isPresent()){
+                        String selectionStr = selection.orElse("0");
+                        int length = selectionStr.length();
+                        String c = Character.toString(selectionStr.charAt(6));
+                        for(int i= 7 ; i<length ; i++){
+                            c = c + selectionStr.charAt(i);
+                        }
+                        Scanner lineScanner = new Scanner(c);
+                        int etagenum = lineScanner.nextInt();
+                        System.out.println(etagenum + " " + selection + " "+ selectionStr);
+                        etagem = liste_EtageM.get(etagenum);
+                    for (Canvas can : liste_Canvas){
+                        can.setVisible(false);
+                    }
+                    liste_Canvas.get(etagenum).setVisible(true);
+                    }
+                    
+                    
+                    
+            /*treeView=updateTreeView();
             mainPane.setLeft(treeView);
             int k=0;
             for (EtageM etageaC : liste_EtageM) {//prend liste etages sur la gauche
                 TreeItem<String> root_etage =treeView.getTreeItem(k);//renvoie l'etage
-                Canvas canvas=liste_Canvas.get(k);
+                 canvas=liste_Canvas.get(k);
                 root_etage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
                     for (Canvas can : liste_Canvas){
                         can.setVisible(false);
@@ -395,43 +557,13 @@ public class App extends Application {
                     mainPane.setCenter(canvasContainer);
                     canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
                     canvas.setWidth(newVal.doubleValue());});
-                    canvas.setVisible(true);
-                });
+                    canvas.setVisible(true);*/
+                //});
             }
+        
             
-        bCEtage.setOnAction((new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent t) {
-            
-            TextInputDialog inDialog = new TextInputDialog("2,20");
-            inDialog.setTitle("Création d'un Etage");
-            inDialog.setHeaderText("Création d'un Etage");
-            String contentText = "Numéro de l'étage: " + nbrEtage + "\n Hauteur sous plafond:";
-            inDialog.setContentText(contentText);
-
-            Optional<String> hauteursousplafondO = inDialog.showAndWait();
-            if (hauteursousplafondO.isPresent()){
-                String hauteursousplafond = hauteursousplafondO.orElse("2,20");
-                Scanner lineScanner = new Scanner(hauteursousplafond);
-                double hsp = lineScanner.nextDouble();
-                System.out.println(hauteursousplafond);
-                System.out.println(hsp);
-                
-                if (type == 0){
-                    EtageI etage = new EtageI(nbrEtage,hsp);
-                    immeuble.ajouterEtage(etage);
-                    nbrEtage ++;
-                }else{
-                    EtageM etage = new EtageM(nbrEtage,hsp);
-                    nbrEtage ++;
-                    maison.ajouterEtage(etage);
-                }
-            }
-            treeView =updateTreeView();
-            mainPane.setLeft(treeView);
             
         }}));
-        Button bCLogement = new Button("Créer un appartement");
         bCLogement.setOnAction((new EventHandler<ActionEvent>(){
             @Override 
             public void handle(ActionEvent t){
@@ -506,10 +638,10 @@ public class App extends Application {
 
         
         if (type == 0 ){
-            HBox bBar = new HBox(20, bCPoint, bCMur, bCPiece , bCLogement , bCEtage, bCRevetement, bCDevis);
+            HBox bBar = new HBox(20, bCPoint, bCMur, bCPiece , bCLogement , bCEtage, bCRevetement, bCDevis, bCMaj);
             mainPane.setBottom(bBar);
         }else{
-            HBox bBar = new HBox(20,bCPoint, bCMur, bCPiece , bCEtage, bCRevetement, bCDevis);
+            HBox bBar = new HBox(20,bCPoint, bCMur, bCPiece , bCEtage, bCRevetement, bCDevis, bCMaj);
             mainPane.setBottom(bBar);
         }
         bCPiece.setOnAction((new EventHandler<ActionEvent>(){
@@ -1763,7 +1895,7 @@ public class App extends Application {
 
          
          
-        Scene scene = new Scene(mainPane, 800, 600);
+        Scene scene = new Scene(mainPane, 1500, 600);
         stage.setScene(scene);
         stage.setTitle("Nouveau");
         stage.show();
