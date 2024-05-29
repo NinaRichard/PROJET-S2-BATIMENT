@@ -841,7 +841,7 @@ public class App extends Application {
                                     
                                     
                                     
-                                   choixM.setSize(550, 270);
+                                   choixM.setSize(900, 700);
                                     choixM.setLocationRelativeTo(null);
                                    choixM.setVisible(true);
                                 }else {
