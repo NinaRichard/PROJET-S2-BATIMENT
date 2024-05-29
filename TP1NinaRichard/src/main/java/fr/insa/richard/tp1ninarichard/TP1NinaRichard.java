@@ -49,10 +49,10 @@ public class TP1NinaRichard {
                 System.out.println("1) Créer un étage et ajouter un étage dans le batiment") ;
                 System.out.println("2) Créer une piece et ajouter une piece dans un logement");
                 System.out.println("3) Créer un mur");
-                System.out.println("4) suprimer un étage");
-                System.out.println("5) suprimer une piece ou changer une piece d'etage");
-                System.out.println("6) suprimer un mur, le modifier ou changer de piece");
-                System.out.println("7) suprimer un point ou le modifier");
+                System.out.println("4) supprimer un étage");
+                System.out.println("5) supprimer une piece ou changer une piece d'etage");
+                System.out.println("6) supprimer un mur, le modifier ou changer de piece");
+                System.out.println("7) supprimer un point ou le modifier");
                 System.out.println("8) Passer à la partie revetement");
                 System.out.println("Pour (annuler ou) arreter taper 0");
                 choix = Lire.i();
@@ -105,7 +105,7 @@ public class TP1NinaRichard {
                             liste_Mur.add(mur);
                         }
                     break;
-                    case 4: //suprimer un étage
+                    case 4: //supprimer un étage
                         if (nbrEtage==0){
                             System.out.println("Vous n'avez pas d'etage a supprimer");
                         }else{
@@ -221,7 +221,7 @@ public class TP1NinaRichard {
                             liste_Mur.remove(murChoisi);
                         }
                     break;
-                    case 7 :// suprimer un point ou le modifier
+                    case 7 :// supprimer un point ou le modifier
                     //Choix coin
                         i=0;
                             for (Coin coin : liste_Coin) {
@@ -332,11 +332,11 @@ public class TP1NinaRichard {
             System.out.println("3) Créer un logement et ajouter un logement dans l'étage");
             System.out.println("4) Créer une piece et ajouter une piece dans un logement");
             System.out.println("5) Créer un mur");
-            System.out.println("6) suprimer un étage");
-            System.out.println("7) suprimer un logement ou changer un logement d'étage");
-            System.out.println("8) suprimer une piece et changer une piece de logement");
-            System.out.println("9) suprimer un mur, le modifier ou changer de piece");
-            System.out.println("10) suprimer un point ou le modifier");
+            System.out.println("6) supprimer un étage");
+            System.out.println("7) supprimer un logement ou changer un logement d'étage");
+            System.out.println("8) supprimer une piece et changer une piece de logement");
+            System.out.println("9) supprimer un mur, le modifier ou changer de piece");
+            System.out.println("10) supprimer un point ou le modifier");
             System.out.println("11) Passer à la partie revetement");
             System.out.println("Pour (annuler ou) arreter taper 0");
             choix = Lire.i();
@@ -433,7 +433,7 @@ public class TP1NinaRichard {
                         liste_Mur.add(mur);
                         }
                 break;
-                case 6://suprimer un étage
+                case 6://supprimer un étage
                         i=0;
                         if (nbrEtage==0){
                             System.out.println("Vous n'avez pas d'etage a supprimer");
@@ -451,7 +451,7 @@ public class TP1NinaRichard {
                         immeuble.setBatiment(liste_EtageI);
                         }
                 break;
-                case 7 ://suprimer un logement ou changer un logement d'étage
+                case 7 ://supprimer un logement ou changer un logement d'étage
                     System.out.println("Voulez vous 1)supprimer une logement; 2)changer un logement d'etage ?");
                     type=Lire.i();
                     while(type != 1 && type != 2){
@@ -620,7 +620,7 @@ public class TP1NinaRichard {
                         System.out.println("Le mur a ete supprime avec succes");
                     }
                 break;
-                case 10 ://System.out.println("10) suprimer un coin ou le modifier");
+                case 10 ://System.out.println("10) supprimer un coin ou le modifier");
                 //Choix coin
                     i=0;
                         for (Coin coin : liste_Coin) {
