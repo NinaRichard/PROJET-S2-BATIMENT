@@ -205,6 +205,7 @@ public class App extends Application {
                     inDialog2.setHeaderText("Création d'un Coin");
                     contentText = "Ordonnee du coin : " + nbrEtage ;
                     inDialog2.setContentText(contentText);
+                    etagem = liste_EtageM.get(etagenum);
                     Optional<String> ordonnee = inDialog2.showAndWait();
                     if (ordonnee.isPresent()){
                         String ord = ordonnee.orElse("2,20");
@@ -213,16 +214,10 @@ public class App extends Application {
                         System.out.println(ord);
                         System.out.println(ord1); 
                         Coin coin = new Coin(nbrCoin,abs1, ord1);
-                        etagei.ajouterCoin(coin);
+                        etagem.ajouterCoin(coin);
                         nbrCoin ++;
                         int i=0;
                         
-                            for (EtageM etage : liste_EtageM){
-                                if (etagenum==etage.getId()){
-                                   etage.ajouterCoin(coin);
-                                }
-                                i++;
-                            }
                         
                     }}
                 }
@@ -291,13 +286,7 @@ public class App extends Application {
                         Coin coin = new Coin(nbrCoin,abs1, ord1);
                         etagem.ajouterCoin(coin);
                         nbrCoin ++;
-                        int i=0;
-                            for (EtageI etage : liste_EtageI){
-                                if (etagenum==etage.getId()){
-                                   etage.ajouterCoin(coin);
-                                }
-                                i++;
-                            }
+                        int i=0; 
                     }}
                 }
             }
