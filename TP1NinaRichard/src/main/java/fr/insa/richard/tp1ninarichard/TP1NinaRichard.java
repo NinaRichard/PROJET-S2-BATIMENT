@@ -32,6 +32,7 @@ public class TP1NinaRichard {
         int immeubleChoisi;
         int logementChoisi;
         int pieceChoisi;
+        int nbrEtage=0;
         List<Etage> liste_Etage;
         List<EtageI> liste_EtageI;
         List<EtageM> liste_EtageM;
@@ -61,13 +62,17 @@ public class TP1NinaRichard {
                             double hauteurSousPlafond=Lire.d();
                             EtageM etageM = new EtageM(maison.getNbrEtage(),hauteurSousPlafond);
                             maison.ajouterEtage(etageM);
+                            nbrEtage++;
                     break;
                     case 2://Créer une piece et ajouter une piece dans la maison
+                        if (nbrEtage==0){
+                            System.out.println("Vous devez d'abord creer un etage");
+                        }else{
                             System.out.println("A quel étage voulez-vous ajouter un étage?");
                             liste_EtageM = maison.getBatiment();
                             i=0;
                             for (EtageM etageaC : liste_EtageM) {
-                                System.out.print("Etage "+ i);
+                                System.out.println("Etage "+ i);
                                 System.out.println(etageaC.toString());
                                 i++;
                             }
@@ -76,14 +81,18 @@ public class TP1NinaRichard {
                             EtageM etageMod4 = liste_EtageM.get(etageChoisi);
                             Piece pieceMod=new Piece(liste_Mur, liste_Coin);
                             etageMod4.ajouterPiece(pieceMod);
+                        }
                     break;
                     case 3://Créer un mur
                     //ATTENTION : LE MUR CREE AINSI N'EST PAS RELIE A UN ETAGE MEME SI ON A DEMANDE L'EMPLACEMENT
+                        if (nbrEtage==0){
+                            System.out.println("Vous devez d'abord creer un etage");
+                        }else{
                             //choix etage
                             liste_EtageM = maison.getBatiment();
                             i=0;
                             for (Etage etage : liste_EtageM) {
-                                System.out.print("Etage "+ i);
+                                System.out.println("Etage "+ i);
                                 System.out.println(etage.toString());
                                 i++;
                             }
@@ -93,13 +102,18 @@ public class TP1NinaRichard {
 
                             //Creation mur
                             Mur mur= new Mur(liste_Mur, liste_Coin, etageModified);
+                            liste_Mur.add(mur);
+                        }
                     break;
                     case 4: //suprimer un étage
+                        if (nbrEtage==0){
+                            System.out.println("Vous n'avez pas d'etage a supprimer");
+                        }else{
                             //choix etage a supprimer
                             i=0;
                             liste_EtageM=maison.getBatiment();
                             for (Etage etage : liste_EtageM){
-                                System.out.print("Etage "+ i);
+                                System.out.println("Etage "+ i);
                                 System.out.println(etage.toString());
                                 i++;
                             }
@@ -107,25 +121,26 @@ public class TP1NinaRichard {
                             etageChoisi = Lire.i();
                             liste_EtageM.remove(etageChoisi);
                             maison.setBatiment(liste_EtageM);
+                        }
                     break;
                     case 5://Suprimer une piece ou changer une piece d'etage
                             //choix etage
                             liste_EtageM = maison.getBatiment();
                             i=0;
                             for (Etage etage : liste_EtageM) {
-                                System.out.print("Etage "+ i);
+                                System.out.println("Etage "+ i);
                                 System.out.println(etage.toString());
                                 i++;
                             }
                             System.out.println("Indiquez le numero de l'étage sélectionne :");
                             etageChoisi = Lire.i();
-                            etageModified = liste_EtageM.get(etageChoisi);
+                            EtageM etageModified = liste_EtageM.get(etageChoisi);
                             
                             //choix piece
                             i=0;
                             liste_Piece=etageModified.getPieceEtage();
                             for (Piece piece : liste_Piece){//choix etage
-                                System.out.print("Piece "+ i);
+                                System.out.println("Piece "+ i);
                                 System.out.println(piece.toString());
                                 i++;
                             }
@@ -133,7 +148,7 @@ public class TP1NinaRichard {
                             pieceChoisi = Lire.i();
                             
                             //garde en memoire piece a supprimer (pour si deplacement)
-                            pieceMod=liste_Piece.get(pieceChoisi);
+                            Piece pieceMod=liste_Piece.get(pieceChoisi);
                             
                             //suppression
                             liste_Piece.remove(pieceChoisi);
@@ -152,7 +167,7 @@ public class TP1NinaRichard {
                             liste_EtageM = maison.getBatiment();
                             i=0;
                             for (Etage etage : liste_EtageM) {
-                                System.out.print("Etage "+ i);
+                                System.out.println("Etage "+ i);
                                 System.out.println(etage.toString());
                                 i++;
                             }
@@ -166,7 +181,7 @@ public class TP1NinaRichard {
                         //Choix Mur
                         i=0;
                             for (Mur mur1 : liste_Mur) {
-                                System.out.print("Mur "+ i);
+                                System.out.println("Mur "+ i);
                                 System.out.println(mur1.toString());
                                 i++;
                             }
@@ -210,7 +225,7 @@ public class TP1NinaRichard {
                     //Choix coin
                         i=0;
                             for (Coin coin : liste_Coin) {
-                                System.out.print("Coin "+ i);
+                                System.out.println("Coin "+ i);
                                 System.out.println(coin.toString());
                                 i++;
                             }
@@ -276,7 +291,7 @@ public class TP1NinaRichard {
                                     liste_EtageM = maison.getBatiment();
                                     i=0;
                                     for (Etage etage : liste_EtageM) {
-                                        System.out.print("Etage "+ i);
+                                        System.out.println("Etage "+ i);
                                         System.out.println(etage.toString());
                                         i++;
                                     }
@@ -288,7 +303,7 @@ public class TP1NinaRichard {
                                     i=0;
                                     liste_Piece=etageModified.getPieceEtage();
                                     for (Piece piece : liste_Piece){//choix etage
-                                        System.out.print("Piece "+ i);
+                                        System.out.println("Piece "+ i);
                                         System.out.println(piece.toString());
                                         i++;
                                     }
@@ -307,6 +322,7 @@ public class TP1NinaRichard {
 
         //choix immeuble
         }else{
+            int nbrLogement=0;
             Immeuble immeuble=new Immeuble(0,batiment.getAddress());
             
             //lancement actions pour construire l'immeuble
@@ -331,14 +347,18 @@ public class TP1NinaRichard {
                         EtageI etageI = new EtageI(immeuble.getNbrEtage(),hauteurSousPlafond);
                         //immeubleMod.setNbrEtage(immeubleMod.getNbrEtage()+1);
                         immeuble.ajouterEtage(etageI);
+                        nbrEtage++;
                 break;
                 case 3: //Créer un logement et ajouter un logement dans un étage
+                    if (nbrEtage==0){
+                            System.out.println("Vous devez d'abord creer un etage");
+                    }else{
                     //choix etage
                     System.out.println("A quel étage voulez-vous ajouter un Logement ?");
                     liste_EtageI = immeuble.getBatiment();
                     i=0;
                     for (Etage etageaC : liste_EtageI) {
-                        System.out.print("Etage "+ i);
+                        System.out.println("Etage "+ i);
                         System.out.println(etageaC.toString());
                         i++;
                     }
@@ -348,15 +368,24 @@ public class TP1NinaRichard {
                     Logement appartement = new Logement(etageMod.getNbrdappart());
                 //etageMod.setNbrdappart(etageMod.getNbrdappart()+1);
                     etageMod.ajouterAppartement(appartement);
+                    nbrLogement++;
+                    }
                 break;
                 case 4://Créer une piece et ajouter une piece dans un logement
+                    if (nbrEtage==0){
+                            System.out.println("Vous devez d'abord creer un etage");
+                        }else{
+                        if (nbrLogement==0){
+                            System.out.println("Vous devez d'abord creer un logement");
+                        }else{
+                    
                         i=0;
                         //choix etage
                         System.out.println("A quel étage voulez vous ajouter un étage ?");
                         liste_EtageI = immeuble.getBatiment();
                         i=0;
                         for (EtageI etageaC : liste_EtageI) {
-                            System.out.print("Etage "+ i);
+                            System.out.println("Etage "+ i);
                             System.out.println(etageaC.toString());
                             i++;
                         }
@@ -368,7 +397,7 @@ public class TP1NinaRichard {
                         i=0;
                         liste_Logement=etageMod4.getAppartementEtage();
                         for (Logement logement : liste_Logement){//choix etage
-                            System.out.print("Logement "+ i);
+                            System.out.println("Logement "+ i);
                             System.out.println(logement.toString());
                             i++;
                         }
@@ -379,31 +408,40 @@ public class TP1NinaRichard {
                         //Ajouter piece dans logement choisi
                         Piece pieceMod=new Piece(liste_Mur, liste_Coin);
                         logementMod.ajouterPiece(pieceMod);
+                        }}
                 break;
                 case 5://Créer un mur
                 //ATTENTION : LE MUR CREE AINSI N'EST PAS RELIE A UN ETAGE MEME SI ON A DEMANDE L'EMPLACEMENT
                         i=0;
+                        if (nbrEtage==0){
+                            System.out.println("Vous devez d'abord creer un etage");
+                        }else{
                         //choix etage
                         liste_EtageI = immeuble.getBatiment();
                         i=0;
                         for (Etage etageaC : liste_EtageI) {
-                            System.out.print("Etage "+ i);
+                            System.out.println("Etage "+ i);
                             System.out.println(etageaC.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero de l'étage sélectionne :");
                         etageChoisi = Lire.i();
-                        etageMod = liste_EtageI.get(etageChoisi);
+                        EtageI etageMod = liste_EtageI.get(etageChoisi);
 
                         //Creation mur
                         Mur mur= new Mur(liste_Mur, liste_Coin, etageMod);
+                        liste_Mur.add(mur);
+                        }
                 break;
                 case 6://suprimer un étage
                         i=0;
+                        if (nbrEtage==0){
+                            System.out.println("Vous n'avez pas d'etage a supprimer");
+                        }else{
                         //choix etage a supprimer
                         liste_EtageI=immeuble.getBatiment();
                         for (Etage etage : liste_EtageI){//choix etage
-                            System.out.print("Etage "+ i);
+                            System.out.println("Etage "+ i);
                             System.out.println(etage.toString());
                             i++;
                         }
@@ -411,7 +449,7 @@ public class TP1NinaRichard {
                         etageChoisi = Lire.i();
                         liste_EtageI.remove(etageChoisi);
                         immeuble.setBatiment(liste_EtageI);
-
+                        }
                 break;
                 case 7 ://suprimer un logement ou changer un logement d'étage
                     System.out.println("Voulez vous 1)supprimer une logement; 2)changer un logement d'etage ?");
@@ -425,19 +463,19 @@ public class TP1NinaRichard {
                     liste_EtageI = immeuble.getBatiment();
                     i=0;
                     for (Etage etageaC : liste_EtageI) {
-                        System.out.print("Etage "+ i);
+                        System.out.println("Etage "+ i);
                         System.out.println(etageaC.toString());
                         i++;
                     }
                     System.out.println("Indiquer le numero de l'étage choisi :");
                     etageChoisi = Lire.i();
-                    etageMod=liste_EtageI.get(etageChoisi);
+                    EtageI etageMod=liste_EtageI.get(etageChoisi);
 
                     //choix logement
                     i=0;
                     liste_Logement=etageMod.getAppartementEtage();
                     for (Logement logement : liste_Logement){
-                        System.out.print("Logement "+ i);
+                        System.out.println("Logement "+ i);
                         System.out.println(logement.toString());
                         i++;
                     }
@@ -458,7 +496,7 @@ public class TP1NinaRichard {
                         liste_EtageI = immeuble.getBatiment();
                         i=0;
                         for (Etage etageaC : liste_EtageI) {
-                            System.out.print("Etage "+ i);
+                            System.out.println("Etage "+ i);
                             System.out.println(etageaC.toString());
                             i++;
                         }
@@ -474,7 +512,7 @@ public class TP1NinaRichard {
                         liste_EtageI = immeuble.getBatiment();
                         i=0;
                         for (Etage etageaC : liste_EtageI) {
-                            System.out.print("Etage "+ i);
+                            System.out.println("Etage "+ i);
                             System.out.println(etageaC.toString());
                             i++;
                         }
@@ -486,7 +524,7 @@ public class TP1NinaRichard {
                         i=0;
                         liste_Logement=etageMod.getAppartementEtage();
                         for (Logement logement : liste_Logement){
-                            System.out.print("Logement "+ i);
+                            System.out.println("Logement "+ i);
                             System.out.println(logement.toString());
                             i++;
                         }
@@ -498,14 +536,14 @@ public class TP1NinaRichard {
                         i=0;
                         liste_Piece=logementMod.getAppartement();
                         for (Piece piece : liste_Piece){//choix etage
-                            System.out.print("Piece "+ i);
+                            System.out.println("Piece "+ i);
                             System.out.println(piece.toString());
                             i++;
                         }
                         System.out.println("Indiquer le numero de la piece a supprimer/deplacer :");
                         pieceChoisi = Lire.i();
                         //garde en memoire piece a supprimer (pour si deplacement)
-                        pieceMod=liste_Piece.get(pieceChoisi);
+                        Piece pieceMod=liste_Piece.get(pieceChoisi);
                         //suppression
                         liste_Piece.remove(pieceChoisi);
                         logementMod.setAppartement(liste_Piece);
@@ -522,7 +560,7 @@ public class TP1NinaRichard {
                             i=0;
                             liste_Logement=etageMod.getAppartementEtage();
                             for (Logement logement : liste_Logement){
-                                System.out.print("Logement "+ i);
+                                System.out.println("Logement "+ i);
                                 System.out.println(logement.toString());
                                 i++;
                             }
@@ -536,7 +574,7 @@ public class TP1NinaRichard {
                     //Choix Mur
                     i=0;
                         for (Mur mur1 : liste_Mur) {
-                            System.out.print("Mur "+ i);
+                            System.out.println("Mur "+ i);
                             System.out.println(mur1.toString());
                             i++;
                         }
@@ -586,7 +624,7 @@ public class TP1NinaRichard {
                 //Choix coin
                     i=0;
                         for (Coin coin : liste_Coin) {
-                            System.out.print("Coin "+ i);
+                            System.out.println("Coin "+ i);
                             System.out.println(coin.toString());
                             i++;
                         }
@@ -658,7 +696,7 @@ public class TP1NinaRichard {
                                 liste_EtageI = immeuble.getBatiment();
                                 i=0;
                                 for (Etage etageaC : liste_EtageI) {
-                                    System.out.print("Etage "+ i);
+                                    System.out.println("Etage "+ i);
                                     System.out.println(etageaC.toString());
                                     i++;
                                 }
@@ -670,7 +708,7 @@ public class TP1NinaRichard {
                                 i=0;
                                 liste_Logement=etageMod.getAppartementEtage();
                                 for (Logement logement : liste_Logement){
-                                    System.out.print("Logement "+ i);
+                                    System.out.println("Logement "+ i);
                                     System.out.println(logement.toString());
                                     i++;
                                 }
@@ -682,7 +720,7 @@ public class TP1NinaRichard {
                                 i=0;
                                 liste_Piece=logementMod.getAppartement();
                                 for (Piece piece : liste_Piece){
-                                    System.out.print("Piece "+ i);
+                                    System.out.println("Piece "+ i);
                                     System.out.println(piece.toString());
                                     i++;
                                 }
@@ -709,11 +747,11 @@ public class TP1NinaRichard {
                 //Choix Mur
                 int i=0;
                     for (Mur mur : liste_Mur) {
-                        System.out.print("Mur "+ i);
+                        System.out.println("Mur "+ i);
                         i++;
                         mur.toString();
                     }
-                System.out.print("Indiquer le numero du mur selectionne");
+                System.out.println("Indiquer le numero du mur selectionne");
                 int murChoisi = Lire.i();
                 Mur murMod = liste_Mur.get(murChoisi);
                 //interieur/exterieur
@@ -877,15 +915,15 @@ public class TP1NinaRichard {
                     Mur[] murs = new Mur[4];
                     for (int f=0; f<4; f++){
                         System.out.println("Quels sont les coordonnées des coins de votre mur  " + (f + 1) + " ?");
-                        System.out.print("Coin 1 x: ");
+                        System.out.println("Coin 1 x: ");
                         double x1 = Lire.d();
-                        System.out.print("Coin 1 y: ");
+                        System.out.println("Coin 1 y: ");
                         double y1 = Lire.d();
                         Coin coin1 = new Coin(nbrCoin, x1,y1);
                         nbrCoin ++;
-                        System.out.print("Coin 2 x: ");
+                        System.out.println("Coin 2 x: ");
                         double x2 = Lire.d();
-                        System.out.print("Coin 2 y: ");
+                        System.out.println("Coin 2 y: ");
                         double y2 = Lire.d();
                         Coin coin2 = new Coin(nbrCoin, x2,y2);
                         nbrCoin ++;
@@ -920,7 +958,7 @@ public class TP1NinaRichard {
     ArrayList<Mur> liste_Mur=new ArrayList<Mur>();
     System.out.println("Bonjour, bienvenue dans notre générateur de devis, dans un premier temps nous allons modéliser votre batiment, puis vous pourrez choisir vos revetements de murs, sols et plafonds.");
     System.out.println("Première étape: Créer un batiment. Pour cela veuiller nous renseigner :");
-    System.out.print("L'adresse du Batiment: ");
+    System.out.println("L'adresse du Batiment: ");
     String adresse = Lire.S();
     System.out.println("Votre Batiment est il 1) une maison 0) un immeuble?");
     int type = Lire.i();
