@@ -324,7 +324,7 @@ public class App extends Application {
                                     fenetreMur.setVisible(true);
                                 }
                             //assez de coins existants
-                            }else{
+                            }else{//CHANGER A PARTIR DE LA
                                 String compteRendu = "Vous avez selectionné:  \n  Coin 1 : " + getCoin1() + "\n Coin 2 : "+ getCoin2();
                                 int result = JOptionPane.showConfirmDialog(fenetreMur,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
@@ -338,12 +338,12 @@ public class App extends Application {
                                         choicesA[h] = choice2;
                                         h ++;
                                     }
-                                    ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
-                                    cDial.setTitle("Selection du point 1");
-                                    cDial.setHeaderText("Veuillez selectionner le premier coin.");
-                                    cDial.setContentText("Choix :");
+                                    ChoiceDialog<String> cDial5 = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                                    cDial5.setTitle("Selection du point 1");
+                                    cDial5.setHeaderText("Veuillez selectionner le premier coin.");
+                                    cDial5.setContentText("Choix :");
 
-                                    Optional<String> selection = cDial.showAndWait();
+                                    Optional<String> selection = cDial5.showAndWait();
                                     if(selection.isPresent()){
                                         String selectionStr = selection.orElse("0");
                                         int length = selectionStr.length();
@@ -514,27 +514,28 @@ public class App extends Application {
                                     fenetreMur.setVisible(true);
                                 }
                             //assez de coins existants
-                            }else{
+                            }else{ //CHANGER A PARTIR DE LA
                                 String compteRendu = "Vous avez selectionné:  \n  Coin 1 : " + getCoin1() + "\n Coin 2 : "+ getCoin2();
                                 int result = JOptionPane.showConfirmDialog(fenetreMur,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     System.out.println("User chose OK");
                                     Coin coinMod1=new Coin(), coinMod2=new Coin();
+                                    
                                     //choix coin1
-                                    String[] choicesA = new String[nbrCoin];
+                                    String[] choicesF = new String[nbrCoin];
                                     int h = 0;
                                     List<Coin> list_Coin=etagem.getCoinEtage();
                                     for(Coin coin : list_Coin){
                                         String choice2 = "Point " + h;
-                                        choicesA[h] = choice2;
+                                        choicesF[h] = choice2;
                                         h ++;
                                     }
-                                    ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
-                                    cDial.setTitle("Selection du point 1");
-                                    cDial.setHeaderText("Veuillez selectionner le premier coin.");
-                                    cDial.setContentText("Choix :");
+                                    ChoiceDialog<String> cDial4 = new ChoiceDialog<>(choicesF[h-1],choicesF);
+                                    cDial4.setTitle("Selection du point 1");
+                                    cDial4.setHeaderText("Veuillez selectionner le premier coin.");
+                                    cDial4.setContentText("Choix :");
 
-                                    Optional<String> selection = cDial.showAndWait();
+                                    Optional<String> selection = cDial4.showAndWait();
                                     if(selection.isPresent()){
                                         String selectionStr = selection.orElse("0");
                                         int length = selectionStr.length();
@@ -556,9 +557,9 @@ public class App extends Application {
                                         k ++;
                                     }
                                     ChoiceDialog<String> cDial2 = new ChoiceDialog<>(choicesB[h-1],choicesB);
-                                    cDial.setTitle("Selection du point 1");
-                                    cDial.setHeaderText("Veuillez selectionner le premier coin.");
-                                    cDial.setContentText("Choix :");
+                                    cDial2.setTitle("Selection du point 1");
+                                    cDial2.setHeaderText("Veuillez selectionner le premier coin.");
+                                    cDial2.setContentText("Choix :");
 
                                     Optional<String> selection2 = cDial2.showAndWait();
                                     if(selection2.isPresent()){
@@ -1566,9 +1567,9 @@ public class App extends Application {
                                     int n=0, m=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
-                                            n=k;
+                                            n=m;
                                         }
-                                        k++;
+                                        m++;
                                     }
                                     revetement.Parametres(n);
                                     }
@@ -1656,12 +1657,12 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0; k=0;
+                                    int n=0, m=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
-                                            n=k;
+                                            n=m;
                                         }
-                                        k++;
+                                        m++;
                                     }
                                     revetement.Parametres(n);
                                 }
@@ -1736,12 +1737,12 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0; k=0;
+                                    int n=0,m=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
-                                            n=k;
+                                            n=m;
                                         }
-                                        k++;
+                                        m++;
                                     }
                                     revetement.Parametres(n);
                                 }
@@ -1840,12 +1841,12 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0; k=0;
+                                    int n=0,m=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
-                                            n=k;
+                                            n=m;
                                         }
-                                        k++;
+                                        m++;
                                     }
                                     revetement.Parametres(n);
                                 }
@@ -1861,12 +1862,12 @@ public class App extends Application {
                                 if(selection4.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0;k=0;
+                                    int n=0,m=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
-                                            n=k;
+                                            n=m;
                                         }
-                                        k++;
+                                        m++;
                                     }
                                     revetement.Parametres(n);
                                 }
@@ -1914,12 +1915,12 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0; k=0;
+                                    int n=0,m=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
-                                            n=k;
+                                            n=m;
                                         }
-                                        k++;
+                                        m++;
                                     }
                                     revetement.Parametres(n);
                                 }
@@ -1967,12 +1968,12 @@ public class App extends Application {
                                 if(selection3.isPresent()){
                                     String selectionStr = selection.orElse("0");//convertit en String
                                     //boucle pour utiliser la methode Parametre de la classe revetement
-                                    int n=0; k=0;
+                                    int n=0,m=0;
                                     for (String revet : choicesD ){
                                         if (revet.equals(selectionStr)){
-                                            n=k;
+                                            n=m;
                                         }
-                                        k++;
+                                        m++;
                                     }
                                     revetement.Parametres(n);
                                 }
@@ -2063,12 +2064,13 @@ public class App extends Application {
         StackPane canvasContainer = new StackPane(canvas);
         mainPane.setCenter(canvasContainer);
         // Bind the canvas size to the container size
+        canvas=redraw();
          canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
-             canvas.setWidth(newVal.doubleValue());
-            // redraw(canvas);
+             //canvas.setWidth(newVal.doubleValue());
          });
          canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
-             canvas.setHeight(newVal.doubleValue());
+         canvas=redraw();
+             //canvas.setHeight(newVal.doubleValue());
             // redraw(canvas);
          });
          
@@ -2110,7 +2112,6 @@ public class App extends Application {
         int k; int i;int j;
         List<Logement> logement;
         List<Piece> pieces;
-        //List<Canvas> list_Canvas=new ArrayList<Canvas>();
 
         TreeItem<String> root_Menu = new TreeItem<>("MENU");
         root_Menu.setExpanded(true);
@@ -2122,9 +2123,8 @@ public class App extends Application {
                     TreeItem<String> root_etage = new TreeItem<>("Etage " + k);
                     logement = etageaC.getAppartementEtage();
                         
-         
+                    i=0;
                     for (Logement logementaC : logement){
-                        i=0;
                         TreeItem<String> root_app = new TreeItem<>("Appartement " + i);
                         pieces = logementaC.getAppartement();
                         j=0;
@@ -2169,7 +2169,7 @@ public class App extends Application {
         context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         context.setFill(Color.PINK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getWidth());
-        canvas.setVisible(false);
+        canvas.setVisible(true);
         context.strokeText("Plan", 10, 10);
         return canvas;
     }
