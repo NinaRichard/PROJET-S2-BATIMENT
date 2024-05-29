@@ -306,6 +306,7 @@ public class App extends Application {
                         treeView =updateTreeView();
                         mainPane.setLeft(treeView);
                     }
+                //cas ou il y a deja au moins un etage
                 //cas immeuble
                 }else if (type == 0){
                     //choix etage
@@ -346,7 +347,7 @@ public class App extends Application {
                      
                      //Coin 1 
                      JPanel panCoin1 = new JPanel();
-                     panCoin1.setBorder(BorderFactory.createTitledBorder("Mur 1"));
+                     panCoin1.setBorder(BorderFactory.createTitledBorder("Coin 1"));
                      panCoin1.setPreferredSize(new Dimension(200,60));
                      rbM1Existant = new JRadioButton("Existant");
                      rbM1Existant.setSelected(true);
@@ -359,7 +360,7 @@ public class App extends Application {
                      
                      //Coin 2 
                      JPanel panCoin2 = new JPanel();
-                     panCoin2.setBorder(BorderFactory.createTitledBorder("Mur 2"));
+                     panCoin2.setBorder(BorderFactory.createTitledBorder("Coin 2"));
                      panCoin2.setPreferredSize(new Dimension(200,60));
                      rbM2Existant = new JRadioButton("Existant");
                      rbM2Existant.setSelected(true);
@@ -397,10 +398,11 @@ public class App extends Application {
                             }else{//CHANGER A PARTIR DE LA
                                 String compteRendu = "Vous avez selectionné:  \n  Coin 1 : " + getCoin1() + "\n Coin 2 : "+ getCoin2();
                                 int result = JOptionPane.showConfirmDialog(fenetreMur,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
+                                System.out.println("test1");
                                 if (result == JOptionPane.OK_OPTION) {
                                     Coin coin1;
                                     Coin coin2;
-                                    if(getCoin1().equals("Existant")){
+                                    if(!getCoin1().equals("Existant")){
                                          int h = 0;
                                     
                                     for(Coin coin : etagei.getCoinEtage()){
@@ -408,12 +410,12 @@ public class App extends Application {
                                         choicesA[h] = choice2;
                                         h ++;
                                     }
-                                    ChoiceDialog<String> cDial5 = new ChoiceDialog<>(choicesA[h-1],choicesA);
-                                    cDial5.setTitle("Selection du Coin 1");
-                                    cDial5.setHeaderText("Veuillez selectionner le premier coin.");
-                                    cDial5.setContentText("Choix :");
+                                    ChoiceDialog<String> cDial47 = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                                    cDial47.setTitle("Selection du Coin 1");
+                                    cDial47.setHeaderText("Veuillez selectionner le premier coin.");
+                                    cDial47.setContentText("Choix :");
 
-                                    Optional<String> selection = cDial5.showAndWait();
+                                    Optional<String> selection = cDial47.showAndWait();
                                     if(selection.isPresent()){
                                         String selectionStr = selection.orElse("0");
                                         int length = selectionStr.length();
@@ -978,6 +980,7 @@ public class App extends Application {
         bCPiece.setOnAction((new EventHandler<ActionEvent>(){
             @Override 
             public void handle(ActionEvent t){
+                //cree un etage s'il n'y a pas ecore d'etage dans le batiment
                 if (nbrEtage == 0){
                     Alert dialogC = new Alert(AlertType.CONFIRMATION);
                     
@@ -1014,8 +1017,11 @@ public class App extends Application {
                         treeView =updateTreeView();
                         mainPane.setLeft(treeView);
                     }
+                //cas ou il y a deja un etage
+                //immeuble
                 }else if (type == 0){
-                    	String[] choicesA = new String[nbrEtage];
+                    //choix etage
+                    String[] choicesA = new String[nbrEtage];
                     int h = 0;
                     for(EtageI etage : liste_EtageI){
                         String choice = "Etage " + h;
@@ -1039,9 +1045,9 @@ public class App extends Application {
                         System.out.println(etagenum + " " + selection + " "+ selectionStr);
                         etagei = liste_EtageI.get(etagenum);
                     }
+                //interdit creation piece s'il n'y a pas de logement
 		if (etagei.getNbrdappart()==0){
 			Alert dialogC = new Alert(AlertType.CONFIRMATION);
-                    
                     dialogC.setTitle("Erreur: Etage sans logement");
                     dialogC.setHeaderText(null);
                     dialogC.setContentText("Attention, il est impossible de creer une piece dans un étage sans logement , en appuyant sur OK vous en créerez un logement dans l'étage " + etagei.getId());
@@ -1049,8 +1055,10 @@ public class App extends Application {
                     
                     if(answer.get()== ButtonType.OK){
 			etagei.ajouterAppartement(new Logement(etagei.getNbrdappart()));
-}
-			} else{
+                    }
+                //cas ou il existe au moins un logement dans l'etage
+		} else{
+                    //choix appartement
                     String[] choicesE = new String[etagei.getNbrdappart()];
                     h = 0;
                     for(Logement appart : etagei.getAppartementEtage()){
@@ -1072,8 +1080,8 @@ public class App extends Application {
                             System.out.println(selectionStr);
                             System.out.println(etagei.getAppartementEtage().get(i).toString());
                         }
-		    
                     }
+                    
 		JDialog fenetrePiece = new JDialog();
                      fenetrePiece.setSize(550, 270);
                      fenetrePiece.setLocationRelativeTo(null);
@@ -1237,7 +1245,7 @@ public class App extends Application {
                                        cbChoixM2.addItem(mur.toString()); 
                                     }
                                     panChoixM21.add(cbChoixM2);
-                                     //Mur 2 A cree
+                                     //Mur 2 A creer
                                      JPanel panChoixM22 = new JPanel();
                                     panChoixM22.setPreferredSize(new Dimension(200,160));
                                     panChoixM22.setBorder(BorderFactory.createTitledBorder("Creation M2"));
@@ -1266,7 +1274,7 @@ public class App extends Application {
                                        cbChoixM3.addItem(mur.toString()); 
                                     }
                                     panChoixM31.add(cbChoixM3);
-                                    //Mur 3 A crée
+                                    //Mur 3 A créer
                                     JPanel panChoixM32 = new JPanel();
                                     panChoixM32.setPreferredSize(new Dimension(200,160));
                                     panChoixM32.setBorder(BorderFactory.createTitledBorder("Creation M2"));
