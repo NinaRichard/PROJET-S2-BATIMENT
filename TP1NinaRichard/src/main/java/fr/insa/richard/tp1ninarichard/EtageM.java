@@ -16,9 +16,14 @@ public class EtageM extends Etage{
     private List<Piece> pieceEtage= new ArrayList();
     
     //Constructeur
+
+    
     public EtageM(int id, double hauteursousplafond) {
         super(id, hauteursousplafond);
     }
+
+    
+    
     
     //Getter et Setter
     //nbr de piece

@@ -29,6 +29,10 @@ public class Etage {
         this.hauteursousplafond = hauteursousplafond;
     }
 
+    public Etage() {
+    }
+    
+
     //Getter et Setter
     //Id
     public int getId() {
