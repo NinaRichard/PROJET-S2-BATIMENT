@@ -335,8 +335,10 @@ public class App extends Application {
                         mainPane.setLeft(treeView);
                     }
                 //cas ou il y a deja au moins un etage
+                
+                }
                 //cas immeuble
-                }else if (type == 0){
+                if (type == 0){
                     //choix etage
                     String[] choicesA = new String[nbrEtage];
                     int h = 0;
@@ -345,6 +347,7 @@ public class App extends Application {
                         choicesA[h] = choice2;
                         h ++;
                     }
+                    
                     ChoiceDialog<String> cDial = new ChoiceDialog<>(choicesA[h-1],choicesA);
                     cDial.setTitle("Selection de l'étage");
                     cDial.setHeaderText("Veuillez selectionner l'Etage dans lequel vous voulez ajouter un mur.");
@@ -426,20 +429,26 @@ public class App extends Application {
                             //assez de coins existants
                             }else{//CHANGER A PARTIR DE LA
                                 String compteRendu = "Vous avez selectionné:  \n  Coin 1 : " + getCoin1() + "\n Coin 2 : "+ getCoin2();
+                                System.out.println(compteRendu);
                                 int result = JOptionPane.showConfirmDialog(fenetreMur,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
-                                System.out.println("test1");
+                                
                                 if (result == JOptionPane.OK_OPTION) {
                                     Coin coin1;
                                     Coin coin2;
-                                    if(!getCoin1().equals("Existant")){
+                                    System.out.println("test-2");
+                                    if(!(getCoin1().equals("Existant"))){
+                                         System.out.println("test-1");
                                          int h = 0;
                                     
-                                    for(Coin coin : etagei.getCoinEtage()){
-                                        String choice2 = coin.toString();
-                                        choicesA[h] = choice2;
-                                        h ++;
+                                        for(Coin coin : etagei.getCoinEtage()){
+                                            System.out.println("h = " + h);
+                                            String choice2 = coin.toString();
+                                            choicesA[h] = choice2;
+                                            h ++;
                                     }
+                                    System.out.println("test-1");
                                     ChoiceDialog<String> cDial47 = new ChoiceDialog<>(choicesA[h-1],choicesA);
+                                    System.out.println("test0");
                                     cDial47.setTitle("Selection du Coin 1");
                                     cDial47.setHeaderText("Veuillez selectionner le premier coin.");
                                     cDial47.setContentText("Choix :");
