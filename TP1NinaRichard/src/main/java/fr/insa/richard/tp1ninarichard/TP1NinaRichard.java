@@ -79,6 +79,7 @@ public class TP1NinaRichard {
                                 System.out.println("Etage "+ i);
                                 System.out.println(etageaC.toString());
                                 i++;
+                                
                             }
                             System.out.println("Indiquer le numero de l'étage sélectionné : ");
                             etageChoisi = Lire.i();
@@ -230,7 +231,7 @@ public class TP1NinaRichard {
 
                             }   
                         if (reponse==0){
-                            System.out.println("Aucune action sur le mur selectionne n'a ete effectue");
+                            System.out.println("Aucune action sur le mur selectionné n'a été effectue");
                         }else{
                             liste_Mur.remove(murChoisi);
                             List<Mur> list=etagem.getMurEtage();
