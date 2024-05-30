@@ -13,6 +13,7 @@ import java.util.List;
  * @author inspi
  */
 public class Etage {
+    //Classe Mère de EtageI et EtageM (etageM conteint des Pieces quand Etage M contient des logements)
     protected int id;
     private double hauteursousplafond;
     private int nbrMur;

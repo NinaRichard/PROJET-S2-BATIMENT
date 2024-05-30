@@ -9,6 +9,7 @@ package fr.insa.richard.tp1ninarichard;
  * @author inspi
  */
 public class Sol{
+    //Non Utilisé
     public int id;
     public Piece piece;
     public Revetement revetement;

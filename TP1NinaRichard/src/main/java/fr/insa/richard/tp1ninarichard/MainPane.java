@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
  * @author inspi
  */
 public class MainPane extends BorderPane {
+    //N'est pas utiliser du au probleme d'instanciation rencontré
     
     private RadioButton rbCreation;
     private RadioButton rbEnlever;

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author nrichard01
  */
 public class Piece {
-    //Ne marche que si rectange
+    //Ne marche que si pas rectange
     private int id;
     private Mur mur1;
     private Mur mur2;
@@ -22,9 +22,10 @@ public class Piece {
     private String usage;
     private Plafond plafond;
     private int Etage;
-    //"attribut" general ajouter pour l'essai si dessus potentiellement il faudrai modifier le code pour que ça marche et soit optimiser
+   
     private static int nbrDePiece;
-    //tentative de constructeur qui permet à l'utilisateur de renseigner les informationn au fur et a mesure
+    
+    //"constructeur qui permet" à l'utilisateur de renseigner les informationn au fur et a mesure
     public Piece(ArrayList<Mur> liste_Mur, ArrayList<Coin> liste_Coin){
         this.id = nbrDePiece; // ou nbr de pice +1 à voir
         nbrDePiece++; //a mettre avant en fct de si on commence à 0 ou pas

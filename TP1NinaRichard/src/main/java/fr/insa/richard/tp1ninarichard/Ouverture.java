@@ -10,6 +10,7 @@ package fr.insa.richard.tp1ninarichard;
  */ 
 
 public abstract class Ouverture {
+    
    private int id;
     
    //Calcul surface

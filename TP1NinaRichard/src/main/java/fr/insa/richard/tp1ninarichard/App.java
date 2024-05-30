@@ -422,142 +422,68 @@ public class App extends Application {
                             //pas assez de coins existants
                             System.out.println(existant + " " + etagei.getCoinEtage().size());
                             if (existant>etagei.getCoinEtage().size()){
-                                int result = JOptionPane.showConfirmDialog(fenetreMur, "Vous n'avez pas assez de coins déjà existants", "Erreur dans la creation de la pièce", JOptionPane.OK_CANCEL_OPTION);
+                                int result = JOptionPane.showConfirmDialog(fenetreMur, "Vous n'avez pas assez de coins déjà existants", "Erreur dans la creation du Mur", JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     fenetreMur.setVisible(true);
                                 }
                             //assez de coins existants
+                            }else if(existant < 2){
+                                int result = JOptionPane.showConfirmDialog(fenetreMur, "Créez des Coin/Point en appuyant sur le bouton associé", "Erreur dans la creation du Mur", JOptionPane.OK_CANCEL_OPTION);
+                                if (result == JOptionPane.OK_OPTION) {
+                                    
+                                }
                             }else{
                                 String compteRendu = "Vous avez selectionné:  \n  Coin 1 : " + getCoin1() + "\n Coin 2 : "+ getCoin2();
                                 System.out.println(compteRendu);
                                 int result = JOptionPane.showConfirmDialog(fenetreMur,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
                                 
                                 if (result == JOptionPane.OK_OPTION) {
-                                    Coin coin1;
-                                    Coin coin2;
-                                    System.out.println("test-2");
-                                    if(!(getCoin1().equals("Existant"))){//Erreur sur cette ligne
-                                         System.out.println("test-1");
-                                         int h = 0;
-                                    
-                                        for(Coin coin : etagei.getCoinEtage()){
-                                            System.out.println("h = " + h);
-                                            String choice2 = coin.toString();
-                                            choicesA[h] = choice2;
-                                            h ++;
-                                    }
-                                    System.out.println("test-1");
-                                    ChoiceDialog<String> cDial47 = new ChoiceDialog<>(choicesA[h-1],choicesA);
-                                    System.out.println("test0");
-                                    cDial47.setTitle("Selection du Coin 1");
-                                    cDial47.setHeaderText("Veuillez selectionner le premier coin.");
-                                    cDial47.setContentText("Choix :");
-
-                                    Optional<String> selection = cDial47.showAndWait();
-                                    if(selection.isPresent()){
-                                        String selectionStr = selection.orElse("0");
-                                        int length = selectionStr.length();
-                                        String c = Character.toString(selectionStr.charAt(6));
-                                        for(int i= 7 ; i<length ; i++){
-                                            c = c + selectionStr.charAt(i);
-                                        }
-                                        Scanner lineScanner = new Scanner(c);
-                                        int coinnum1 = lineScanner.nextInt();
-                                        coin1 = etagei.getCoinEtage().get(coinnum1);
-                                    }
-                                    }else {
-                                        //rentre  Absysse et ordonné
-                                    }
-                                    if(getCoin2().equals("Existant")){
-                                         int h = 0;
-                                    String[] choicesZ = new String[etagei.getCoinEtage().size()];
-                                    for(Coin coin : etagei.getCoinEtage()){
-                                        String choice3 = coin.toString();
-                                        choicesZ[h] = choice3;
-                                        h ++;
-                                    }
-                                    ChoiceDialog<String> cDial6 = new ChoiceDialog<>(choicesZ[h-1],choicesZ);
-                                    cDial6.setTitle("Selection du Coin 3");
-                                    cDial6.setHeaderText("Veuillez selectionner le deuxième coin.");
-                                    cDial6.setContentText("Choix :");
-
-                                    Optional<String> selection = cDial6.showAndWait();
-                                    if(selection.isPresent()){
-                                        String selectionStr = selection.orElse("0");
-                                        int length = selectionStr.length();
-                                        String c = Character.toString(selectionStr.charAt(15));
-                                        for(int i= 16 ; i<length ; i++){
-                                            c = c + selectionStr.charAt(i);
-                                        }
-                                        Scanner lineScanner = new Scanner(c);
-                                        int coinnum1 = lineScanner.nextInt();
-                                        coin1 = etagei.getCoinEtage().get(coinnum1);
-                                    }
-                                    }else {
-                                        //rentre  Absysse et ordonné
-                                    }
-                                    //choix coin1
-                                    /*String[] choicesA = new String[nbrCoin];
-                                    int h = 0;
-                                    List<Coin> list_Coin=etagei.getCoinEtage();
-                                    for(Coin coin : list_Coin){
-                                        String choice2 = "Point " + h;
-                                        choicesA[h] = choice2;
-                                        h ++;
-                                    }
-                                    ChoiceDialog<String> cDial5 = new ChoiceDialog<>(choicesA[h-1],choicesA);
-                                    cDial5.setTitle("Selection du point 1");
-                                    cDial5.setHeaderText("Veuillez selectionner le premier coin.");
-                                    cDial5.setContentText("Choix :");
-
-                                    Optional<String> selection = cDial5.showAndWait();
-                                    if(selection.isPresent()){
-                                        String selectionStr = selection.orElse("0");
-                                        int length = selectionStr.length();
-                                        String c = Character.toString(selectionStr.charAt(6));
-                                        for(int i= 7 ; i<length ; i++){
-                                            c = c + selectionStr.charAt(i);
-                                        }
-                                        Scanner lineScanner = new Scanner(c);
-                                        int coinnum1 = lineScanner.nextInt();
-                                        coinMod1 = list_Coin.get(coinnum1);
-                                    }
-                                    //choix coin2
-                                    String[] choicesB = new String[nbrCoin];
-                                    int k = 0;
-                                    list_Coin=etagei.getCoinEtage();
-                                    for(Coin coin : list_Coin){
-                                        String choice2 = "Point " + h;
-                                        choicesB[h] = choice2;
-                                        k ++;
-                                    }
-                                    ChoiceDialog<String> cDial2 = new ChoiceDialog<>(choicesB[h-1],choicesB);
-                                    cDial.setTitle("Selection du point 1");
-                                    cDial.setHeaderText("Veuillez selectionner le premier coin.");
-                                    cDial.setContentText("Choix :");
-
-                                    Optional<String> selection2 = cDial2.showAndWait();
-                                    if(selection2.isPresent()){
-                                        String selectionStr = selection2.orElse("0");
-                                        int length = selectionStr.length();
-                                        String c = Character.toString(selectionStr.charAt(6));
-                                        for(int i= 7 ; i<length ; i++){
-                                            c = c + selectionStr.charAt(i);
-                                        }
-                                        Scanner lineScanner = new Scanner(c);
-                                        int coinnum2 = lineScanner.nextInt();
-                                        coinMod2 = list_Coin.get(coinnum2);
-                                    }
-                                    //creation mur
-                                    Mur murmMod=new Mur(coinMod1, coinMod2);
-                                    List<Mur> liste_Mur = etagei.getMurEtage();
-                                    liste_Mur.add(murmMod);
-                                    etagei.setMurEtage(liste_Mur);
+                                 JDialog dialogC = new JDialog();
+                                 JPanel content = new JPanel();
+                                 JPanel panCoin1 = new JPanel();
+                                panCoin1.setPreferredSize(new Dimension(400,60));
+                                panCoin1.setBorder(BorderFactory.createTitledBorder("Coin 1"));
+                                JComboBox cbCoin1 = new JComboBox();
+                                for(Coin coin: etagei.getCoinEtage()){
+                                    cbCoin1.addItem(coin.toString());
                                 }
-                                else {
-                                fenetreMur.setVisible(true);
-                                }*/
-                            }
+                               panCoin1.add(cbCoin1);
+                               content.add(panCoin1);
+                               JPanel panCoin2 = new JPanel();
+                                panCoin2.setPreferredSize(new Dimension(400,60));
+                                panCoin2.setBorder(BorderFactory.createTitledBorder("Coin 1"));
+                                JComboBox cbCoin2 = new JComboBox();
+                                for(Coin coin: etagei.getCoinEtage()){
+                                    cbCoin2.addItem(coin.toString());
+                                }
+                               panCoin2.add(cbCoin2);
+                               content.add(panCoin2);
+                               JPanel controle = new JPanel();
+                               JButton okButton = new JButton();
+                               JButton CancelButton = new JButton();
+                               okButton.addActionListener(new ActionListener(){
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                                   Coin coin1= etagei.getCoinEtage().get(cbCoin1.getSelectedIndex());
+                                   Coin coin2= etagei.getCoinEtage().get(cbCoin2.getSelectedIndex());
+                                   Mur mur = new Mur(etagei.getMurEtage().size(),coin1,coin2);
+                                   etagei.ajouterMur(mur);
+                                   
+                               }});
+                               okButton.addActionListener(new ActionListener(){
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                                   fenetreMur.setVisible(true);
+                                   
+                               }});
+                               controle.add(okButton);
+                               controle.add(CancelButton);
+                                 dialogC.add(controle);
+                                 dialogC.add(content);
+                                 dialogC.setSize(550, 270);
+                     dialogC.setLocationRelativeTo(null);
+                     dialogC.setVisible(true);
+                               }
                         }}
                          public String getCoin1(){
                              return (rbM1Existant.isSelected()) ? rbM1Existant.getText() :
@@ -666,6 +592,8 @@ public class App extends Application {
                      okButton.addActionListener(new ActionListener(){
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent e) {
+                            fenetreMur.setVisible(false);
+                        
                             int existant = 0;
                             if (getCoin1().equals("Existant")){
                                 existant ++;
@@ -681,8 +609,10 @@ public class App extends Application {
                                     fenetreMur.setVisible(true);
                                 }
                             //assez de coins existants
-                            }else{ //CHANGER A PARTIR DE LA
-                                String compteRendu = "Vous avez selectionné:  \n  Coin 1 : " + getCoin1() + "\n Coin 2 : "+ getCoin2();
+                            }else{ 
+//CHANGER A PARTIR DE LA
+                               
+String compteRendu = "Vous avez selectionné:  \n  Coin 1 : " + getCoin1() + "\n Coin 2 : "+ getCoin2();
                                 int result = JOptionPane.showConfirmDialog(fenetreMur,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
                                 if (result == JOptionPane.OK_OPTION) {
                                     System.out.println("User chose OK");
@@ -701,7 +631,7 @@ public class App extends Application {
                                     cDial4.setTitle("Selection du point 1");
                                     cDial4.setHeaderText("Veuillez selectionner le premier coin.");
                                     cDial4.setContentText("Choix :");
-
+/*
                                     Optional<String> selection = cDial4.showAndWait();
                                     if(selection.isPresent()){
                                         String selectionStr = selection.orElse("0");
@@ -745,7 +675,7 @@ public class App extends Application {
                                     List<Mur> liste_Mur = etagem.getMurEtage();
                                     liste_Mur.add(murmMod);
                                     etagem.setMurEtage(liste_Mur);
-                                }
+                                */}
                                 else {
                                 fenetreMur.setVisible(true);
                                 }
@@ -774,7 +704,7 @@ public class App extends Application {
                         }
                      });
                      control.add(okButton);
-                     control.add(cancelButton);
+                     //control.add(cancelButton);
                      
                      fenetreMur.getContentPane().setLayout(new BorderLayout());
                      fenetreMur.getContentPane().add(content,BorderLayout.CENTER);

@@ -12,6 +12,7 @@ import java.util.List;
  * @author inspi
  */
 public class Batiment {
+    //Classe Mere de Maison et Immeuble
     private int id;
     private String type;
     private int typeIM;
