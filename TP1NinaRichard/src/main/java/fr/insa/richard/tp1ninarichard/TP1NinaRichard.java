@@ -112,6 +112,25 @@ public class TP1NinaRichard {
                             List<Mur> list=etageModified.getMurEtage();
                             list.add(mur);
                             liste_EtageM.get(etageChoisi).setMurEtage(list);
+                            System.out.println("Combien de portes voulez-vous ajouter ?");
+                            int nbporte=Lire.i();
+                            Porte porte=new Porte(1);
+                            double surface=mur.getSurface()-nbporte*porte.Surface();
+                            if ((surface<=0)||(etageModified.getHauteursousplafond()<=porte.getHauteur())){
+                                System.out.println("Il n'y a pas assez de place sur le mur.");
+                            }else{
+                                mur.setSurface(surface);
+                            }
+                            System.out.println("Combien de fenetres voulez-vous ajouter ?");
+                            int nbfenetre=Lire.i();
+                            Fenetre fenetre=new Fenetre(1);
+                            surface=mur.getSurface()-nbfenetre*fenetre.Surface();
+                            if ((surface<=0)||(etageModified.getHauteursousplafond()<=fenetre.getCote())){
+                                System.out.println("Il n'y a pas assez de place sur le mur.");
+                            }else{
+                                mur.setSurface(surface);
+                            }
+                            
                         }
                     break;
                     case 4: //supprimer un étage
@@ -808,7 +827,6 @@ public class TP1NinaRichard {
         
     
     public static void menuRevetement(ArrayList<Mur> liste_Mur, ArrayList<Revetement> liste_Revetement, int nbrevetement, int compt, Piece pieceMod){
-        do{
         switch(compt){
             case 1:
                 //Choix Mur
@@ -941,7 +959,6 @@ public class TP1NinaRichard {
                 System.out.println("Veuillez entrer un nombre entre 0 et 3.");
             break;
         }
-        }while(Lire.i()!=0);
     }
 
     public static void main(String[] args) {
@@ -951,76 +968,11 @@ public class TP1NinaRichard {
         System.out.println("lecture fichier reussie");
         
         
-        
-        /*
-         // Définition du chemin du fichier de sortie
-        String filePath = "batiment.txt";
-        // Écriture du code LaTeX avec TikZ dans le fichier de sortie
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-        //Coin c1 = new Coin(1,3.15,4.5);
-        //System.out.println(c1.toString());
-        System.out.println("Bonjour, de quel type est votre batiment?");
-        String batimenttype = Lire.S();
-        Batiment batiment = new Batiment(1, batimenttype);
-        System.out.println("Combien d'étage comporte votre batiment?");
-        int nbrEtage = Lire.i();
-        int nbrCoin =0;
-        int nbrMur = 0;
-        for (int i=0; i<nbrEtage ; i++){
-            Etage etage = new Etage(i);
-            batiment.ajouterEtage(etage);
-            System.out.println("Combien de logements comporte votre étage " + i + " ?");
-            int nbrAppartement = Lire.i();
-            for (int j=1; j<=nbrAppartement ; j++){
-                Logement appartement = new Logement(j);
-                etage.ajouterAppartement(appartement);
-                System.out.println("Combien de piece comporte votre logement " + j + " ?");
-                int nbrPiece = Lire.i();
-                for (int k=1; k<=nbrPiece ; k++){
-                    System.out.println("Quel est l'utilité de votre piece " + k + " ?");
-                    String typePiece = Lire.S();
-                    Mur[] murs = new Mur[4];
-                    for (int f=0; f<4; f++){
-                        System.out.println("Quels sont les coordonnées des coins de votre mur  " + (f + 1) + " ?");
-                        System.out.println("Coin 1 x: ");
-                        double x1 = Lire.d();
-                        System.out.println("Coin 1 y: ");
-                        double y1 = Lire.d();
-                        Coin coin1 = new Coin(nbrCoin, x1,y1);
-                        nbrCoin ++;
-                        System.out.println("Coin 2 x: ");
-                        double x2 = Lire.d();
-                        System.out.println("Coin 2 y: ");
-                        double y2 = Lire.d();
-                        Coin coin2 = new Coin(nbrCoin, x2,y2);
-                        nbrCoin ++;
-                        murs[f] = new Mur(nbrMur, coin1, coin2);
-                        nbrMur ++;
-                    }
-                    Sol sol = new Sol(nbrPiece);
-                    Plafond plafond = new Plafond(nbrPiece);
-                    Piece piece = new Piece(k,murs[0],murs[1],murs[2],murs[3], sol , plafond, typePiece);
-                    //ajouter la piece à l'appart
-                    appartement.ajouterPiece(piece);
-                }   
-            }
-        }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        /*
-        Porte p1 = new Porte(1);
-        double s = p1.Surface();
-        System.out.println("la surface vaut "+s);*/
-    //int nbrdeBatiment = 0; 
     int nbrCoin=0, nbrMur=0;
     ArrayList<Revetement> liste_Revetement=new ArrayList<Revetement>();
     int nbrevetement=0;
     Revetement revetement1=new Revetement(nbrevetement);
     liste_Revetement.add(revetement1);
-    //ArrayList<Batiment> liste_Batiment=new ArrayList<Batiment>();
-    //ArrayList<Maison> liste_Maison=new ArrayList<Maison>();
-    //ArrayList<Immeuble> liste_Immeuble=new ArrayList<Immeuble>();
     ArrayList<Coin> liste_Coin=new ArrayList<Coin>();
     ArrayList<Mur> liste_Mur=new ArrayList<Mur>();
     System.out.println("Bonjour, bienvenue dans notre générateur de devis, dans un premier temps nous allons modéliser votre batiment, puis vous pourrez choisir vos revetements de murs, sols et plafonds.");
@@ -1034,26 +986,6 @@ public class TP1NinaRichard {
         type = Lire.i(); 
     }
     Batiment batiment=new Batiment(0,type);
-    /*nbrdeBatiment ++;
-    Maison maison= new Maison(nbrdeBatiment,adresse);
-    liste_Maison.add(maison);
-    nbrdeBatiment ++;
-    Immeuble immeuble = new Immeuble(nbrdeBatiment,adresse);
-    liste_Immeuble.add(immeuble);
-    nbrdeBatiment ++;
-    if (type == 1){
-        String typeB="Maison";
-        Batiment batiment =new Batiment(nbrdeBatiment, typeB);
-        //Maison batiment = new Maison(nbrdeBatiment,adresse);
-        liste_Batiment.add(batiment);
-    }else {
-        String typeB="Immeuble";
-        Batiment batiment =new Batiment(nbrdeBatiment, typeB);
-        //Immeuble batiment = new Immeuble(nbrdeBatiment,adresse);
-        liste_Batiment.add(batiment);
-    }*/
-    //Batiment batiment=new Batiment();
-    //liste_Batiment.add(batiment);
     
     //initialisation des listes coin et mur
     Coin coin=new Coin(nbrCoin,0,0);
@@ -1062,9 +994,8 @@ public class TP1NinaRichard {
     Mur mur=new Mur(nbrMur, coin, coin);
     liste_Mur.add(mur);
     
+    //lancement menu pour creer le batiment et choisir les revetements
     menu(batiment, liste_Coin, liste_Mur, liste_Revetement, nbrevetement);
-    
-    //menu(liste_Batiment,liste_Coin ,liste_Mur); //les listes ne peuvent pas etre transmises vides?
     
     //calcul des surfaces par revetement
     int i=0;
@@ -1131,7 +1062,9 @@ public class TP1NinaRichard {
             break;
         }    
     }
+    //creation devis
     Devis devis=new Devis();
+    devis.setAdresse(adresse);
     devis.fichier(peinture1, carrelage1, lambris1, marbre, crepi, papierpeint, plaquettesdeparement, peinture2, peinture3, carrelage2, lambris2, liege1, parquet, 
             vinylelino, moquette, stratifie, gazon, liege2, carrelage3);
     

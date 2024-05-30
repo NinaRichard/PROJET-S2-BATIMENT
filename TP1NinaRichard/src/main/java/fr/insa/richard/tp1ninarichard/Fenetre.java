@@ -37,7 +37,7 @@ public class Fenetre extends Ouverture{
 
     @Override
     public String toString() {
-        return "La fenetre numero " + id + " a une cote de " + cote + ".";
+        return "La fenetre numero " + id + " a un cote de " + cote + ".";
     }
 
     //renvoyer surface

@@ -54,7 +54,7 @@ public class Mur {
                         i++;
                         coin.toString();
         }
-        System.out.print("Premier Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
+        System.out.print("Premier Coin (renseigner le numero du coin, si il n'existe pas taper 0) ");
         int choixCoin = Lire.i();
         if (choixCoin == 0){
             System.out.print("Donner l'absisse de votre nouveau point:");
@@ -66,7 +66,7 @@ public class Mur {
         } else{
             this.coin1 = liste_Coin.get(choixCoin);
         }
-        System.out.print("Deuxieme Coin (renseigner le numero du coin, si il n'exite pas taper 0) ");
+        System.out.print("Deuxieme Coin (renseigner le numero du coin, si il n'existe pas taper 0) ");
         choixCoin = Lire.i();
         if (choixCoin == 0){
             System.out.print("Donner l'absisse de votre nouveau point:");
