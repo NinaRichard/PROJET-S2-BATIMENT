@@ -427,7 +427,7 @@ public class App extends Application {
                                     fenetreMur.setVisible(true);
                                 }
                             //assez de coins existants
-                            }else{//CHANGER A PARTIR DE LA
+                            }else{
                                 String compteRendu = "Vous avez selectionné:  \n  Coin 1 : " + getCoin1() + "\n Coin 2 : "+ getCoin2();
                                 System.out.println(compteRendu);
                                 int result = JOptionPane.showConfirmDialog(fenetreMur,compteRendu,"Veuiller verifier votre selection",JOptionPane.OK_CANCEL_OPTION);
@@ -436,7 +436,7 @@ public class App extends Application {
                                     Coin coin1;
                                     Coin coin2;
                                     System.out.println("test-2");
-                                    if(!(getCoin1().equals("Existant"))){
+                                    if(!(getCoin1().equals("Existant"))){//Erreur sur cette ligne
                                          System.out.println("test-1");
                                          int h = 0;
                                     
